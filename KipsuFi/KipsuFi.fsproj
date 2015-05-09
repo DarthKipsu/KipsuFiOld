@@ -110,6 +110,17 @@
     <Reference Include="WebSharper.UI.Next.Templating">
       <HintPath>..\packages\WebSharper.UI.Next.3.0.51.121\lib\net40\WebSharper.UI.Next.Templating.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.SqlServer.Types">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.11.0.0\lib\net20\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="FSharp.Data.SqlClient">
+      <HintPath>..\packages\FSharp.Data.SqlClient.1.6.2\lib\net40\FSharp.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="FSharp.Data">
+      <HintPath>..\packages\FSharp.Data.2.2.1\lib\net40\FSharp.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <!-- F# targets -->
   <Choose>
@@ -140,4 +151,8 @@
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
+  <ItemGroup>
+    <None Include="SqlServerTypes\x64\SqlServerSpatial110.dll" />
+    <None Include="SqlServerTypes\x86\SqlServerSpatial110.dll" />
+  </ItemGroup>
 </Project>
