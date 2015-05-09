@@ -10,15 +10,30 @@ module Site =
     let Main =
         Sitelet.Infer <| function
             | Main -> Skin.MainPage
-            | ListAlgorithms -> (Api.Algorithms())
             | Algorithms id -> (Api.Algorithm <| HttpUtility.UrlDecode(id))
             | ListDatastructures -> (Api.Datastructures())
             | Datastructures id -> (Api.Datastructure <| HttpUtility.UrlDecode(id))
+       
+    let Algo = 
+        Sitelet.Folder "algorithms" [
+            Sitelet.Content "/" ListAlgorithms (Api.Algorithms())
+            Sitelet.Content "" ListAlgorithms (Api.Algorithms())
+        ]
+
+    let Data = 
+        Sitelet.Folder "datastructures" [
+            Sitelet.Content "/" ListDatastructures (Api.Datastructures())
+            Sitelet.Content "" ListDatastructures (Api.Datastructures())
+        ]
 
 [<Sealed>]
 type Website() =
     interface IWebsite<Action> with
-        member this.Sitelet = Site.Main
+        member this.Sitelet = Sitelet.Sum[
+            Site.Algo
+            Site.Data
+            Site.Main
+        ]
         member this.Actions = []
 
 type Global() =
