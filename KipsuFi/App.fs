@@ -8,11 +8,10 @@ module Site =
 
     let Main =
         Sitelet.Sum [
-            Sitelet.Content "/main" Main Skin.MainPage
+            Sitelet.Content "/" Main Skin.MainPage
             Sitelet.Content "/algorithms" Algorithms (Api.Algorithms())
             Sitelet.Content "/datastructures" Datastructures (Api.Datastructures())
         ]
-
 
 [<Sealed>]
 type Website() =
