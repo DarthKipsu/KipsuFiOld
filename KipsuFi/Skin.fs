@@ -28,6 +28,6 @@ module Skin =
         WithTemplate "no joku title" <| fun ctx ->
             [
                 Div [Text "kipsun sivut"]
-                Div [A [HRef "/algorithms"] -< [Text "Algorithms"]]
+                Div [A [HRef "/listAlgorithms"] -< [Text "Algorithms"]]
                 Div [A [HRef "/datastructures"] -< [Text "Datastructures"]]
             ]

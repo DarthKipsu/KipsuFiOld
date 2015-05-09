@@ -1,6 +1,8 @@
 ﻿namespace KipsuFi
 
 type Action =
-    | Main
-    | Algorithms
-    | Datastructures
+    | [<CompiledName "">] Main
+    | [<CompiledName "listAlgorithms">] ListAlgorithms
+    | [<CompiledName "algorithms">] Algorithms of id: string
+    | [<CompiledName "listDatastructures">] ListDatastructures
+    | [<CompiledName "datastructures">] Datastructures of id: string
