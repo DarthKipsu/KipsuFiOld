@@ -13,6 +13,7 @@ module Site =
             | Algorithms id -> (Api.Algorithm <| HttpUtility.UrlDecode(id))
             | ListDatastructures -> (Api.Datastructures())
             | Datastructures id -> (Api.Datastructure <| HttpUtility.UrlDecode(id))
+            | _ -> Content.ServerError
        
     let Algo = 
         Sitelet.Folder "algorithms" [
@@ -29,11 +30,12 @@ module Site =
 [<Sealed>]
 type Website() =
     interface IWebsite<Action> with
-        member this.Sitelet = Sitelet.Sum[
-            Site.Algo
-            Site.Data
-            Site.Main
-        ]
+        member this.Sitelet =
+            Sitelet.Sum[
+                Site.Algo
+                Site.Data
+                Site.Main
+            ]
         member this.Actions = []
 
 type Global() =

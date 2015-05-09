@@ -90,7 +90,7 @@ module DB =
                     Disadvantages = features (fun f -> not f.F2)
                     Content = reader.[2] :?> string
                  })
-                 name
+                 name |> List.head
 
     let datastructures() =
         readRecord
@@ -116,4 +116,4 @@ module DB =
                     Disadvantages = features (fun f -> not f.F2)
                     Content = reader.[2] :?> string
                  })
-                 name
+                 name |> List.head
