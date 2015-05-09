@@ -14,6 +14,14 @@ module DB =
             Disadvantages: string list
         }
 
+    type Datastructure = 
+        {
+            Name: string
+            Description: string
+            Advantages: string list
+            Disadvantages: string list
+        }
+
     type StringParser = JsonProvider<""" ["item"] """>
     type FeatureParser = JsonProvider<""" [{"f1": "name", "f2": true}] """>
 
@@ -22,35 +30,39 @@ module DB =
         conn.Open()
         conn
 
-    let readNamesToList query func =
+    let readRecord query func =
         let conn = connection()
         let command = new NpgsqlCommand(query, conn)
         try
-            try
-                let reader = command.ExecuteReader()
-                [while reader.Read() do yield func reader]
-            with
-                | :? System.Exception as e -> raise e
+            let reader = command.ExecuteReader()
+            [while reader.Read() do yield func reader]
         finally
             conn.Close()
 
+    let parseFeature features selector comparator =
+        [for feature in features do if comparator feature then yield selector feature]
+
     let algorithms() =
-        readNamesToList
+        readRecord
             """SELECT a.algorithm_name, a.description, json_agg(DISTINCT ad.datastructure_name), json_agg((af.feature_name, af.advantage)) FROM algorithms a natural join algorithms_datastructures ad, algorithms_features af GROUP BY a.algorithm_name, a.description ORDER BY 1"""
             (fun reader -> 
-                let features = FeatureParser.Parse(reader.[3] :?> string)
+                let features = parseFeature (FeatureParser.Parse(reader.[3] :?> string)) (fun f -> f.F1)
                 {
                     Name = reader.[0] :?> string
                     Description = reader.[1] :?> string
-                    Datastructures =
-                        StringParser.Parse(reader.[2] :?> string) |> List.ofArray
-                    Advantages = 
-                        [for feature in features do if feature.F2 then yield feature.F1]
-                    Disadvantages = 
-                        [for feature in features do if not feature.F2 then yield feature.F1]
+                    Datastructures = StringParser.Parse(reader.[2] :?> string) |> List.ofArray
+                    Advantages = features (fun f -> f.F2)
+                    Disadvantages = features (fun f -> not f.F2)
                  })
 
-    let datastructure_names() =
-        readNamesToList
-            "SELECT datastructure_name FROM datastructures"
-            (fun reader ->  reader.[0] :?> string)
+    let datastructures() =
+        readRecord
+            "SELECT d.datastructure_name, d.description, json_agg((df.feature_name, df.advantage)) FROM datastructures d natural join datastructures_features df GROUP BY d.datastructure_name, d.description ORDER BY 1"
+            (fun reader -> 
+                let features = parseFeature (FeatureParser.Parse(reader.[2] :?> string)) (fun f -> f.F1)
+                {
+                    Name = reader.[0] :?> string
+                    Description = reader.[1] :?> string
+                    Advantages = features (fun f -> f.F2)
+                    Disadvantages = features (fun f -> not f.F2)
+                 })

@@ -7,25 +7,11 @@ open WebSharper.Sitelets
 module Api =
     open System.Web
 
-    type Data =
-        {
-            Group : string
-            Content : string list
-        }
-
-    let WithTemplate title body : Content<Action> =
-        Content.JsonContent <| fun context ->
-            {
-                Group = title
-                Content = body context
-            }
-
-
-    let AlgorithmPage() =
+    let Algorithms() =
         Content.JsonContent <| fun context ->
             DB.algorithms()
 
-    let DatastructuresPage =
-        WithTemplate "Datastructures" <| fun ctx ->
-            DB.datastructure_names()
+    let Datastructures() =
+        Content.JsonContent <| fun context ->
+            DB.datastructures()
            
