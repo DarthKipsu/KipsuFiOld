@@ -34,7 +34,7 @@
     <Name>KipsuFi</Name>
     <RootNamespace>KipsuFi</RootNamespace>
     <AssemblyName>KipsuFi</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <WarningLevel>3</WarningLevel>
   </PropertyGroup>
   <ItemGroup>

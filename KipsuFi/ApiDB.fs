@@ -23,7 +23,7 @@ module Api =
 
     let AlgorithmPage() =
         Content.JsonContent <| fun context ->
-            DB.algorithm_names()
+            DB.algorithms()
 
     let DatastructuresPage =
         WithTemplate "Datastructures" <| fun ctx ->
