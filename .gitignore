@@ -1,9 +1,9 @@
-packages/
+KipsuFiFSharpOld/packages/
 *.userprefs
 */bin/
 */obj/
-KipsuFi/DesignTimeURIs/ 
-KipsuFi/WorldBankSchema/ 
+*/DesignTimeURIs/ 
+*/WorldBankSchema/ 
 
 *.swp
 *.swo
