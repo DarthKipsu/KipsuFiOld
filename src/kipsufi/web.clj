@@ -1,14 +1,16 @@
 (ns kipsufi.web
     (:require [compojure.core :refer [defroutes GET]]
               [ring.adapter.jetty :as ring]
-              [hiccup.page :as page]))
+              [kipsufi.views.index :as index]
+              [kipsufi.views.list :as listCont]))
 
 (defroutes routes
-           (GET "/" [] (page/html5
-                         [:head
-                          [:title "Hello World"]]
-                         [:body
-                          [:div {:id "content"} "Hello World"]])))
+    (GET "/" []
+         (index/show))
+    (GET "/algorithms" []
+         (listCont/show "Algorithms" ""))
+    (GET "/datastructures" []
+         (listCont/show "Datastructures" "")))
 
 (defn -main []
     (ring/run-jetty #'routes {:port 8080 :join? false}))
