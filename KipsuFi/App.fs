@@ -11,7 +11,6 @@ module Site =
         Sitelet.Infer <| function
             | Main -> Skin.MainPage
             | Algorithms id -> (Api.Algorithm <| HttpUtility.UrlDecode(id))
-            | ListDatastructures -> (Api.Datastructures())
             | Datastructures id -> (Api.Datastructure <| HttpUtility.UrlDecode(id))
             | _ -> Content.ServerError
        

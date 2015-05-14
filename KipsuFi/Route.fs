@@ -2,7 +2,7 @@
 
 type Action =
     | [<CompiledName "">] Main
-    | [<CompiledName "listAlgorithms">] ListAlgorithms
+    | ListAlgorithms
     | [<CompiledName "algorithms">] Algorithms of id: string
-    | [<CompiledName "listDatastructures">] ListDatastructures
+    | ListDatastructures
     | [<CompiledName "datastructures">] Datastructures of id: string
