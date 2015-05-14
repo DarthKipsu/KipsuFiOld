@@ -8,4 +8,4 @@ open WebSharper.UI.Next.Notation
 
 [<JavaScript>]
 module Client =    
-    let [<Literal>] TemplateHtmlPath = __SOURCE_DIRECTORY__ + "/index.html"
+    let [<Literal>] TemplateHtmlPath = __SOURCE_DIRECTORY__ + "/index.html" 

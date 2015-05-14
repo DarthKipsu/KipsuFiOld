@@ -16,8 +16,8 @@ module Site =
        
     let Algo = 
         Sitelet.Folder "algorithms" [
-            Sitelet.Content "/" ListAlgorithms (Api.Algorithms())
             Sitelet.Content "" ListAlgorithms (Api.Algorithms())
+            Sitelet.Content "/" ListAlgorithms (Api.Algorithms())
         ]
 
     let Data = 
