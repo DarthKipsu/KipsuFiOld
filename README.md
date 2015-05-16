@@ -1,14 +1,28 @@
-# kipsufi
+# KipsuFi
 
-A Clojure library designed to ... well, that part is up to you.
+My personal website with Clojure.
 
-## Usage
+## REST API
 
-FIXME
+At the moment the api supports queries for algorithms and datastructures. Responses are in JSON format.
+
+To get a lits of all entries simply navigate to:  
+```
+[server]/api
+```
+
+List of all algorithms or datastructures can be accessed by:
+```
+[server]/api/algorithms  
+[server]/api/datastructures
+```
+
+A single entry:  
+```
+[server]/api/algorithms/[algorithm name]
+[server]/api/datastructures/[datastructure name]
+```
 
 ## License
 
-Copyright © 2015 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Distributed under the Eclipse Public License 1.0
