@@ -13,7 +13,7 @@
           :features))
 
 (defn ^:private format-time [obj]
-  (assoc obj :date (str (:date obj))))
+  (assoc obj :created (str (:created obj)) :edited (str (:edited obj))))
 
 (defn ^:private with-group [group obj]
   (assoc obj :group group))
@@ -30,7 +30,7 @@
   (->> (db/list-datastructures)
     (map format-time)
     (map features->advantage-groups)
-    (map (partial with-group "algorithms"))))
+    (map (partial with-group "datastructures"))))
 
 (defn all []
   (concat (algorithms) (datastructures)))
