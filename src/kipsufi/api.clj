@@ -34,3 +34,13 @@
 
 (defn all []
   (concat (algorithms) (datastructures)))
+
+(defn algorithm [algorithm]
+  (format-time
+    (features->advantage-groups
+      (first (db/read-algorithm algorithm)))))
+
+(defn datastructure [datastructure]
+  (format-time
+    (features->advantage-groups
+      (first (db/read-datastructure datastructure)))))

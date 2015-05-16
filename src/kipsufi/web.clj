@@ -5,7 +5,6 @@
               [clojure.data.json :as json]
               [kipsufi.views.index :as index]
               [kipsufi.views.list :as listView]
-              [kipsufi.database :as db]
               [kipsufi.api :as api])
   (:use [ring.middleware.params :only [wrap-params]]
         [ring.middleware.json :refer :all]
@@ -32,6 +31,10 @@
          (json-response (api/algorithms)))
     (GET "/api/datastructures" []
          (json-response (api/datastructures)))
+    (GET "/api/algorithms/:algorithm-name" [algorithm-name]
+         (json-response (api/algorithm algorithm-name)))
+    (GET "/api/datastructures/:datastructure-name" [datastructure-name]
+         (json-response (api/datastructure datastructure-name)))
     (route/resources "/")
     (route/not-found "Not Found"))
 
