@@ -27,7 +27,11 @@
 
 (defroutes api-routes
     (GET "/api" []
-         (json-response (db/list-algorithms)))
+         (json-response (api/all)))
+    (GET "/api/algorithms" []
+         (json-response (api/algorithms)))
+    (GET "/api/datastructures" []
+         (json-response (api/datastructures)))
     (route/resources "/")
     (route/not-found "Not Found"))
 
