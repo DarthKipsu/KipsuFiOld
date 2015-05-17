@@ -11,4 +11,6 @@
      [:div {:class "row"}
       [:div {:class "col-md-8 col-md-offset-2"}
        [:h1 title]]
-      [:div {:class "col-md-10 col-md-offset-2"} body]]]))
+      [:div {:class "col-md-10 col-md-offset-2"} body]]
+     (h/include-js "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js")
+     (h/include-js "js/script.js")]))

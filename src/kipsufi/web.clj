@@ -18,11 +18,7 @@
 
 (defroutes www-routes
     (GET "/" []
-         (index/show))
-    (GET "/algorithms" []
-         (listView/show "Algorithms" ""))
-    (GET "/datastructures" []
-         (listView/show "Datastructures" "")))
+         (index/show)))
 
 (defroutes api-routes
     (GET "/api" []
