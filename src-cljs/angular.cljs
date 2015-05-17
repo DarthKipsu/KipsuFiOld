@@ -4,13 +4,16 @@
                [gyr.core :only [def.module def.config def.factory
                                 def.controller def.service]]))
 
-(def.module kipsufi [])
+(def.module kipsufi ["ngRoute"])
 
 (def.config kipsufi [$routeProvider]
             (-> $routeProvider
               (.when "/" (obj :controller "MainController" :templateUrl "views/index.html"))
               (.otherwise (obj :redirectTo "/"))))
 
-(enable-console-print!)
-
-(println "Hello world!")
+(def.controller kipsufi.MainController [$scope $http]
+                (-> $http
+                  (.get "/api")
+                  (.success (fn [res]
+                              (js/console.log res)))
+                  (.error (fn [] (js/console.log "error")))))

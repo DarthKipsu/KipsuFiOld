@@ -3,7 +3,7 @@
               [compojure.route :as route]
               [ring.adapter.jetty :as ring]
               [clojure.data.json :as json]
-              [kipsufi.views.index :as index]
+              [kipsufi.views.layout :as page]
               [kipsufi.views.list :as listView]
               [kipsufi.api :as api])
   (:use [ring.middleware.params :only [wrap-params]]
@@ -18,7 +18,7 @@
 
 (defroutes www-routes
     (GET "/" []
-         (index/show)))
+         (page/common "darth.kipsu.fi")))
 
 (defroutes api-routes
     (GET "/api" []
