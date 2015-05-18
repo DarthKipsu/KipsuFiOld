@@ -15,5 +15,5 @@
                 (-> $http
                   (.get "/api")
                   (.success (fn [res]
-                              (js/console.log res)))
+                              (! $scope.data res)))
                   (.error (fn [] (js/console.log "error")))))

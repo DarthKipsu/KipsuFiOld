@@ -11,7 +11,7 @@
      [:div {:class "row"}
       [:div {:class "col-md-8 col-md-offset-2"}
        [:h1 title]]
-      [:div {:class "col-md-10 col-md-offset-2" :ng-view ""}]]
+      [:div {:class "col-md-10 col-md-offset-1" :ng-view ""}]]
      (h/include-js "//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js")
      (h/include-js "//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-route.js")
      (h/include-js "js/script.js")]))
