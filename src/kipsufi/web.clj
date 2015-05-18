@@ -18,7 +18,7 @@
 
 (defroutes www-routes
     (GET "/" []
-         (page/common "darth.kipsu.fi")))
+         (page/common)))
 
 (defroutes api-routes
     (GET "/api" []

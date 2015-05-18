@@ -1,6 +1,6 @@
 <div ng-repeat="entry in data">
   <div class="col-md-6">
-    <h2>{{entry.name}}</h2>
+    <h2><a ng-href="#/{{entry.group}}/{{entry.name}}">{{entry.name}}</a></h2>
     <div class="col-md-12" ng-show="entry.datastructures">
       <p>
         <strong>Datastructures:</strong>
