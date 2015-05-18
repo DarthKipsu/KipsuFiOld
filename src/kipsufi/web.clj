@@ -22,6 +22,8 @@
 
 (defroutes api-routes
     (GET "/api" []
+         (json-response (api/index)))
+    (GET "/api/recent" []
          (json-response (api/all)))
     (GET "/api/algorithms" []
          (json-response (api/algorithms)))

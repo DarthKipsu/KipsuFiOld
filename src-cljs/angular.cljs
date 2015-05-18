@@ -13,7 +13,7 @@
 
 (def.controller kipsufi.MainController [$scope $http]
                 (-> $http
-                  (.get "/api")
+                  (.get "/api/recent")
                   (.success (fn [res]
                               (! $scope.data res)))
                   (.error (fn [] (js/console.log "error")))))

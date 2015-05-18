@@ -20,6 +20,11 @@
 
 ; ---- PUBLIC ---- ;
 
+(defn index []
+  {"algorithms list" "/algorithms"
+   "datastructures list" "/datastructures"
+   "recent items" "/recent"})
+
 (defn algorithms []
   (->> (db/list-algorithms)
     (map format-time)
