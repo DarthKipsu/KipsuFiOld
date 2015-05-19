@@ -10,6 +10,7 @@
             (-> $routeProvider
               (.when "/" (obj :controller "MainController" :templateUrl "views/list.html"))
               (.when "/algorithms/:name" (obj :controller "AlgorithmController" :templateUrl "views/show.html"))
+              (.when "/datastructures/:name" (obj :controller "DatastructureController" :templateUrl "views/show.html"))
               (.otherwise (obj :redirectTo "/"))))
 
 (def.controller kipsufi.MainController [$scope $http]
@@ -25,6 +26,16 @@
                   (.success (fn [res]
                               (! $scope.name res.name)
                               (! $scope.datastructures res.datastructures)
+                              (! $scope.advantages res.advantages)
+                              (! $scope.disadvantages res.disadvantages)
+                              (! $scope.content res.content)))
+                  (.error (fn [] (js/console.log "error")))))
+
+(def.controller kipsufi.DatastructureController [$scope $routeParams $http]
+                (-> $http
+                  (.get (str "/api/datastructures/" $routeParams.name))
+                  (.success (fn [res]
+                              (! $scope.name res.name)
                               (! $scope.advantages res.advantages)
                               (! $scope.disadvantages res.disadvantages)
                               (! $scope.content res.content)))
