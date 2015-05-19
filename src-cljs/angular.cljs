@@ -13,30 +13,28 @@
               (.when "/datastructures/:name" (obj :controller "DatastructureController" :templateUrl "views/show.html"))
               (.otherwise (obj :redirectTo "/"))))
 
-(def.controller kipsufi.MainController [$scope $http]
-                (-> $http
-                  (.get "/api/recent")
-                  (.success (fn [res]
-                              (! $scope.data res)))
-                  (.error (fn [] (js/console.log "error")))))
+(def.controller kipsufi.MainController [$scope ApiService]
+                (ApiService.recent $scope))
 
-(def.controller kipsufi.AlgorithmController [$scope $routeParams $http]
-                (-> $http
-                  (.get (str "/api/algorithms/" $routeParams.name))
-                  (.success (fn [res]
-                              (! $scope.name res.name)
-                              (! $scope.datastructures res.datastructures)
-                              (! $scope.advantages res.advantages)
-                              (! $scope.disadvantages res.disadvantages)
-                              (! $scope.content res.content)))
-                  (.error (fn [] (js/console.log "error")))))
+(def.controller kipsufi.AlgorithmController [$scope $routeParams ApiService]
+                (ApiService.data-for (str "/api/algorithms/" $routeParams.name) $scope))
 
-(def.controller kipsufi.DatastructureController [$scope $routeParams $http]
-                (-> $http
-                  (.get (str "/api/datastructures/" $routeParams.name))
-                  (.success (fn [res]
-                              (! $scope.name res.name)
-                              (! $scope.advantages res.advantages)
-                              (! $scope.disadvantages res.disadvantages)
-                              (! $scope.content res.content)))
-                  (.error (fn [] (js/console.log "error")))))
+(def.controller kipsufi.DatastructureController [$scope $routeParams ct]ApiService$http]
+                (ApiService.data-for (str "/api/datastructures/" $routeParams.name) $scope))
+
+(def.service kipsufi.ApiService [$http]
+             (obj :recent (fn [$scope]
+                            (-> $http
+                              (.get "/api/recent")
+                              (.success (fn [res] (! $scope.data res)))
+                              (.error (fn [] (js/console.log "error")))))
+                  :data-for (fn [path $scope]
+                              (-> $http
+                                (.get path)
+                                (.success (fn [res]
+                                            (! $scope.name res.name)
+                                            (! $scope.datastructures res.datastructures)
+                                            (! $scope.advantages res.advantages)
+                                            (! $scope.disadvantages res.disadvantages)
+                                            (! $scope.content res.content)))
+                                (.error (fn [] (js/console.log "error")))))))
