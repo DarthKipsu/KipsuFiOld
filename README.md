@@ -1,4 +1,7 @@
-# KipsuFi
+[![Build Status](https://travis-ci.org/DarthKipsu/KipsuFi.svg)](https://travis-ci.org/DarthKipsu/KipsuFi)
+[![Dependencies Status](http://jarkeeper.com/DarthKipsu/KipsuFi/status.svg)](http://jarkeeper.com/DarthKipsu/KipsuFi)
+
+KipsuFi
 
 My personal website with Clojure.
 
@@ -25,4 +28,4 @@ A single entry:
 
 ## License
 
-Distributed under the Eclipse Public License 1.0
+Distributed under the GNU General Public License v2.0
