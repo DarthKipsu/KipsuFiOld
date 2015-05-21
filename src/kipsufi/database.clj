@@ -10,7 +10,9 @@
 (def ^:private query (partial sql/query connection))
 
 
-(defn list-algorithms []
+(defn list-algorithms 
+  "Reads all algorithms from db and returns them as lazy seq."
+  []
   (query (select [{:a.algorithm_name :name}
                   :a.description
                   :a.created :a.edited
@@ -21,7 +23,9 @@
                  "GROUP BY a.algorithm_name, a.description"
                  (order-by :a.edited))))
 
-(defn list-datastructures []
+(defn list-datastructures 
+  "Reads all datastructures from db and returns them as lazy seq."
+  []
   (query (select [{:d.datastructure_name :name}
                   :d.description
                   :d.created :d.edited
@@ -31,7 +35,9 @@
                  "GROUP BY d.datastructure_name, d.description"
                  (order-by :d.edited))))
 
-(defn read-algorithm [algorithm]
+(defn read-algorithm
+  "Reads a single algorithm fron db and returns it with contents."
+  [algorithm]
   (query (select [{:a.algorithm_name :name}
                   :a.description
                   :a.content
@@ -43,7 +49,9 @@
                  (where {:a.algorithm_name algorithm})
                  "GROUP BY a.algorithm_name, a.description")))
 
-(defn read-datastructure [datastructure]
+(defn read-datastructure
+  "Reads a single datastructure from db and returns it with contents."
+  [datastructure]
   (query (select [{:d.datastructure_name :name}
                   :d.description
                   :d.content

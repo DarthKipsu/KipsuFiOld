@@ -20,32 +20,44 @@
 
 ; ---- PUBLIC ---- ;
 
-(defn index []
+(defn index
+  "Returns a list of API subdirectories."
+  []
   {"algorithms list" "/algorithms"
    "datastructures list" "/datastructures"
    "recent items" "/recent"})
 
-(defn algorithms []
+(defn algorithms
+  "Returns a formatted list of algorithms."
+  []
   (->> (db/list-algorithms)
     (map format-time)
     (map features->advantage-groups)
     (map (partial with-group "algorithms"))))
 
-(defn datastructures []
+(defn datastructures
+  "Returns a formatted list of datastructures."
+  []
   (->> (db/list-datastructures)
     (map format-time)
     (map features->advantage-groups)
     (map (partial with-group "datastructures"))))
 
-(defn all []
+(defn all
+  "Returns a formatted list of both algorithms and datastructures."
+  []
   (concat (algorithms) (datastructures)))
 
-(defn algorithm [algorithm]
+(defn algorithm
+  "Returns the formatted entry of a single algorithm."
+  [algorithm]
   (format-time
     (features->advantage-groups
       (first (db/read-algorithm algorithm)))))
 
-(defn datastructure [datastructure]
+(defn datastructure
+  "Returns the formatted entry of a single datastructure."
+  [datastructure]
   (format-time
     (features->advantage-groups
       (first (db/read-datastructure datastructure)))))
