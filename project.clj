@@ -7,7 +7,7 @@
                  [org.clojure/java.jdbc "0.3.7"]
                  [org.clojure/clojurescript "0.0-3211"]
                  [im.chit/purnam "0.5.2"]
-                 [im.chit/gyr "0.4.0"] 
+                 [im.chit/gyr "0.3.1"] 
                  [java-jdbc/dsl "0.1.2"]
                  [postgresql/postgresql "9.3-1102.jdbc41"]
                  [ring/ring-jetty-adapter "1.3.2"]

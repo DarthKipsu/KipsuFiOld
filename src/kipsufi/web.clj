@@ -9,8 +9,7 @@
         [ring.middleware.json :refer :all]
         [ring.middleware.keyword-params :only [wrap-keyword-params]]))
 
-(defn json-response [content]
-  (println content)
+(defn ^:private json-response [content]
   {:status 200
    :headers {"Content-Type" "application/json"}
    :body (json/write-str content)})
