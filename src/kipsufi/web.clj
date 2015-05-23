@@ -4,7 +4,6 @@
               [ring.adapter.jetty :as ring]
               [clojure.data.json :as json]
               [kipsufi.views.layout :as page]
-              [kipsufi.views.list :as listView]
               [kipsufi.api :as api])
   (:use [ring.middleware.params :only [wrap-params]]
         [ring.middleware.json :refer :all]
