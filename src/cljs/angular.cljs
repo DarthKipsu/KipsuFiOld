@@ -1,6 +1,6 @@
 (ns cljs.angular
   (:use-macros [purnam.core :only [obj !]]
-               [gyr.core :only [def.module def.controller 
+               [gyr.core :only [def.module def.controller def.directive
                                 def.service def.config]]))
 
 (def.module kipsufi ["ngRoute"])
@@ -9,13 +9,13 @@
   (-> $routeProvider
     (.when "/"
             (obj :controller "MainController"
-                :templateUrl "views/list.html"))
+                :templateUrl "views/main.html"))
     (.when "/algorithms"
             (obj :controller "AlgorithmsController"
-                :templateUrl "views/list.html"))
+                :templateUrl "views/algorithms.html"))
     (.when "/datastructures"
             (obj :controller "DatastructuresController"
-                :templateUrl "views/list.html"))
+                :templateUrl "views/datastructures.html"))
     (.when "/algorithms/:name"
             (obj :controller "AlgorithmController"
                 :templateUrl "views/show.html"))
@@ -38,6 +38,9 @@
 
 (def.controller kipsufi.DatastructureController [$scope $routeParams ApiService]
   (ApiService.data-for (str "/api/datastructures/" $routeParams.name) $scope))
+
+(def.directive kipsufi.listItems []
+    (obj :templateUrl "views/list.html"))
 
 (def.service kipsufi.ApiService [$http]
   (obj :list (fn [path $scope]
