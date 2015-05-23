@@ -6,7 +6,8 @@
     [:head
      [:meta {:charset "utf-8"}]
      [:title "darth.kipsu.fi"]
-     (h/include-css "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css")]
+     (h/include-css "//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css")
+     (h/include-css "css/style.css")]
     [:body {:ng-app "kipsufi"}
      [:nav {:class "navbar navbar-default"}
       [:div {:class "container-fluid"}

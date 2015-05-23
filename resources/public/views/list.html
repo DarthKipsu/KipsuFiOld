@@ -1,24 +1,28 @@
 <div ng-repeat="entry in data">
   <div class="col-md-6">
-    <h2><a ng-href="#/{{entry.group}}/{{entry.name}}">{{entry.name}}</a></h2>
-    <div class="col-md-12" ng-show="entry.datastructures">
-      <p>
+    <div class="list-item head">
+      <h2><a ng-href="#/{{entry.group}}/{{entry.name}}">{{entry.name}}</a></h2>
+    </div>
+    <div class="list-item content">
+      <div class="col-md-12" ng-show="entry.datastructures">
+        <p>
         <strong>Datastructures:</strong>
         <span ng-repeat="ds in entry.datastructures">{{ds}}</span>
-      </p>
-    </div>
-    <div class="col-md-6">
-      <p><strong>Advantages:</strong></p>
-      <div ng-repeat="advantage in entry.advantages">
-        <p>{{advantage}}</p>
+        </p>
       </div>
-    </div>
-    <div class="col-md-6">
-      <p><strong>Disadvantages:</strong></p>
-      <div ng-repeat="disadvantage in entry.disadvantages">
-        <p>{{disadvantage}}</p>
+      <div class="col-md-6">
+        <p><strong>Advantages:</strong></p>
+        <div ng-repeat="advantage in entry.advantages">
+          <p>{{advantage}}</p>
+        </div>
       </div>
+      <div class="col-md-6">
+        <p><strong>Disadvantages:</strong></p>
+        <div ng-repeat="disadvantage in entry.disadvantages">
+          <p>{{disadvantage}}</p>
+        </div>
+      </div>
+      <div class="col-md-12">{{entry.description}}</div>
     </div>
-    <div class="col-md-12">{{entry.description}}</div>
   </div>
 </div>

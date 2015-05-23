@@ -16,12 +16,15 @@
                  [compojure "1.3.4"]
                  [hiccup "1.0.5"]]
   :plugins [[lein-ring "0.9.4"]
-            [lein-cljsbuild "1.0.6"]]
+            [lein-cljsbuild "1.0.6"]
+            [lein-lesscss "1.2"]]
   :cljsbuild {
     :builds [{
-      :source-paths ["src-cljs"]
+      :source-paths ["src/cljs"]
       :compiler {
         :output-to "resources/public/js/script.js"
         :optimizations :whitespace
         :pretty-print true}}]}
+  :lesscss-paths ["src/less"]
+  :lesscss-output-path "resources/public/css"
   :ring {:handler kipsufi.web/app})
