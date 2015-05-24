@@ -20,6 +20,22 @@ h1, h3, body > nav {
     font-family: @highlight-font;
 }
 
+.layout-pic img {
+    width: 100%;
+}
+
+.affix {
+    top: 0px;
+}
+
+.content {
+    z-index: 0;
+}
+
+nav {
+    z-index: 100;
+}
+
 .gradient-header() {
     background: #ffffff;
     background: -moz-linear-gradient(top,  #ffffff 0%, #f1f1f1 50%, #e1e1e1 51%, #f6f6f6 100%);
@@ -31,8 +47,10 @@ h1, h3, body > nav {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 );
 }
 
-body > nav {
+body > div > nav {
     .gradient-header();
+    display: block;
+    width: 100%;
 }
 
 .intro {
