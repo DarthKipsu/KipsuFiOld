@@ -12,9 +12,9 @@
      (h/include-css "css/style.css")]
     [:body {:ng-app "kipsufi"}
      [:div {:class "layout-pic"}
-      [:img {:src "images/jolla.jpg"}]]
-     [:div {:style "height: 50px;"}
-      [:nav {:class "navbar navbar-default affix-top" :data-spy "affix" :data-offset-top "200"}
+      [:img {:src "images/jolla.jpg" :id "jolla"}]]
+     [:div {:style "height: 70px;"}
+      [:nav {:class "navbar navbar-default affix-top" :data-spy "affix" :data-offset-top "250"}
        [:div {:class "container-fluid"}
         [:ul {:class "nav navbar-nav"}
          [:li [:a {:ng-href "#/"} "Home"]]
