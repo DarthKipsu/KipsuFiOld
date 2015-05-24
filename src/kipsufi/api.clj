@@ -1,5 +1,6 @@
 (ns kipsufi.api
-    (:require [kipsufi.database :as db]))
+    (:require [kipsufi.database :as db]
+              [clj-time.coerce :as c]))
 
 ; ---- PRIVATE ---- ;
 
@@ -13,7 +14,8 @@
           :features))
 
 (defn ^:private format-time [obj]
-  (assoc obj :created (str (:created obj)) :edited (str (:edited obj))))
+  (assoc obj :created (c/to-long (c/from-sql-time (:created obj)))
+             :edited (c/to-long (c/from-sql-time (:edited obj)))))
 
 (defn ^:private with-group [group obj]
   (assoc obj :group group))

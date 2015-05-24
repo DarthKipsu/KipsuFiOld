@@ -24,3 +24,9 @@ body {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
+.item-date {
+  text-align: right;
+  font-size: 10px;
+  line-height: 0.9;
+  color: #666666;
+}
