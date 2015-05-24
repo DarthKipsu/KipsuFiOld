@@ -1,8 +1,8 @@
 <div ng-repeat="entry in data">
-  <div class="col-md-6">
+  <div class="col-md-6"><div class="item-selector" ng-click="show(entry)">
     <div class="list-item head">
       <p class="item-date">{{entry.edited | date:'dd.MM.yyyy, HH:mm'}}</p>
-      <h2><p ng-href="#/{{entry.group}}/{{entry.name}}">{{entry.name}}</p></h2>
+      <h2>{{entry.name}}</h2>
     </div>
     <div class="list-item content">
       <div class="col-md-12" ng-show="entry.datastructures">
@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="col-md-12">{{entry.description}}</div>
-    </div>
+    </div></div>
   </div>
 </div>
 <div hello-directive></div>

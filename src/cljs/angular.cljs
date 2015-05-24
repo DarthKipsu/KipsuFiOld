@@ -3,6 +3,9 @@
                [gyr.core :only [def.module def.controller def.directive
                                 def.service def.config]]))
 
+(defn ^:private goto-item [item]
+  (set! js/window.location (str "#/" item.group "/" item.name)))
+
 (def.module kipsufi ["ngRoute"])
 
 (def.config kipsufi [$routeProvider]
@@ -46,7 +49,9 @@
   (obj :list (fn [path $scope]
                (-> $http
                   (.get path)
-                  (.success (fn [res] (! $scope.data res)))
+                  (.success (fn [res] 
+                              (! $scope.show (partial goto-item))
+                              (! $scope.data res)))
                   (.error (fn [] (js/console.log "error")))))
         :data-for (fn [path $scope]
                     (-> $http
