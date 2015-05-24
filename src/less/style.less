@@ -2,13 +2,25 @@
 @medium-color: #666;
 @header-background-color: #F8F8F8;
 @border-color: #E7E7E7;
+@highlight-color: #D6F9FF;
+@highlight-font: Lobster;
 @radius: 5px;
 
 body {
     color: @dark-color;
+    font-family: Droid Sans;
 }
 
-.gradient-background() {
+h1 {
+    text-align: center;
+    text-shadow: 3px 3px 5px @highlight-color;
+}
+
+h1, h3, body > nav {
+    font-family: @highlight-font;
+}
+
+.gradient-header() {
     background: #ffffff;
     background: -moz-linear-gradient(top,  #ffffff 0%, #f1f1f1 50%, #e1e1e1 51%, #f6f6f6 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#f1f1f1), color-stop(51%,#e1e1e1), color-stop(100%,#f6f6f6));
@@ -20,7 +32,11 @@ body {
 }
 
 body > nav {
-    .gradient-background();
+    .gradient-header();
+}
+
+.intro {
+    font-size: 20px;
 }
 
 .list-item {
@@ -30,11 +46,20 @@ body > nav {
 
     .highlight {
         padding: 0;
+        background: #ffffff;
+        background: -moz-linear-gradient(top,  #ffffff 0%, #f3f3f3 50%, #ededed 51%, #ffffff 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#f3f3f3), color-stop(51%,#ededed), color-stop(100%,#ffffff));
+        background: -webkit-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%);
+        background: -o-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%);
+        background: -ms-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%);
+        background: linear-gradient(to bottom,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 );
     }
 }
 
 .list-item.content {
     border-top: 0px;
+    padding: 5px 0;
     -webkit-border-bottom-left-radius: @radius;
     -webkit-border-bottom-right-radius: @radius;
     -moz-border-radius-bottomleft: @radius;
@@ -44,7 +69,7 @@ body > nav {
 }
 
 .list-item.head {
-    .gradient-background();
+    .gradient-header();
     -webkit-border-top-left-radius: @radius;
     -webkit-border-top-right-radius: @radius;
     -moz-border-radius-topleft: @radius;
