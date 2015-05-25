@@ -22,6 +22,8 @@
          [:li [:a {:ng-href "#/datastructures"} "Datastructures"]]]]]]
      [:section {:class "content"}
       [:div {:class "col-md-10 col-md-offset-1" :ng-view ""}]]
+     [:footer
+      [:div {:class "col-md-12"} "Verna Koskinen - darth.kipsu@gmail.com"]]
      (h/include-js "//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
      (h/include-js "//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js")
      (h/include-js "//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-route.js")
