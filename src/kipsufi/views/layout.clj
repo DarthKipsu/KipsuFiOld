@@ -16,10 +16,17 @@
      [:div {:style "height: 70px;"}
       [:nav {:class "navbar navbar-default affix-top" :data-spy "affix" :data-offset-top "250"}
        [:div {:class "container-fluid"}
+        [:div {:class "navbar-header"}
+         [:button {:type "button" :class "navbar-toggle collapsed" :data-toggle "collapse" :data-target "#main-navbar"}
+          [:span {:class "sr-only"}"Toggle navigation"]
+          [:span {:class "icon-bar"}]
+          [:span {:class "icon-bar"}]
+          [:span {:class "icon-bar"}]]]
+        [:div {:class "collapse navbar-collapse" :id "main-navbar"}
         [:ul {:class "nav navbar-nav"}
          [:li [:a {:ng-href "#/"} "Home"]]
          [:li [:a {:ng-href "#/algorithms"} "Algorithms"]]
-         [:li [:a {:ng-href "#/datastructures"} "Datastructures"]]]]]]
+         [:li [:a {:ng-href "#/datastructures"} "Datastructures"]]]]]]]
      [:section {:class "content"}
       [:div {:class "col-md-10 col-md-offset-1" :ng-view ""}]]
      [:footer
