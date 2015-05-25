@@ -12,19 +12,22 @@
   (-> $routeProvider
     (.when "/"
             (obj :controller "MainController"
-                :templateUrl "views/main.html"))
+                 :templateUrl "views/main.html"))
     (.when "/algorithms"
             (obj :controller "AlgorithmsController"
-                :templateUrl "views/algorithms.html"))
+                 :templateUrl "views/algorithms.html"))
     (.when "/datastructures"
             (obj :controller "DatastructuresController"
-                :templateUrl "views/datastructures.html"))
+                 :templateUrl "views/datastructures.html"))
     (.when "/algorithms/:name"
             (obj :controller "AlgorithmController"
-                :templateUrl "views/show.html"))
+                 :templateUrl "views/show.html"))
     (.when "/datastructures/:name"
             (obj :controller "DatastructureController"
-                :templateUrl "views/show.html"))
+                 :templateUrl "views/show.html"))
+    (.when "/about"
+            (obj :controller "AboutController"
+                 :templateUrl "views/about.html"))
     (.otherwise (obj :redirectTo "/"))))
 
 (def.controller kipsufi.MainController [$scope ApiService]
@@ -41,6 +44,8 @@
 
 (def.controller kipsufi.DatastructureController [$scope $routeParams ApiService]
   (ApiService.data-for (str "/api/datastructures/" $routeParams.name) $scope))
+
+(def.controller kipsufi.AboutController [$scope])
 
 (def.directive kipsufi.listItems []
     (obj :templateUrl "views/list.html"))

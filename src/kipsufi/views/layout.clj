@@ -25,8 +25,12 @@
         [:div {:class "collapse navbar-collapse" :id "main-navbar"}
         [:ul {:class "nav navbar-nav"}
          [:li [:a {:ng-href "#/"} "Home"]]
+         [:li {:class "divider hidden-xs"}]
          [:li [:a {:ng-href "#/algorithms"} "Algorithms"]]
-         [:li [:a {:ng-href "#/datastructures"} "Datastructures"]]]]]]]
+         [:li [:a {:ng-href "#/datastructures"} "Datastructures"]]]
+        [:ul {:class "nav navbar-nav navbar-right"}
+         [:li [:a {:ng-href "#/about"} "About"]]
+         [:li {:class "space"}]]]]]]
      [:section {:class "content"}
       [:div {:class "col-md-10 col-md-offset-1" :ng-view ""}]]
      [:footer
