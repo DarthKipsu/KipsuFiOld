@@ -16,14 +16,14 @@ h1 {
     text-shadow: 3px 3px 5px @highlight-color;
 }
 
-h1, h3, body > nav {
+h1, h3, body > div > nav {
     font-family: @highlight-font;
 }
 
 .layout-pic {
     background-image: url("/images/jolla-bg.jpg");
     background-repeat: repeat-x;
-    background-position: 140px 0px;
+    background-position: 138px 0px;
 }
 
 .affix {
@@ -57,6 +57,13 @@ body > div > nav {
 
 .intro {
     font-size: 20px;
+}
+
+.highlight {
+    border: 1px solid @border-color;
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    border-radius: @radius;
 }
 
 .list-item {
