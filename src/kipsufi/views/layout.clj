@@ -10,7 +10,7 @@
      (h/include-css "//fonts.googleapis.com/css?family=Lobster")
      (h/include-css "//fonts.googleapis.com/css?family=Droid+Sans")
      (h/include-css "css/style.css")]
-    [:body {:ng-app "kipsufi"}
+    [:body
      [:div {:class "layout-pic"}
       [:img {:src "images/jolla.jpg" :id "jolla"}]]
      [:div {:style "height: 70px;"}
@@ -24,19 +24,16 @@
           [:span {:class "icon-bar"}]]]
         [:div {:class "collapse navbar-collapse" :id "main-navbar"}
         [:ul {:class "nav navbar-nav"}
-         [:li [:a {:ng-href "#/"} "Home"]]
+         [:li [:a {:href "#/"} "Home"]]
          [:li {:class "divider hidden-xs"}]
-         [:li [:a {:ng-href "#/algorithms"} "Algorithms"]]
-         [:li [:a {:ng-href "#/datastructures"} "Datastructures"]]]
+         [:li [:a {:href "#/algorithms"} "Algorithms"]]
+         [:li [:a {:href "#/datastructures"} "Datastructures"]]]
         [:ul {:class "nav navbar-nav navbar-right"}
-         [:li [:a {:ng-href "#/about"} "About"]]
+         [:li [:a {:href "#/about"} "About"]]
          [:li {:class "space"}]]]]]]
-     [:section {:class "content"}
-      [:div {:class "col-md-10 col-md-offset-1" :ng-view ""}]]
+     [:section {:id "react-content"}]
      [:footer
       [:div {:class "col-md-12"} "Verna Koskinen - darth.kipsu@gmail.com"]]
      (h/include-js "//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
-     (h/include-js "//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js")
-     (h/include-js "//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-route.js")
      (h/include-js "//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js")
      (h/include-js "js/script.js")]))
