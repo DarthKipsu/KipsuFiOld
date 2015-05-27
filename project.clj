@@ -9,6 +9,7 @@
                  [reagent "0.5.0"]
                  [cljsjs/react "0.13.3-0"]
                  [cljsjs/react-router "0.13.2-0"]
+                 [cljs-ajax "0.3.11"]
                  [java-jdbc/dsl "0.1.2"]
                  [postgresql/postgresql "9.3-1102.jdbc41"]
                  [ring/ring-jetty-adapter "1.3.2"]
