@@ -1,5 +1,6 @@
 (ns kipsufi.api
     (:require [kipsufi.database :as db]
+              [clj-time.format :as f]
               [clj-time.coerce :as c]))
 
 ; ---- PRIVATE ---- ;
@@ -18,10 +19,11 @@
           :features))
 
 (defn ^:private format-time
-  "Format sgl timestamp into 12 digit int display format."
+  "Format sgl timestamp into better display format for web."
   [obj]
-  (assoc obj :created (c/to-long (c/from-sql-time (:created obj)))
-             :edited (c/to-long (c/from-sql-time (:edited obj)))))
+  (assoc obj :created (f/unparse (f/formatter "d MMMM yyyy") (c/from-sql-time (:created obj)))
+             :edited (f/unparse (f/formatter "d MMMM yyyy") (c/from-sql-time (:edited obj)))
+             :launched (f/unparse (f/formatter "d MMMM yyyy") (c/from-sql-time (:launched obj)))))
 
 (defn ^:private with-group
   "Add :group to map."
@@ -52,6 +54,13 @@
     (map format-time)
     (map features->advantage-groups)
     (map (partial with-group "datastructures"))))
+
+(defn projects
+  "Returns a formatted list of projects."
+  []
+  (->> (db/list-projects)
+    (map format-time)
+    (map (partial with-group "projects"))))
 
 (defn all
   "Returns a formatted list of both algorithms and datastructures."

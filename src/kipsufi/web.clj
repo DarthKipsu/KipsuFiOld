@@ -27,6 +27,8 @@
          (json-response (api/algorithms)))
     (GET "/api/datastructures" []
          (json-response (api/datastructures)))
+    (GET "/api/projects" []
+         (json-response (api/projects)))
     (GET "/api/algorithms/:algorithm-name" [algorithm-name]
          (json-response (api/algorithm algorithm-name)))
     (GET "/api/datastructures/:datastructure-name" [datastructure-name]

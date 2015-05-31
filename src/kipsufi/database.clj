@@ -35,6 +35,18 @@
                  "GROUP BY d.datastructure_name, d.description"
                  (order-by :d.edited))))
 
+(defn list-projects 
+  "Reads all projects from db and returns them as lazy seq."
+  []
+  (query (select [{:p.project_name :name}
+                  :p.description
+                  :p.launched :p.created :p.edited
+                  {"json_agg(DISTINCT pl.language_name)" :languages}]
+                 {:projects :p}
+                 "NATURAL JOIN projects_languages pl"
+                 "GROUP BY p.project_name, p.description"
+                 (order-by :p.edited))))
+
 (defn read-algorithm
   "Reads a single algorithm fron db and returns it with contents."
   [algorithm]
