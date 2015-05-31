@@ -3,6 +3,7 @@
   (:use [cljs.components.main :only [main-page]]
         [cljs.components.algo :only [algo-page]]
         [cljs.components.datas :only [datas-page]]
+        [cljs.components.show :only [show-algorithm show-datastructure]]
         [cljs.components.about :only [about-page]]))
 
 (defn container [route]
@@ -13,7 +14,9 @@
   (defroutes [:route "" container
               [:route "/" main-page]
               [:route "/algorithms" algo-page]
+              [:route "/algorithms/:name" show-algorithm]
               [:route "/datastructures" datas-page]
+              [:route "/datastructures/:name" show-datastructure]
               [:route "about" about-page]
               [:not-found main-page]]))
 

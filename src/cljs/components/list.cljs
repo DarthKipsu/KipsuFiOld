@@ -18,7 +18,7 @@
   ^{:key index}
   [:div.col-md-6
    [:div.item-selector
-    {:on-click #(js/console.log (str (:group item) "/" (:name item)))}
+    {:on-click #(set! js/window.location (str "#/" (:group item) "/" (:name item)))}
     [:div.list-item.head
      [:p.item-date (:edited item)]
      [:h3 (:name item)]]
