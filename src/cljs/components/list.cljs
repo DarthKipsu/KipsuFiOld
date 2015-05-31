@@ -1,15 +1,4 @@
-(ns cljs.components.list
-  (:require [reagent.core :as reagent :refer [atom]]
-            [cljs.reagent_react_router.core :refer []]
-            [ajax.core :refer [GET POST]]))
-
-(def items (atom []))
-
-(defn load-items [url]
-  (GET url {:response-format :json
-            :keywords? true
-            :handler (fn [data] (reset! items data))
-            :error-handler (fn [e] (js/console.log "error"))}))
+(ns cljs.components.list)
 
 (defn display-in-p [index item]
   [:p {:key index} item])
@@ -35,6 +24,3 @@
        [:p [:strong "Disadvantages:"]]
        (map-indexed display-in-p (:advantages item))]]
      [:div.col-md-12 (:description item)]]]])
-
-(defn list-items []
-  [:div (map-indexed single-item @items)])

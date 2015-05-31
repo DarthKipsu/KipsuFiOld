@@ -3,7 +3,7 @@
   (:use [cljs.components.main :only [main-page]]
         [cljs.components.algo :only [algo-page]]
         [cljs.components.datas :only [datas-page]]
-        [cljs.components.show :only [show-algorithm show-datastructure]]
+        [cljs.api_connector :only [show-algorithm show-datastructure]]
         [cljs.components.about :only [about-page]]))
 
 (defn container [route]
