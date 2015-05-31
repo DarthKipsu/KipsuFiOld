@@ -47,6 +47,14 @@
   (load-items "api/datastructures")
   [display-list])
 
+(defn list-projects
+  "Fetch and display a list of projects from the api."
+  []
+  (load-items "api/projects")
+  (js/console.log "projektit")
+  (js/console.log items)
+  [display-list])
+
 (defn show-algorithm
   "Fetch and display a single algorithm from the api by name in route params."
   [route]

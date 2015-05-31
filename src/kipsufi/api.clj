@@ -23,7 +23,7 @@
   [obj]
   (assoc obj :created (f/unparse (f/formatter "d MMMM yyyy") (c/from-sql-time (:created obj)))
              :edited (f/unparse (f/formatter "d MMMM yyyy") (c/from-sql-time (:edited obj)))
-             :launched (f/unparse (f/formatter "d MMMM yyyy") (c/from-sql-time (:launched obj)))))
+             :launched (if (:launched obj) (f/unparse (f/formatter "d MMMM yyyy") (c/from-sql-time (:launched obj))) nil)))
 
 (defn ^:private with-group
   "Add :group to map."
@@ -37,6 +37,7 @@
   []
   {"algorithms list" "/algorithms"
    "datastructures list" "/datastructures"
+   "projects list" "/projectsrojects"
    "recent items" "/recent"})
 
 (defn algorithms
@@ -63,9 +64,9 @@
     (map (partial with-group "projects"))))
 
 (defn all
-  "Returns a formatted list of both algorithms and datastructures."
+  "Returns a formatted list of all item types."
   []
-  (concat (algorithms) (datastructures)))
+  (concat (algorithms) (datastructures) (projects)))
 
 (defn algorithm
   "Returns the formatted entry of a single algorithm."
