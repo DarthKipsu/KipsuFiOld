@@ -3,6 +3,8 @@
   (:use [cljs.components.main :only [main-page]]
         [cljs.components.algo :only [algo-page]]
         [cljs.components.datas :only [datas-page]]
+        [cljs.components.articles :only [article-page]]
+        [cljs.components.projects :only [project-page]]
         [cljs.api_connector :only [show-algorithm show-datastructure]]
         [cljs.components.about :only [about-page]]))
 
@@ -17,6 +19,8 @@
               [:route "/algorithms/:name" show-algorithm]
               [:route "/datastructures" datas-page]
               [:route "/datastructures/:name" show-datastructure]
+              [:route "/articles" article-page]
+              [:route "/projects" project-page]
               [:route "about" about-page]
               [:not-found main-page]]))
 

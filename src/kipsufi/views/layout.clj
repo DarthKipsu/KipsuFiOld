@@ -26,9 +26,11 @@
         [:ul {:class "nav navbar-nav"}
          [:li [:a {:href "#/"} "Home"]]
          [:li {:class "divider hidden-xs"}]
+         [:li [:a {:href "#/articles"} "Articles"]]
          [:li [:a {:href "#/algorithms"} "Algorithms"]]
          [:li [:a {:href "#/datastructures"} "Datastructures"]]]
         [:ul {:class "nav navbar-nav navbar-right"}
+         [:li [:a {:href "#/projects"} "Projects"]]
          [:li [:a {:href "#/about"} "About"]]
          [:li {:class "space"}]]]]]]
      [:section {:id "react-content"}]
