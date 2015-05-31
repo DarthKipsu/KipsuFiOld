@@ -73,3 +73,17 @@
                  "NATURAL JOIN algorithms_datastructures ad, datastructures_features df"
                  (where {:d.datastructure_name datastructure})
                  "GROUP BY d.datastructure_name, d.description")))
+
+(defn read-project 
+  "Reads a single project from db and returns it with contents and categories."
+  [project]
+  (query (select [{:p.project_name :name}
+                  :p.description
+                  :p.content :p.comments :p.better_done :p.lesson
+                  :p.link_url :p.link_name
+                  :p.launched :p.created :p.edited
+                  {"json_agg(DISTINCT pl.language_name)" :languages}]
+                 {:projects :p}
+                 "NATURAL JOIN projects_languages pl"
+                 (where {:p.project_name project})
+                 "GROUP BY p.project_name, p.description")))

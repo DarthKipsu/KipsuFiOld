@@ -33,6 +33,8 @@
          (json-response (api/algorithm algorithm-name)))
     (GET "/api/datastructures/:datastructure-name" [datastructure-name]
          (json-response (api/datastructure datastructure-name)))
+    (GET "/api/projects/:project-name" [project-name]
+         (json-response (api/project project-name)))
     (route/resources "/")
     (route/not-found "Not Found"))
 

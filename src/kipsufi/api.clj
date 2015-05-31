@@ -80,3 +80,9 @@
   (format-time
     (features->advantage-groups
       (first (db/read-datastructure datastructure)))))
+
+(defn project
+  "Returns the formatted entry of a single project."
+  [project]
+  (format-time
+      (first (db/read-project project))))
