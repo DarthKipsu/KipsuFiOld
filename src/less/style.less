@@ -30,8 +30,21 @@ h1, h3, body > div > nav {
     width: 100px;
 }
 
-.affix {
+nav.affix {
     top: 0px;
+
+    ul {
+        li:hover {
+            background-color: darken(@header-background-color, 10%);
+            a {
+                color: white !important;
+            }
+        }
+
+        li a:hover {
+            color: white;
+        }
+    }
 }
 
 .content {
@@ -73,7 +86,7 @@ footer {
 }
 
 body > div > nav {
-    opacity: 0.75;
+    opacity: 0.95;
     display: block;
     width: 100%;
 }
