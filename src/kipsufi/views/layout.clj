@@ -11,10 +11,8 @@
      (h/include-css "//fonts.googleapis.com/css?family=Droid+Sans")
      (h/include-css "css/style.css")]
     [:body
-     [:div {:class "layout-pic"}
-      [:img {:src "images/jolla.jpg" :id "jolla"}]]
      [:div {:style "height: 70px;"}
-      [:nav {:class "navbar navbar-default affix-top" :data-spy "affix" :data-offset-top "250"}
+      [:nav {:class "navbar navbar-default affix-top" :data-spy "affix" :data-offset-top "50"}
        [:div {:class "container-fluid"}
         [:div {:class "navbar-header"}
          [:button {:type "button" :class "navbar-toggle collapsed" :data-toggle "collapse" :data-target "#main-navbar"}

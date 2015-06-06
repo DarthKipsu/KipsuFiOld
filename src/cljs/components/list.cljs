@@ -1,4 +1,5 @@
-(ns cljs.components.list)
+(ns cljs.components.list
+  (:use [cljs.components.show :only [set-html-from-db]]))
 
 (defn display-in-line [index item]
   [:span {:key index}
@@ -26,7 +27,7 @@
          [:div.col-md-6 [list-all "Disadvantages: " disadvantages true]]])
       (if languages
         [:div.col-md-12 [list-all "Languages: " languages true]])]
-     [:div.col-md-12 (:description item)]]))
+     [set-html-from-db (:description item)]]))
 
 (defn single-item [index item]
   ^{:key index}

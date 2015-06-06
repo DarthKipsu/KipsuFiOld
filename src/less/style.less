@@ -20,17 +20,10 @@ h1, h3, body > div > nav {
     font-family: @highlight-font;
 }
 
-.layout-pic {
-    background-image: url("/images/jolla-bg.jpg");
-    background-repeat: repeat-x;
-    background-position: 138px 0px;
-}
-
 .navbar .divider {
     height: 50px;
     margin: 0 9px;
-    border-right: 1px solid white;
-    border-left: 1px solid white;
+    border-right: 1px solid @border-color;
 }
 
 .navbar .space {
@@ -49,6 +42,15 @@ h1, h3, body > div > nav {
 
 nav {
     z-index: 100;
+}
+
+nav.affix-top {
+    background-color: white;
+    border-color: white;
+
+    div > div > ul > li.divider {
+        border-color: white;
+    }
 }
 
 footer {
@@ -71,7 +73,7 @@ footer {
 }
 
 body > div > nav {
-    .gradient-header();
+    opacity: 0.75;
     display: block;
     width: 100%;
 }
