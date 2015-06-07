@@ -14,34 +14,40 @@
      items)])
 
 (defn show-algorithm-datastructure [item]
-  [:section
+  [:div
+   [:div.img-bg [:img {:src (str "images/faces_big/" (:name item) ".png") :class "face-big"}]]
    [:h1 (:name item)]
-   [:div.col-md-12.intro
-    [set-html-from-db (:description item)]]
-   [:div.col-md-12.highlight
-    (if (:datastructures item)
-      [list-all "Datastructures:" (:datastructures item)])
-    [list-all "Advantages:" (:advantages item)]
-    [list-all "Disadvantages:" (:disadvantages item)]]
-   [:div.col-md-12 (:content item)]])
+   [:div.print
+    [set-html-from-db (:description item)]
+    [:div.col-md-12
+     (if (:datastructures item)
+       [list-all "Datastructures:" (:datastructures item)])
+     [list-all "Advantages:" (:advantages item)]
+     [list-all "Disadvantages:" (:disadvantages item)]]
+    [:div.col-md-12.space]
+    [:div.col-md-12 (:content item)]]
+    [:div.col-md-12.space]])
 
 (defn show-project [item]
-  [:section
+  [:div
+   [:div.img-bg [:img {:src (str "images/faces_big/" (:name item) ".png") :class "face-big"}]]
    [:h1 (:name item)]
-   [:div.intro
-    [set-html-from-db (:description item)]]
-   [:div.col-md-12.highlight
-    [:img.col-md-8 {:src (str "images/projects/" (:name item) ".png")}]
-    [list-all "Languages: " (:languages item)]
-    [:div.col-md-4 [:br] [:strong "Link:"]
-     [:p [:a {:href (:link_url item)} (:link_name item)]]]]
-   [set-html-from-db (:content item)]
-   [:div.col-md-12 [:strong "Comments:"]]
-   [set-html-from-db (:comments item)]
-   [:div.col-md-12 [:strong "What I could have done better:"]]
-   [set-html-from-db (:better_done item)]
-   [:div.col-md-12 [:strong "Lesson learned:"]]
-   [set-html-from-db (:lesson item)]])
+   [:div.print
+    [:div.intro
+     [set-html-from-db (:description item)]]
+    [:div.col-md-12
+     [list-all "Languages: " (:languages item)]
+     [:div.col-md-4 [:br] [:strong "Link:"]
+      [:p [:a {:href (:link_url item)} (:link_name item)]]]]
+    [:div.col-md-12
+     [set-html-from-db (:content item)]
+     [:div.col-md-12 [:h3 "Comments:"]]
+     [set-html-from-db (:comments item)]
+     [:div.col-md-12 [:h3 "What I could have done better:"]]
+     [set-html-from-db (:better_done item)]
+     [:div.col-md-12 [:h3 "Lesson learned:"]]
+     [set-html-from-db (:lesson item)]]]
+    [:div.col-md-12.space]])
 
 (defn show-article [category item]
   (cond

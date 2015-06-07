@@ -7,7 +7,7 @@
    [:h1.title "About Me"]
    [:div.print
     [:div.col-md-12
-     [:p.intro "I'm a first year computer sciences student at the Univeristy of Helsinki. I'm especially interested in finding efficient and elegant solutions to problems."]]
+     [:p.intro "I'm Verna, a first year computer sciences student at the Univeristy of Helsinki. In December 2013 I started my journy as a padawan programmer. I'm constantly thriving to be better as a programmer as well as a person. I want to create well crafted, clean and functional code."]]
     [:div.col-md-6.small-font
      [:p]
      [:p [:strong "Name: "] "Verna Koskinen"]

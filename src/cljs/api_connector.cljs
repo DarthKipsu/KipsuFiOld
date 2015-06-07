@@ -59,16 +59,16 @@
   "Fetch and display a single algorithm from the api by name in route params."
   [route]
   (load-items (str "api/algorithms/" (-> route :params (.-name))))
-  [:div.col-md-12 [display-item :algorithm] [RouteHandler route]])
+  [:div.content [display-item :algorithm] [RouteHandler route]])
 
 (defn show-datastructure
   "Fetch and display a single datastructure from api by name in route params."
   [route]
   (load-items (str "api/datastructures/" (-> route :params (.-name))))
-  [:div.col-md-12 [display-item :datastructure] [RouteHandler route]])
+  [:div.content [display-item :datastructure] [RouteHandler route]])
 
 (defn show-project
   "Fetch and display a single project from api by name in route params."
   [route]
   (load-items (str "api/projects/" (-> route :params (.-name))))
-  [:div.col-md-12 [display-item :project] [RouteHandler route]])
+  [:div.content [display-item :project] [RouteHandler route]])
