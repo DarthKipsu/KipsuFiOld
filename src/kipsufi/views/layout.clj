@@ -31,7 +31,7 @@
          [:li [:a {:href "#/projects"} "Projects"]]
          [:li [:a {:href "#/about"} "About"]]
          [:li {:class "space"}]]]]]]
-     [:section {:id "react-content"}]
+     [:div {:id "react-content"}]
      [:footer
       [:div {:class "col-md-12"} "Verna Koskinen - darth.kipsu@gmail.com"]]
      (h/include-js "//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
