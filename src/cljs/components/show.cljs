@@ -16,7 +16,8 @@
 (defn show-algorithm-datastructure [item]
   [:section
    [:h1 (:name item)]
-   [:div.col-md-12.intro (:description item)]
+   [:div.col-md-12.intro
+    [set-html-from-db (:description item)]]
    [:div.col-md-12.highlight
     (if (:datastructures item)
       [list-all "Datastructures:" (:datastructures item)])

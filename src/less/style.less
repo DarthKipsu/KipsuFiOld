@@ -9,6 +9,7 @@
 body {
     color: @dark-color;
     font-family: Droid Sans;
+    background-color: @header-background-color;
 }
 
 h1 {
@@ -36,6 +37,8 @@ h1, h3, body > div > nav {
 }
 
 nav.affix {
+    margin: 0;
+    left: 0;
     top: 0px;
     padding: 0 0px;
 
@@ -53,10 +56,14 @@ nav.affix {
     }
 }
 
-.content {
+.content, .nav-container {
+    overflow: auto;
     z-index: 0;
-    width: 80%;
+    width: 100%;
+    max-width: 960px;
     margin: auto;
+    padding: 25px;
+    background-color: white;
 }
 
 nav {
@@ -64,7 +71,8 @@ nav {
 }
 
 nav.affix-top {
-    padding: 0 10%;
+    max-width: 960px;
+    margin: auto;
     background-color: white;
     border-color: white;
 
@@ -73,12 +81,35 @@ nav.affix-top {
     }
 }
 
+.face-small {
+    margin-left: -5px;
+}
+
+.info {
+    width: 100%;
+    margin-bottom: 3px;
+    line-height: 0.9;
+    font-size: 10px;
+    color: @medium-color;
+
+    .item-type {
+        text-transform: uppercase;
+    }
+
+    .item-date {
+        float: right;
+    }
+}
+
 footer {
-    height: 70px;
+    max-width: 960px;
+    margin: auto;
+    background-color: darken(@border-color, 10%);
+    height: 170px;
     line-height: 70px;
     text-align: center;
     font-family: @highlight-font;
-    color: @border-color;
+    color: white;
 }
 
 .gradient-header() {
@@ -158,12 +189,8 @@ body > div > nav {
 }
 
 .item-selector {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .item-date {
-    text-align: right;
-    font-size: 10px;
-    line-height: 0.9;
-    color: @medium-color;
 }

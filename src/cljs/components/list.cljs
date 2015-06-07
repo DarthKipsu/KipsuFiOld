@@ -10,17 +10,11 @@
    (map-indexed display-in-line items)])
 
 (defn item-contents [item]
-  (let [datastructures (:datastructures item)
-        advantages (:advantages item)
+  (let [advantages (:advantages item)
         disadvantages (:disadvantages item)
-        launched (:launched item)
         languages (:languages item)]
     [:div.list-item.content
-     (if datastructures
-       [:div.col-md-12 [list-all "Datastructures: " datastructures false]])
-     (if launched
-       [:div.col-md-12 [:p [:strong "Launched: "] launched]])
-     [:div.col-md-12.highlight
+     [:div.col-md-12
       (if (or advantages disadvantages)
         [:div 
          [:div.col-md-6 [list-all "Advantages: " advantages true]]
@@ -35,6 +29,9 @@
    [:div.item-selector
     {:on-click #(set! js/window.location (str "#/" (:group item) "/" (:name item)))}
     [:div.list-item.head
-     [:p.item-date (:edited item)]
+     [:p {:class "info"}
+      [:span.item-type (:group item)]
+      [:span.item-date (:edited item)]]
+     [:img {:src (str "images/faces_small/" (:name item) ".png") :class "face-small"}]
      [:h3 (:name item)]]
     [item-contents item]]])

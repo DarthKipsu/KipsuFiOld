@@ -11,7 +11,7 @@
      (h/include-css "//fonts.googleapis.com/css?family=Droid+Sans")
      (h/include-css "css/style.css")]
     [:body
-     [:div {:style "height: 70px;"}
+     [:div {:class "nav-container"}
       [:nav {:class "navbar navbar-default affix-top" :data-spy "affix" :data-offset-top "50"}
        [:div {:class "container-fluid"}
         [:div {:class "navbar-header"}

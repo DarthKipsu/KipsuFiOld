@@ -4,9 +4,9 @@
 (defn about-page [route]
   [:div.col-md-12
    [:h1 "About me"]
-   [:div.col-md-4
+   [:div.col-md-5
     [:img {:src "images/me.jpg"}]]
-   [:div.col-md-8
+   [:div.col-md-7
     [:p]
     [:p [:strong "Name: "] "Verna Koskinen"]
     [:p [:strong "Email "] "dath.kipsu@gmail.com"]
