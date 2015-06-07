@@ -4,7 +4,8 @@
 
 (defn main-page [route]
   [:div.col-md-12
-   [:h1 "darth.kipsu.fi"]
+   [:div.img-bg [:img {:src "images/faces_big/main.png" :class "face-big"}]]
+   [:h1.title "darth.kipsu.fi"]
    [:h3 "Recent articles"]
    [list-recent]
    [RouteHandler route]])
