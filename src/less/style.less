@@ -8,6 +8,7 @@
 
 body {
     color: @dark-color;
+    font-size: 18px;
     font-family: Droid Sans;
     background-color: @header-background-color;
 }
@@ -24,6 +25,7 @@ h3 {
 
 p {
     margin: 15px 0;
+    width: 100%;
 }
 
 h1, h3, body > div > nav {
@@ -114,7 +116,7 @@ h1.title {
     margin-bottom: 3px;
     padding: 0 10px;
     line-height: 0.9;
-    font-size: 10px;
+    font-size: 10px !important;
     color: @medium-color;
 
     .item-type {
@@ -124,6 +126,10 @@ h1.title {
     .item-date {
         float: right;
     }
+}
+
+div.space {
+    height: 30px;
 }
 
 footer {
@@ -155,8 +161,9 @@ body > div > nav {
 }
 
 .intro {
-    font-size: 20px;
+    font-size: 22px;
     margin-bottom: 40px;
+    font-style: italic;
 }
 
 .highlight {
@@ -164,6 +171,10 @@ body > div > nav {
     -webkit-border-radius: @radius;
     -moz-border-radius: @radius;
     border-radius: @radius;
+}
+
+.small-font {
+    font-size: 16px;
 }
 
 .list-item {
@@ -176,6 +187,10 @@ body > div > nav {
 
     h3 {
         margin-left: 10px;
+    }
+
+    p {
+        font-size: 16px;
     }
 }
 
@@ -211,7 +226,4 @@ body > div > nav {
 
 .item-selector {
     margin-bottom: 30px;
-}
-
-.item-date {
 }
