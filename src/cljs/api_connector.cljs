@@ -20,7 +20,9 @@
 (defn ^:private display-list
   "Display a list of articles."
   []
-  [:div (map-indexed single-item @items)])
+  [:div
+   [:div.col-md-6 (map-indexed single-item (take-nth 2 @items))]
+   [:div.col-md-6 (map-indexed single-item (take-nth 2 (rest @items)))]])
 
 (defn ^:private display-item
   "Display a single article."

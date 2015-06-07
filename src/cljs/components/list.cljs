@@ -25,7 +25,7 @@
 
 (defn single-item [index item]
   ^{:key index}
-  [:div.col-md-6.item420
+  [:div
    [:div.item-selector
     {:on-click #(set! js/window.location (str "#/" (:group item) "/" (:name item)))}
     [:div.list-item.head
