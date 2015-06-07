@@ -9,4 +9,5 @@
    [:div.print
     [:h3 "Recent articles"]
     [list-recent]]
+   [:div.col-md-12.space]
    [RouteHandler route]])
