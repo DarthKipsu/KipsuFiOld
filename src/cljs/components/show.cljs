@@ -37,8 +37,10 @@
      [set-html-from-db (:description item)]]
     [:div.col-md-12
      [list-all "Languages: " (:languages item)]
-     [:div.col-md-4 [:br] [:strong "Link:"]
-      [:p [:a {:href (:link_url item)} (:link_name item)]]]]
+     [:div.col-md-4 [:p [:strong "Link:"]]
+      [:p [:a {:href (:link_url item)} (:link_name item)]]]
+     [:div.col-md-4 [:p [:strong "Launched:"]]
+      [:p (:launched item)]]]
     [:div.col-md-12
      [set-html-from-db (:content item)]
      [:div.col-md-12 [:h3 "Comments:"]]
