@@ -9,6 +9,7 @@ KipsuFiFSharpOld/packages/
 *.swo
 *~
 
+/saved-articles
 /target
 /classes
 /checkouts
