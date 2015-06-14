@@ -23,8 +23,9 @@ h3 {
 }
 
 p {
-    margin: 15px 0;
+    margin: 25px 0;
     width: 100%;
+    line-height: 30px;
 }
 
 h1, h3, body > div > nav {
@@ -117,22 +118,7 @@ h1.title.black {
     color: @dark-color;
 }
 
-.info {
-    width: 100%;
-    margin-bottom: 3px;
-    padding: 0 10px;
-    line-height: 0.9;
-    font-size: 10px !important;
-    color: @medium-color;
 
-    .item-type {
-        text-transform: uppercase;
-    }
-
-    .item-date {
-        float: right;
-    }
-}
 
 div.space {
     height: 30px;
@@ -198,6 +184,25 @@ body > div > nav {
 
     p {
         font-size: 16px;
+        line-height: 26px;
+        margin: 15px 0;
+    }
+
+    p.info {
+        width: 100%;
+        margin-bottom: 3px;
+        padding: 0 10px;
+        line-height: 0.9;
+        font-size: 10px !important;
+        color: @medium-color;
+    
+        .item-type {
+            text-transform: uppercase;
+        }
+    
+        .item-date {
+            float: right;
+        }
     }
 }
 
@@ -233,4 +238,13 @@ body > div > nav {
 
 .item-selector {
     margin-bottom: 30px;
+}
+
+p.align-middle {
+    width: 100%;
+    text-align: center;
+
+    img {
+        margin: 20px;
+    }
 }

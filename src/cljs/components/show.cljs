@@ -1,5 +1,13 @@
 (ns cljs.components.show)
 
+(extend-type js/NodeList
+    ISeqable
+    (-seq [array] (array-seq array 0)))
+
+(extend-type js/HTMLCollection
+    ISeqable
+    (-seq [array] (array-seq array 0)))
+
 (defn is-algo-or-datas? [category]
   (or (= category :algorithm) (= category :datastructure)))
 
@@ -25,7 +33,7 @@
      [list-all "Advantages:" (:advantages item)]
      [list-all "Disadvantages:" (:disadvantages item)]]
     [:div.col-md-12.space]
-    [:div.col-md-12 (:content item)]]
+    [set-html-from-db (:content item)]]
     [:div.col-md-12.space]])
 
 (defn show-project [item]
