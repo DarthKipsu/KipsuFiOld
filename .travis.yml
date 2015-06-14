@@ -2,6 +2,8 @@ language: clojure
 lein: lein2
 jdk:
   - oraclejdk8
+addons:
+  ssh_known_hosts: kipsu.fi
 env:
   global:
     - secure: "b8wUL3gYZpbNKV/TwxbI3pEBZadFZNZSS2uDSlyZyjo4bZVu5Dh9WschhyVPc79STm6KVSUncDl/QjZMzUYA/3MaSWJT/TGOIrnaRGX896uXcqhXXrj0Qh61wzBiftrIf2VyPkFwbUDs3tNFhq1gzrMlzYtmGV6brDQOC21UrGc="
