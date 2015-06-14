@@ -1,4 +1,5 @@
-(ns cljs.components.show)
+(ns cljs.components.show
+  (:require [reagent.core :as reagent]))
 
 (extend-type js/NodeList
     ISeqable

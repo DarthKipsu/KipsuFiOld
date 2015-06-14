@@ -17,11 +17,14 @@
                  [org.clojure/data.json "0.2.6"]
                  [compojure "1.3.4"]
                  [hiccup "1.0.5"]
+                 [hickory "0.5.4"]
                  [clj-time "0.9.0"]]
   :main kipsufi.web
   :plugins [[lein-ring "0.9.4"]
             [lein-cljsbuild "1.0.6"]
-            [lein-lesscss "1.2"]]
+            [lein-lesscss "1.2"]
+            [lein-npm "0.5.0"]]
+  :node-dependencies [[react-gist "1.0.1"]]
   :cljsbuild {
     :builds [{
       :source-paths ["src/cljs"]
