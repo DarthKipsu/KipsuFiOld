@@ -10,6 +10,7 @@ env:
     - secure: "Gdhgsj1hsTQFD6CBkBMxkgnI8xSvldg18h6SZah9QTmtMLWK2XCzZdodzmRyH+1IjPEQ9grGh1T3Xn2Xf3a2/zfCYY9lwjECXgeim0Q5Jpj6HMYmUsrEUL5HyM7N9XI95pHrbNkrxvO4/awtVPyy3yEbfMxxCZ/L7JlTuwSuJ9E="
     - secure: "XbSIqSwKGaqwJIXWMfL4DF76KiD1hoqqGIJy7Y2HkH4bIEbgS4X/FgqUm8NKudFWTge1dEaU5uAisLIWNnfP6zGkpL/18fw11jZYsLKmCtiDRYxXm5BapVsBI9+g6KuktXHkvc2JNiy6rtcRdvCIxKqd2YUyAUcTgL6k1C8ENmc="
 after_success:
+  - sudo apt-get -y install sshpass
   - lein compile
   - lein uberjar
   - sshpass -p $DEPLOY_PASS scp target/kipsufi-0.1.0-SNAPSHOT-standalone.jar $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
