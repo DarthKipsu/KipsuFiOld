@@ -1,0 +1,16 @@
+language: clojure
+lein: lein2
+jdk:
+  - oraclejdk8
+env:
+  global:
+    - secure: "b8wUL3gYZpbNKV/TwxbI3pEBZadFZNZSS2uDSlyZyjo4bZVu5Dh9WschhyVPc79STm6KVSUncDl/QjZMzUYA/3MaSWJT/TGOIrnaRGX896uXcqhXXrj0Qh61wzBiftrIf2VyPkFwbUDs3tNFhq1gzrMlzYtmGV6brDQOC21UrGc="
+    - secure: "aFiGmL/1sVb5uYhcUW9ttJA44r4mnu0skpOyoF+uqYM3c98xZra+tiOopcQ0CqksouRA3XIYcj8RDW/4BS+pGNQGZUrpL64F2AHF9RvJK++V6A3nqfJyCysLcOu+B+meRPZHez01QxKDAH+pPLxGfIc1zbBHtmL0frNMmiILGxg="
+    - secure: "QaQ/WwC6ipH9AHjb5zI4Yv1n65kZyd9ZvmPzpp3du327CXhV1QNDkPyJfvfVAckAu7gK99tVTQSp9fPtedd5Mg4h4H7eOxCjx0q02YkRrrLA8+K8gLT3pUKf77iBzM/GbbXfRChKDs7JhfAp3fUwRHuJIKJW3aIjKPJbLnkrmUo="
+    - secure: "Gdhgsj1hsTQFD6CBkBMxkgnI8xSvldg18h6SZah9QTmtMLWK2XCzZdodzmRyH+1IjPEQ9grGh1T3Xn2Xf3a2/zfCYY9lwjECXgeim0Q5Jpj6HMYmUsrEUL5HyM7N9XI95pHrbNkrxvO4/awtVPyy3yEbfMxxCZ/L7JlTuwSuJ9E="
+    - secure: "XbSIqSwKGaqwJIXWMfL4DF76KiD1hoqqGIJy7Y2HkH4bIEbgS4X/FgqUm8NKudFWTge1dEaU5uAisLIWNnfP6zGkpL/18fw11jZYsLKmCtiDRYxXm5BapVsBI9+g6KuktXHkvc2JNiy6rtcRdvCIxKqd2YUyAUcTgL6k1C8ENmc="
+after_success:
+  - lein compile
+  - lein uberjar
+  - sshpass -p $DEPLOY_PASS scp target/kipsufi-0.1.0-SNAPSHOT-standalone.jar $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
+  - sshpass -p $DEPLOY_PASS ssh $DEPLOY_USER@$DEPLOY_HOST $DEPLOY_COMMAND
