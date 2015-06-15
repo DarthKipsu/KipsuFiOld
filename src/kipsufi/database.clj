@@ -41,6 +41,13 @@
               "GROUP BY p.project_name, p.description "
               "ORDER BY p.edited DESC")))
 
+(defn list-articles
+  "Reads all articles from db and returns them as lazy seq."
+  []
+  (query (str "SELECT article_name AS name,description,edited,created "
+              "FROM articles "
+              "ORDER BY edited DESC")))
+
 (defn read-algorithm
   "Reads a single algorithm fron db and returns it with contents."
   [algorithm]
@@ -75,3 +82,12 @@
                "WHERE p.project_name = ? "
                "GROUP BY p.project_name, p.description")
           project]))
+
+(defn read-article 
+  "Reads a single article from db and returns it with contents and categories."
+  [article]
+  (query [(str "SELECT article_name AS name,description,content,created,edited "
+               "FROM articles "
+               "WHERE article_name = ?")
+          article]))
+

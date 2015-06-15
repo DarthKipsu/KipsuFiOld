@@ -5,7 +5,7 @@
         [cljs.components.datas :only [datas-page]]
         [cljs.components.articles :only [article-page]]
         [cljs.components.projects :only [project-page]]
-        [cljs.api_connector :only [show-algorithm show-datastructure show-project]]
+        [cljs.api_connector :only [show-algorithm show-datastructure show-project show-art]]
         [cljs.components.about :only [about-page]]))
 
 (defn container [route]
@@ -19,9 +19,10 @@
               [:route "/algorithms/:name" show-algorithm]
               [:route "/datastructures" datas-page]
               [:route "/datastructures/:name" show-datastructure]
-              [:route "/articles" article-page]
               [:route "/projects" project-page]
               [:route "/projects/:name" show-project]
+              [:route "/articles" article-page]
+              [:route "/articles/:name" show-art]
               [:route "about" about-page]
               [:not-found main-page]]))
 

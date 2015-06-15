@@ -31,12 +31,16 @@
                 (json-response (api/datastructures)))
            (GET "/api/projects" []
                 (json-response (api/projects)))
+           (GET "/api/articles" []
+                (json-response (api/articles)))
            (GET "/api/algorithms/:algorithm-name" [algorithm-name]
                 (json-response (api/algorithm algorithm-name)))
            (GET "/api/datastructures/:datastructure-name" [datastructure-name]
                 (json-response (api/datastructure datastructure-name)))
            (GET "/api/projects/:project-name" [project-name]
                 (json-response (api/project project-name)))
+           (GET "/api/articles/:article-name" [article-name]
+                (json-response (api/article article-name)))
            (route/resources "/")
            (route/not-found "Not Found"))
 

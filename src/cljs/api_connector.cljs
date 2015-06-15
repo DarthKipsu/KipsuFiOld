@@ -55,6 +55,12 @@
   (load-items "api/projects")
   [display-list])
 
+(defn list-articles
+  "Fetch and display a list of articles from the api."
+  []
+  (load-items "api/articles")
+  [display-list])
+
 (defn show-algorithm
   "Fetch and display a single algorithm from the api by name in route params."
   [route]
@@ -72,3 +78,9 @@
   [route]
   (load-items (str "api/projects/" (-> route :params (.-name))))
   [:div.content [display-item :project] [RouteHandler route]])
+
+(defn show-art
+  "Fetch and display a single article from api by name in route params."
+  [route]
+  (load-items (str "api/articles/" (-> route :params (.-name))))
+  [:div.content [display-item :article] [RouteHandler route]])

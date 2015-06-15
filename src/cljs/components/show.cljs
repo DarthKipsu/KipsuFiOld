@@ -60,8 +60,19 @@
      [set-html-from-db (:lesson item)]]]
     [:div.col-md-12.space]])
 
+(defn show-art [item]
+  [:div
+   [:div.img-bg [:img {:src (str "images/faces_big/" (:name item) ".png") :class "face-big"}]]
+   [:div.print
+    [:div.intro
+     [set-html-from-db (:description item)]]
+    [:div.col-md-12
+     [set-html-from-db (:content item)]]]
+    [:div.col-md-12.space]])
+
 (defn show-article [category item]
   (cond
     (not (:name item)) [:div]
     (is-algo-or-datas? category) [show-algorithm-datastructure item]
-    (= category :project) [show-project item]))
+    (= category :project) [show-project item]
+    (= category :article) [show-art item]))

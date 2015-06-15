@@ -63,10 +63,17 @@
     (map format-time)
     (map (partial with-group "projects"))))
 
+(defn articles
+  "Returns a formatted list of articles."
+  []
+  (->> (db/list-articles)
+    (map format-time)
+    (map (partial with-group "articles"))))
+
 (defn all
   "Returns a formatted list of all item types."
   []
-  (concat (algorithms) (datastructures) (projects)))
+  (concat (algorithms) (datastructures) (articles) (projects)))
 
 (defn algorithm
   "Returns the formatted entry of a single algorithm."
@@ -87,3 +94,9 @@
   [project]
   (format-time
       (first (db/read-project project))))
+
+(defn article
+  "Returns the formatted entry of a single project."
+  [article]
+  (format-time
+      (first (db/read-article article))))
