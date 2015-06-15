@@ -24,10 +24,12 @@
             [lein-cljsbuild "1.0.6"]
             [lein-lesscss "1.2"]
             [lein-npm "0.5.0"]]
+  :hooks [leiningen.cljsbuild]
   :node-dependencies [[react-gist "1.0.1"]]
   :cljsbuild {
     :builds [{
       :source-paths ["src/cljs"]
+      :jar true
       :compiler {
         :output-to "resources/public/js/script.js"
         :optimizations :whitespace
