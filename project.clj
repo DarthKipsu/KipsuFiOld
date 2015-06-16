@@ -26,7 +26,9 @@
             [lein-npm "0.5.0"]]
   :hooks [leiningen.cljsbuild]
   :node-dependencies [[react-gist "1.0.1"]]
-  :profiles {:dev {:dependencies [[midje "1.6.3"]]}}
+  :profiles {:dev {:dependencies [[midje "1.6.3"]]
+                   :plugins [[lein-midje "3.1.3"]]}
+             :uberjar {:aot :all}}
   :cljsbuild {
     :builds [{
       :source-paths ["src/cljs"]
