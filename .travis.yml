@@ -14,6 +14,7 @@ env:
 after_success:
   - sudo apt-get -y install sshpass
   - lein compile
+  - lein lesscss
   - lein uberjar
   - sshpass -p $DEPLOY_PASS scp target/kipsufi-0.1.0-SNAPSHOT-standalone.jar $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
   - sshpass -p $DEPLOY_PASS ssh $DEPLOY_USER@$DEPLOY_HOST $DEPLOY_COMMAND
