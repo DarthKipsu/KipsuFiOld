@@ -5,12 +5,12 @@
 
 ; ---- PRIVATE ---- ;
 
-(defn ^:private filter-features
+(defn filter-features
   "Return features that match the given selector."
   [obj selector]
   (map (fn [x] (:f1 x)) (selector (fn [x] (:f2 x)) (:features obj))))
 
-(defn ^:private features->advantage-groups
+(defn features->advantage-groups
   "Divide :features into :advantages and :disadvantages."
   [obj]
   (dissoc (assoc obj
@@ -18,14 +18,14 @@
                  :disadvantages (filter-features obj remove))
           :features))
 
-(defn ^:private format-time
+(defn format-time
   "Format sgl timestamp into better display format for web."
   [obj]
   (assoc obj :created (f/unparse (f/formatter "d MMMM yyyy") (c/from-sql-time (:created obj)))
              :edited (f/unparse (f/formatter "d MMMM yyyy") (c/from-sql-time (:edited obj)))
              :launched (if (:launched obj) (f/unparse (f/formatter "d MMMM yyyy") (c/from-sql-time (:launched obj))) nil)))
 
-(defn ^:private with-group
+(defn with-group
   "Add :group to map."
   [group obj]
   (assoc obj :group group))
