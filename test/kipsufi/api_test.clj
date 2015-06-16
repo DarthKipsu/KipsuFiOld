@@ -1,6 +1,7 @@
 (ns kipsufi.api-test
   (:require [clojure.test :refer :all]
             [kipsufi.api :refer :all]
+            [kipsufi.db-mock :as db]
             [clj-time.coerce :as c])
   (:use midje.sweet))
 
@@ -32,4 +33,26 @@
                               :launched nil})
  (fact "adds a :group identifier to an object"
    (with-group :algorithms {}) => {:group :algorithms}))
+
+(facts "database loaders for single items"
+  (fact "a single algorithm is read from the database"
+    (:name (single-item-from-db
+             db/read-algorithm "Algorithm 1")) => "Algorithm 1"
+    (:name (single-item-from-db
+             db/read-algorithm "Algorithm 2")) => "Algorithm 2")
+  (fact "a single datastructure is read from the database"
+    (:name (single-item-from-db
+             db/read-datastructure "Datastructure 1")) => "Datastructure 1"
+    (:name (single-item-from-db
+             db/read-datastructure "Datastructure 2")) => "Datastructure 2")
+  (fact "a single article is read from the database"
+    (:name (single-item-from-db
+             db/read-article "Article 1")) => "Article 1"
+    (:name (single-item-from-db
+             db/read-article "Article 2")) => "Article 2")
+  (fact "a single project is read from the database"
+    (:name (single-item-from-db
+             db/read-project "Project 1")) => "Project 1"
+    (:name (single-item-from-db
+             db/read-project "Project 2")) => "Project 2"))
 
