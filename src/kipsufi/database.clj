@@ -17,7 +17,8 @@
               "json_agg(DISTINCT ad.datastructure_name) AS datastructures,"
               "json_agg((af.feature_name, af.advantage)) AS features "
               "FROM algorithms a "
-              "NATURAL JOIN algorithms_datastructures ad, algorithms_features af "
+              "NATURAL JOIN algorithms_datastructures ad "
+              "NATURAL JOIN algorithms_features af "
               "GROUP BY a.algorithm_name, a.description "
               "ORDER BY a.edited DESC")))
 
@@ -27,7 +28,8 @@
   (query (str "SELECT d.datastructure_name AS name,d.description,d.created,d.edited,"
               "json_agg((df.feature_name, df.advantage)) AS features "
               "FROM datastructures d "
-              "NATURAL JOIN algorithms_datastructures ad, datastructures_features df "
+              "NATURAL JOIN algorithms_datastructures ad "
+              "NATURAL JOIN datastructures_features df "
               "GROUP BY d.datastructure_name, d.description "
               "ORDER BY d.edited DESC")))
 
@@ -55,7 +57,8 @@
                "json_agg(DISTINCT ad.datastructure_name) AS datastructures,"
                "json_agg((af.feature_name, af.advantage)) AS features "
                "FROM algorithms a "
-               "NATURAL JOIN algorithms_datastructures ad, algorithms_features af "
+               "NATURAL JOIN algorithms_datastructures ad "
+               "NATURAL JOIN algorithms_features af "
                "WHERE a.algorithm_name = ? "
                "GROUP BY a.algorithm_name, a.description")
           algorithm]))
@@ -66,7 +69,8 @@
   (query [(str "SELECT d.datastructure_name AS name,d.description,d.content,d.created,d.edited,"
                "json_agg((df.feature_name, df.advantage)) AS features "
                "FROM datastructures d "
-               "NATURAL JOIN algorithms_datastructures ad, datastructures_features df "
+               "NATURAL JOIN algorithms_datastructures ad "
+               "NATURAL JOIN datastructures_features df "
                "WHERE d.datastructure_name = ? "
                "GROUP BY d.datastructure_name, d.description")
           datastructure]))
