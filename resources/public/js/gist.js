@@ -73,5 +73,3 @@
             }
         }
 }})(jQuery);
-
-window.setTimeout(function() {$.gist()}, 1000);

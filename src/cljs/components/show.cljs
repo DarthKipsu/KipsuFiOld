@@ -23,6 +23,7 @@
      items)])
 
 (defn show-algorithm-datastructure [item]
+  (js/window.setTimeout $.gist 1000)
   [:div
    [:div.img-bg [:img {:src (str "images/faces_big/" (:name item) ".png") :class "face-big"}]]
    [:h1 (:name item)]
