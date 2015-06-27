@@ -34,18 +34,22 @@
                                :description (str "Project called " project)
                                :name project}])
 
-(defn list-algorithms []
-  (lazy-seq (map (fn [x] (first (read-algorithm (str "Algorithm " x))))
-                 (range 1 9))))
+(defn list-n [func string n]
+  (lazy-seq (map (fn [x] (first (func (str string " " x))))
+                 (range 1 (inc n)))))
 
-(defn list-datastructures []
-  (lazy-seq (map (fn [x] (first (read-datastructure (str "Datastructure " x))))
-                       (range 1 9))))
+(defn list-algorithms 
+  ([] (list-n read-algorithm "Algorithm" 8))
+  ([n] (list-n read-algorithm "Algorithm" n)))
 
-(defn list-projects []
-  (lazy-seq (map (fn [x] (first (read-project (str "Project " x))))
-                       (range 1 9))))
+(defn list-datastructures 
+  ([] (list-n read-datastructure "Datastructure" 8))
+  ([n] (list-n read-datastructure "Datastructure" n)))
 
-(defn list-articles []
-  (lazy-seq (map (fn [x] (first (read-article (str "Article " x))))
-                       (range 1 9))))
+(defn list-projects 
+  ([] (list-n read-project "Project" 8))
+  ([n] (list-n read-project "Project" n)))
+
+(defn list-articles 
+  ([] (list-n read-article "Article" 8))
+  ([n] (list-n read-article "Article" n)))

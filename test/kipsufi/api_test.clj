@@ -63,22 +63,30 @@
         => "Algorithm 1"
     (:name (second (list-from-db (db/list-algorithms) "algorithms")))
         => "Algorithm 2")
+  (fact "a list of algorithms with desired length is read from the database"
+    (count (list-from-db (db/list-algorithms 5) "algorithms")) => 5)
   (fact "a list of datastructures is read from the database"
     (count (list-from-db (db/list-datastructures) "datastructures")) => 8
     (:name (first (list-from-db (db/list-datastructures) "datastructures")))
         => "Datastructure 1"
     (:name (second (list-from-db (db/list-datastructures) "datastructures")))
         => "Datastructure 2")
+  (fact "a list of datastructures with desired length is read from the database"
+    (count (list-from-db (db/list-datastructures 3) "datastructures")) => 3)
   (fact "a list of projects is read from the database"
     (count (list-from-db (db/list-projects) "projects")) => 8
     (:name (first (list-from-db (db/list-projects) "projects")))
         => "Project 1"
     (:name (second (list-from-db (db/list-projects) "projects")))
         => "Project 2")
+  (fact "a list of projects with desired length is read from the database"
+    (count (list-from-db (db/list-projects 2) "projects")) => 2)
   (fact "a list of articles is read from the database"
     (count (list-from-db (db/list-articles) "articles")) => 8
     (:name (first (list-from-db (db/list-articles) "articles")))
         => "Article 1"
     (:name (second (list-from-db (db/list-articles) "articles")))
-        => "Article 2"))
+        => "Article 2")
+  (fact "a list of articles with desired length is read from the database"
+    (count (list-from-db (db/list-articles 4) "articles")) => 4))
 
