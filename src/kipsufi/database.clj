@@ -3,11 +3,13 @@
   (:require [kipsufi.jdbc.json]
             [clojure.java.jdbc :as sql]))
 
-(def ^:private connection
+(def connection
   {:subprotocol "postgresql"
-   :subname "//localhost:5432/codingproject"})
+   :subname "//localhost:5432/kipsu"
+   :user "kipsu"
+   :password "kipsu"})
 
-(def ^:private query (partial sql/query connection))
+(def query (partial sql/query connection))
 
 
 (defn list-algorithms 
@@ -28,7 +30,6 @@
   (query (str "SELECT d.datastructure_name AS name,d.description,d.created,d.edited,"
               "json_agg((df.feature_name, df.advantage)) AS features "
               "FROM datastructures d "
-              "NATURAL JOIN algorithms_datastructures ad "
               "NATURAL JOIN datastructures_features df "
               "GROUP BY d.datastructure_name, d.description "
               "ORDER BY d.edited DESC")))
@@ -69,7 +70,6 @@
   (query [(str "SELECT d.datastructure_name AS name,d.description,d.content,d.created,d.edited,"
                "json_agg((df.feature_name, df.advantage)) AS features "
                "FROM datastructures d "
-               "NATURAL JOIN algorithms_datastructures ad "
                "NATURAL JOIN datastructures_features df "
                "WHERE d.datastructure_name = ? "
                "GROUP BY d.datastructure_name, d.description")
