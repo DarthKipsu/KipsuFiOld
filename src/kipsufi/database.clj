@@ -76,23 +76,23 @@
 
 (defn list-algorithms 
   "Reads all algorithms from db and returns them as lazy seq."
-  []
-  (query algorithms-query))
+  ([] (query algorithms-query))
+  ([n] (query [(str algorithms-query " LIMIT ?") n])))
     
 (defn list-datastructures 
   "Reads all datastructures from db and returns them as lazy seq."
-  []
-  (query datastructures-query))
+  ([] (query datastructures-query))
+  ([n] (query [(str datastructures-query " LIMIT ?") n])))
 
 (defn list-projects 
   "Reads all projects from db and returns them as lazy seq."
-  []
-  (query projects-query))
+  ([] (query projects-query))
+  ([n] (query [(str projects-query " LIMIT ?") n])))
 
 (defn list-articles
   "Reads all articles from db and returns them as lazy seq."
-  []
-  (query articles-query))
+  ([] (query articles-query))
+  ([n] (query [(str articles-query " LIMIT ?") n])))
 
 (defn read-algorithm
   "Reads a single algorithm fron db and returns it with contents."

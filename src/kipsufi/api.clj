@@ -33,7 +33,7 @@
 (defn list-from-db
   "GEt a list of items from db with groups and formatted time"
   [db-query group]
-  (->> (db-query)
+  (->> db-query
     (map format-time)
     (map (partial with-group group))))
 
@@ -54,30 +54,32 @@
 
 (defn algorithms
   "Returns a formatted list of algorithms."
-  []
-  (map features->advantage-groups
-       (list-from-db db/list-algorithms "algorithms")))
+  ([] (map features->advantage-groups
+           (list-from-db (db/list-algorithms) "algorithms")))
+  ([n] (map features->advantage-groups
+            (list-from-db (db/list-algorithms n) "algorithms"))))
 
 (defn datastructures
   "Returns a formatted list of datastructures."
-  []
-  (map features->advantage-groups
-       (list-from-db db/list-datastructures "datastructures")))
+  ([] (map features->advantage-groups
+           (list-from-db (db/list-datastructures) "datastructures")))
+  ([n] (map features->advantage-groups
+           (list-from-db (db/list-datastructures n) "datastructures"))))
 
 (defn projects
   "Returns a formatted list of projects."
-  []
-  (list-from-db db/list-projects "projects"))
+  ([] (list-from-db (db/list-projects) "projects"))
+  ([n] (list-from-db (db/list-projects n) "projects")))
 
 (defn articles
   "Returns a formatted list of articles."
-  []
-  (list-from-db db/list-articles "articles"))
+  ([] (list-from-db (db/list-articles) "articles"))
+  ([n] (list-from-db (db/list-articles n) "articles")))
 
 (defn all
   "Returns a formatted list of all item types."
   []
-  (concat (algorithms) (datastructures) (articles) (projects)))
+  (concat (algorithms 5) (datastructures 5) (articles 5) (projects 5)))
 
 (defn algorithm
   "Returns the formatted entry of a single algorithm."

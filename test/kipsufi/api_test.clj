@@ -58,27 +58,27 @@
 
 (facts "database loaders for listed items"
   (fact "a list of algorithms is read from the database"
-    (count (list-from-db db/list-algorithms "algorithms")) => 8
-    (:name (first (list-from-db db/list-algorithms "algorithms")))
+    (count (list-from-db (db/list-algorithms) "algorithms")) => 8
+    (:name (first (list-from-db (db/list-algorithms) "algorithms")))
         => "Algorithm 1"
-    (:name (second (list-from-db db/list-algorithms "algorithms")))
+    (:name (second (list-from-db (db/list-algorithms) "algorithms")))
         => "Algorithm 2")
   (fact "a list of datastructures is read from the database"
-    (count (list-from-db db/list-datastructures "datastructures")) => 8
-    (:name (first (list-from-db db/list-datastructures "datastructures")))
+    (count (list-from-db (db/list-datastructures) "datastructures")) => 8
+    (:name (first (list-from-db (db/list-datastructures) "datastructures")))
         => "Datastructure 1"
-    (:name (second (list-from-db db/list-datastructures "datastructures")))
+    (:name (second (list-from-db (db/list-datastructures) "datastructures")))
         => "Datastructure 2")
   (fact "a list of projects is read from the database"
-    (count (list-from-db db/list-projects "projects")) => 8
-    (:name (first (list-from-db db/list-projects "projects")))
+    (count (list-from-db (db/list-projects) "projects")) => 8
+    (:name (first (list-from-db (db/list-projects) "projects")))
         => "Project 1"
-    (:name (second (list-from-db db/list-projects "projects")))
+    (:name (second (list-from-db (db/list-projects) "projects")))
         => "Project 2")
   (fact "a list of articles is read from the database"
-    (count (list-from-db db/list-articles "articles")) => 8
-    (:name (first (list-from-db db/list-articles "articles")))
+    (count (list-from-db (db/list-articles) "articles")) => 8
+    (:name (first (list-from-db (db/list-articles) "articles")))
         => "Article 1"
-    (:name (second (list-from-db db/list-articles "articles")))
+    (:name (second (list-from-db (db/list-articles) "articles")))
         => "Article 2"))
 
