@@ -37,7 +37,7 @@
            (GET "/api" []
                 (json-response (api/index)))
            (GET "/api/recent" []
-                (json-response (api/all)))
+                (json-response (api/recent)))
            (GET "/api/algorithms" []
                 (json-response (api/algorithms)))
            (GET "/api/datastructures" []

@@ -25,6 +25,10 @@
              :edited (f/unparse (f/formatter "d MMMM yyyy") (c/from-sql-time (:edited obj)))
              :launched (if (:launched obj) (f/unparse (f/formatter "d MMMM yyyy") (c/from-sql-time (:launched obj))) nil)))
 
+(defn edited>DateTime
+  "Return edited date in DateTime format"
+  [x] (f/parse (f/formatter "d MMMM yyyy") (:edited x)))
+
 (defn with-group
   "Add :group to map."
   [group obj]
@@ -78,8 +82,13 @@
 
 (defn all
   "Returns a formatted list of all item types."
+  [n]
+  (concat (algorithms n) (datastructures n) (articles n) (projects n)))
+
+(defn recent
+  "Returns a formatted list of all item types."
   []
-  (concat (algorithms 5) (datastructures 5) (articles 5) (projects 5)))
+  (take 10 (sort-by edited>DateTime #(compare %2 %1) (all 10))))
 
 (defn algorithm
   "Returns the formatted entry of a single algorithm."
