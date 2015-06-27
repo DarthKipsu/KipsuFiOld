@@ -26,7 +26,6 @@
   (js/window.setTimeout $.gist 1000)
   [:div
    [:div.img-bg [:img {:src (str "images/faces_big/" (:name item) ".png") :class "face-big"}]]
-   [:h1 (:name item)]
    [:div.print
     [set-html-from-db (:description item)]
     [:div.col-md-12
