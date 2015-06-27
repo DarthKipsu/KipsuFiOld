@@ -16,9 +16,22 @@
    :headers {"Content-Type" "application/json"}
    :body (json/write-str content)})
 
+(defn ^:private redirect [url]
+  {:status 302
+   :headers {"Location" url}
+   :body ""})
+
 (defroutes www-routes
            (GET "/" []
-                (page/common)))
+                (page/common))
+           (GET "/loves-me-not" []
+                (redirect "/projects/loves-me-not"))
+           (GET "/GhostStory" []
+                (redirect "/projects/GhostStory"))
+           (GET "/Laivanupotus" []
+                (redirect "/projects/Laivanupotus"))
+           (GET "/EclipseCalculator" []
+                (redirect "/projects/EclipseCalculator")))
 
 (defroutes api-routes
            (GET "/api" []
