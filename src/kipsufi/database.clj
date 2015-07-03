@@ -14,7 +14,7 @@
 (def ^:private algorithms-query
   (str "SELECT a.algorithm_name AS name,a.description,a.created,a.edited,"
        "json_agg(DISTINCT ad.datastructure_name) AS datastructures,"
-       "json_agg((af.feature_name, af.advantage)) AS features "
+       "json_agg(DISTINCT (af.feature_name, af.advantage)) AS features "
        "FROM algorithms a "
        "NATURAL JOIN algorithms_datastructures ad "
        "NATURAL JOIN algorithms_features af "
@@ -24,7 +24,7 @@
 (def ^:private algorithm-query
   (str "SELECT a.algorithm_name AS name,a.description,a.content,a.created,a.edited,"
        "json_agg(DISTINCT ad.datastructure_name) AS datastructures,"
-       "json_agg((af.feature_name, af.advantage)) AS features "
+       "json_agg(DISTINCT (af.feature_name, af.advantage)) AS features "
        "FROM algorithms a "
        "NATURAL JOIN algorithms_datastructures ad "
        "NATURAL JOIN algorithms_features af "
@@ -41,7 +41,7 @@
 
 (def ^:private datastructure-query
   (str "SELECT d.datastructure_name AS name,d.description,d.content,d.created,d.edited,"
-       "json_agg((df.feature_name, df.advantage)) AS features "
+       "json_agg(DISTINCT (df.feature_name, df.advantage)) AS features "
        "FROM datastructures d "
        "NATURAL JOIN datastructures_features df "
        "WHERE d.datastructure_name = ? "
