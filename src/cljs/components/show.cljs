@@ -15,11 +15,14 @@
 (defn set-html-from-db [html]
   [:div.col-md-12 {:dangerouslySetInnerHTML {:__html html}}])
 
-(defn list-all [title items]
+(defn list-all [title items link]
   [:div.col-md-4
    [:p [:strong title]]
    (map-indexed
-     (fn [index item] [:span {:key index} (if (pos? index) ", ") item])
+     (fn [index item] [:span {:key index}
+                       (if (pos? index) ", ")
+                       (if link [:a {:href (str link item)} item]
+                         item)])
      items)])
 
 (defn show-algorithm-datastructure [item]
@@ -30,7 +33,7 @@
     [set-html-from-db (:description item)]
     [:div.col-md-12
      (if (:datastructures item)
-       [list-all "Datastructures:" (:datastructures item)])
+       [list-all "Datastructures:" (:datastructures item) "#/datastructures/"])
      [list-all "Advantages:" (:advantages item)]
      [list-all "Disadvantages:" (:disadvantages item)]]
     [:div.col-md-12.space]
