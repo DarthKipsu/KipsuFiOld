@@ -5,6 +5,7 @@
             [clojure.data.json :as json]
             [kipsufi.views.layout :as page]
             [kipsufi.api :as api]
+            [ring.middleware.session :as session]
             [ring.adapter.jetty :as jetty])
   (:use [ring.middleware.params :only [wrap-params]]
         [ring.middleware.json :refer :all]
@@ -16,24 +17,32 @@
    :headers {"Content-Type" "application/json"}
    :body (json/write-str content)})
 
-(defn ^:private redirect [url]
+(defn ^:private redirect-response [url]
   {:status 302
    :headers {"Location" url}
    :body ""})
+
+(defn ^:private check-session [session]
+  (if (:user session)
+    {:body (str "Session set for " (:user session))}
+    {:body "Setting session"
+     :session (assoc session :user "Verna")}))
 
 (defroutes www-routes
            (GET "/" []
                 (page/common))
            (GET "/loves-me-not" []
-                (redirect "/projects/loves-me-not"))
+                (redirect-response "/projects/loves-me-not"))
            (GET "/GhostStory" []
-                (redirect "/projects/GhostStory"))
+                (redirect-response "/projects/GhostStory"))
            (GET "/Laivanupotus" []
-                (redirect "/projects/Laivanupotus"))
+                (redirect-response "/projects/Laivanupotus"))
            (GET "/EclipseCalculator" []
-                (redirect "/projects/EclipseCalculator")))
+                (redirect-response "/projects/EclipseCalculator")))
 
 (defroutes api-routes
+           (GET "/admin" {session :session}
+                (check-session session))
            (GET "/api" []
                 (json-response (api/index)))
            (GET "/api/recent" []
@@ -64,7 +73,8 @@
             wrap-json-params 
             wrap-json-body
             wrap-keyword-params
-            wrap-params)))
+            wrap-params
+            session/wrap-session)))
 
 (defn -main
   [& [port]]
