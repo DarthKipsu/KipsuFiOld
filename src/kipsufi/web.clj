@@ -31,14 +31,14 @@
 (defroutes www-routes
            (GET "/" []
                 (page/common))
-           (GET "/loves-me-not" []
-                (redirect-response "/projects/loves-me-not"))
-           (GET "/GhostStory" []
-                (redirect-response "/projects/GhostStory"))
-           (GET "/Laivanupotus" []
-                (redirect-response "/projects/Laivanupotus"))
-           (GET "/EclipseCalculator" []
-                (redirect-response "/projects/EclipseCalculator")))
+           (GET "/loves-me-not/?" []
+                (redirect-response "/projects/loves-me-not/"))
+           (GET "/GhostStory/?" []
+                (redirect-response "/projects/GhostStory/"))
+           (GET "/Laivanupotus/?" []
+                (redirect-response "/projects/Laivanupotus/"))
+           (GET "/EclipseCalculator/?" []
+                (redirect-response "/projects/EclipseCalculator/")))
 
 (defroutes api-routes
            (GET "/admin" {session :session}
