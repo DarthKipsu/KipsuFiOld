@@ -31,13 +31,13 @@
 (defroutes www-routes
            (GET "/" []
                 (page/common))
-           (GET "/loves-me-not/?" []
+           (GET "/loves-me-not/" []
                 (redirect-response "/projects/loves-me-not/"))
-           (GET "/GhostStory/?" []
+           (GET "/GhostStory/" []
                 (redirect-response "/projects/GhostStory/"))
-           (GET "/Laivanupotus/?" []
+           (GET "/Laivanupotus/" []
                 (redirect-response "/projects/Laivanupotus/"))
-           (GET "/EclipseCalculator/?" []
+           (GET "/EclipseCalculator/" []
                 (redirect-response "/projects/EclipseCalculator/")))
 
 (defroutes api-routes
