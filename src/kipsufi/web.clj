@@ -12,6 +12,7 @@
             [kipsufi.views.datastructures :as datastructures]
             [kipsufi.views.projects :as projects]
             [kipsufi.views.about :as about]
+            [kipsufi.views.show :as show]
             [kipsufi.api :as api]
             [ring.middleware.session :as session]
             [ring.adapter.jetty :as jetty])
@@ -43,15 +44,27 @@
            (GET "/articles" []
                 (page/common (articles/wrapper (api->hiccup/as-list (api/articles)))
                              (str main/title " - " articles/title)))
+           (GET "/articles/:item" [item]
+                (page/common (show/article (api/article item))
+                             (str main/title " - " item)))
            (GET "/algorithms" []
                 (page/common (algorithms/wrapper (api->hiccup/as-list (api/algorithms)))
                              (str main/title " - " algorithms/title)))
+           (GET "/algorithms/:item" [item]
+                (page/common (show/algorithm-datastructure (api/algorithm item))
+                             (str main/title " - " item)))
            (GET "/datastructures" []
                 (page/common (datastructures/wrapper (api->hiccup/as-list (api/datastructures)))
                              (str main/title " - " datastructures/title)))
+           (GET "/datastructures/:item" [item]
+                (page/common (show/algorithm-datastructure (api/datastructure item))
+                             (str main/title " - " item)))
            (GET "/projects" []
                 (page/common (projects/wrapper (api->hiccup/as-list (api/projects)))
                              (str main/title " - " projects/title)))
+           (GET "/projects/:item" [item]
+                (page/common (show/project (api/project item))
+                             (str main/title " - " item)))
            (GET "/about" []
                 (page/common (about/wrapper)
                              (str main/title " - " about/title)))

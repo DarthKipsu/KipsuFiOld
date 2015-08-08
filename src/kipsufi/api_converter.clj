@@ -1,14 +1,14 @@
 (ns kipsufi.api_converter)
 
-(defn display-in-line [index item]
+(defn ^:private display-in-line [index item]
     [:span {:key index}
         (if (pos? index) ", ") item])
 
-(defn list-all [title items line-break?]
+(defn ^:private list-all [title items line-break?]
     [:p [:strong title] (if line-break? [:br])
         (map-indexed display-in-line items)])
 
-(defn item-contents [item]
+(defn ^:private item-contents [item]
   (let [advantages (:advantages item)
         disadvantages (:disadvantages item)
         languages (:languages item)]
