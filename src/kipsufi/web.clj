@@ -59,10 +59,10 @@
            (GET "/datastructures/:item" [item]
                 (page/common (show/algorithm-datastructure (api/datastructure item))
                              (str main/title " - " item)))
-           (GET "/projects" []
+           (GET "/work" []
                 (page/common (projects/wrapper (api->hiccup/as-list (api/projects)))
                              (str main/title " - " projects/title)))
-           (GET "/projects/:item" [item]
+           (GET "/work/:item" [item]
                 (page/common (show/project (api/project item))
                              (str main/title " - " item)))
            (GET "/about" []

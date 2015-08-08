@@ -72,8 +72,8 @@
 
 (defn projects
   "Returns a formatted list of projects."
-  ([] (list-from-db (db/list-projects) "projects"))
-  ([n] (list-from-db (db/list-projects n) "projects")))
+  ([] (list-from-db (db/list-projects) "work"))
+  ([n] (list-from-db (db/list-projects n) "work")))
 
 (defn articles
   "Returns a formatted list of articles."

@@ -31,7 +31,7 @@
          [:li [:a {:href "/algorithms"} "Algorithms"]]
          [:li [:a {:href "/datastructures"} "Datastructures"]]]
         [:ul.nav.navbar-nav.navbar-right
-         [:li [:a {:href "/projects"} "Projects"]]
+         [:li [:a {:href "/work"} "Projects"]]
          [:li [:a {:href "/about"} "About"]]
          [:li.space]]]]]]
      [:section#content content]
