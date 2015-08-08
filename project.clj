@@ -5,10 +5,6 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [org.clojure/java.jdbc "0.3.7"]
-                 [org.clojure/clojurescript "0.0-3211"]
-                 [reagent "0.5.0"]
-                 [cljsjs/react "0.13.3-0"]
-                 [cljsjs/react-router "0.13.2-0"]
                  [cljs-ajax "0.3.11"]
                  [java-jdbc/dsl "0.1.2"]
                  [postgresql/postgresql "9.3-1102.jdbc41"]
@@ -22,23 +18,14 @@
                  [com.jquery/jquery "1.9.1"]]
   :main kipsufi.web
   :plugins [[lein-ring "0.9.4"]
-            [lein-cljsbuild "1.0.6"]
             [lein-lesscss "1.2"]
             [lein-npm "0.5.0"]
             [com.cemerick/clojurescript.test "0.3.3"]]
-  :hooks [leiningen.cljsbuild]
-  :node-dependencies [[react-gist "1.0.1"]]
   :profiles {:dev {:dependencies [[midje "1.6.3"]]
                    :plugins [[lein-midje "3.1.3"]]}
              :uberjar {:aot :all}}
-  :cljsbuild {
-    :builds [{
-      :source-paths ["src/cljs"]
-      :jar true
-      :compiler {
-        :output-to "resources/public/js/script.js"
-        :optimizations :whitespace
-        :pretty-print true}}]}
   :lesscss-paths ["src/less"]
+  :cljsbuild {:builds []
+              :test-commands nil}
   :lesscss-output-path "resources/public/css"
   :ring {:handler kipsufi.web/app})
