@@ -62,7 +62,7 @@ nav.affix {
     }
 }
 
-.content, .nav-container {
+#content, .nav-container {
     overflow: auto;
     z-index: 0;
     width: 100%;
@@ -99,7 +99,8 @@ iframe {
     margin: 30px 100px;
 }
 
-div.img-bg {
+section.img-bg {
+    margin: auto;
     width: 100%;
     max-width: 960px;
     overflow: auto;
@@ -229,7 +230,6 @@ body > div > nav {
 }
 
 .item-selector:hover {
-    cursor: pointer;
     box-shadow: 0 0 5px @highlight-color;
     -webkit-border-radius: @radius;
     -moz-border-radius: @radius;
@@ -238,6 +238,11 @@ body > div > nav {
 
 .item-selector {
     margin-bottom: 30px;
+
+    a {
+      text-decoration: none;
+      color: @dark-color;
+    }
 }
 
 p.align-middle {
