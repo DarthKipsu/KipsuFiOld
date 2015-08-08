@@ -1,7 +1,7 @@
 (ns kipsufi.views.layout
   (:require [hiccup.page :as h]))
 
-(defn common [content title img-name]
+(defn common [content title]
   (h/html5
     [:head
      [:meta {:charset "utf-8"}]
@@ -34,11 +34,9 @@
          [:li [:a {:href "#/projects"} "Projects"]]
          [:li [:a {:href "#/about"} "About"]]
          [:li.space]]]]]]
-     [:section.img-bg
-      [:img.face-big {:src (str "images/faces_big/" img-name ".png")}]]
      [:section#content content]
      [:footer
       [:div.col-md-12 "Verna Koskinen - darth.kipsu@gmail.com"]]
      (h/include-js "//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
      (h/include-js "//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js")
-     (h/include-js "js/script.js")]))
+     ]));(h/include-js "js/script.js")]))

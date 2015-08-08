@@ -3,7 +3,10 @@
             [compojure.route :as route]
             [ring.adapter.jetty :as ring]
             [clojure.data.json :as json]
+            [kipsufi.api :as api]
+            [kipsufi.api_converter :as api->hiccup]
             [kipsufi.views.layout :as page]
+            [kipsufi.views.main :as main]
             [kipsufi.api :as api]
             [ring.middleware.session :as session]
             [ring.adapter.jetty :as jetty])
@@ -30,7 +33,8 @@
 
 (defroutes www-routes
            (GET "/" []
-                (page/common [:h1 "Tervetuloa!"] "darth.kipsu.fi" "main"))
+                (page/common (main/content (api->hiccup/as-list (api/recent)))
+                             main/title))
            (GET "/loves-me-not/" []
                 (redirect-response "/projects/loves-me-not/"))
            (GET "/GhostStory/" []
