@@ -23,9 +23,9 @@
      [:div.col-md-12 (:description item)]]))
 
 (defn ^:private single-item [index item]
-  [:div
-   [:div.item-selector
-    ;{:on-click #(set! js/window.location (str "#/" (:group item) "/" (:name item)))}
+  [:div.item-selector
+   [:a
+    {:href (str "/" (:group item) "/" (:name item))}
     [:div.list-item.head
      [:p {:class "info"}
       [:span.item-type (:group item)]
