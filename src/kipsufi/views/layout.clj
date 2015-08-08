@@ -1,40 +1,44 @@
 (ns kipsufi.views.layout
   (:require [hiccup.page :as h]))
 
-(defn common []
+(defn common [content title img-name]
   (h/html5
     [:head
      [:meta {:charset "utf-8"}]
-     [:title "darth.kipsu.fi"]
+     [:title title]
      (h/include-css "//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css")
      (h/include-css "//fonts.googleapis.com/css?family=Lobster")
      (h/include-css "//fonts.googleapis.com/css?family=Droid+Sans")
      (h/include-css "css/style.css")]
     [:body
-     [:div {:class "nav-container"}
-      [:nav {:class "navbar navbar-default affix-top" :data-spy "affix" :data-offset-top "50"}
-       [:div {:class "container-fluid"}
-        [:div {:class "navbar-header"}
-         [:button {:type "button" :class "navbar-toggle collapsed" :data-toggle "collapse" :data-target "#main-navbar"}
-          [:span {:class "sr-only"}"Toggle navigation"]
-          [:span {:class "icon-bar"}]
-          [:span {:class "icon-bar"}]
-          [:span {:class "icon-bar"}]]]
-        [:div {:class "collapse navbar-collapse" :id "main-navbar"}
-        [:ul {:class "nav navbar-nav"}
+     [:div.nav-container
+      [:nav.navbar.navbar-default.affix-top {:data-spy "affix"
+                                             :data-offset-top "50"}
+       [:div.container-fluid
+        [:div.navbar-header
+         [:button.navbar-toggle.collapsed {:type "button"
+                                           :data-toggle "collapse"
+                                           :data-target "#main-navbar"}
+          [:span.sr-only "Toggle navigation"]
+          [:span.icon-bar]
+          [:span.icon-bar]
+          [:span.icon-bar]]]
+        [:div#main-navbar.collapse.navbar-collapse
+        [:ul.nav.navbar-nav
          [:li [:a {:href "#/"} "Home"]]
-         [:li {:class "divider hidden-xs"}]
+         [:li.divider.hidden-xs]
          [:li [:a {:href "#/articles"} "Articles"]]
          [:li [:a {:href "#/algorithms"} "Algorithms"]]
          [:li [:a {:href "#/datastructures"} "Datastructures"]]]
-        [:ul {:class "nav navbar-nav navbar-right"}
+        [:ul.nav.navbar-nav.navbar-right
          [:li [:a {:href "#/projects"} "Projects"]]
          [:li [:a {:href "#/about"} "About"]]
-         [:li {:class "space"}]]]]]]
-     [:div {:id "react-content"}]
+         [:li.space]]]]]]
+     [:section.img-bg
+      [:img.face-big {:src (str "images/faces_big/" img-name ".png")}]]
+     [:section#content content]
      [:footer
-      [:div {:class "col-md-12"} "Verna Koskinen - darth.kipsu@gmail.com"]]
+      [:div.col-md-12 "Verna Koskinen - darth.kipsu@gmail.com"]]
      (h/include-js "//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
      (h/include-js "//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js")
-     (h/include-js "js/gist.js")
      (h/include-js "js/script.js")]))

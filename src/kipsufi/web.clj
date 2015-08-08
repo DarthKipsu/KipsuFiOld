@@ -30,7 +30,7 @@
 
 (defroutes www-routes
            (GET "/" []
-                (page/common))
+                (page/common [:h1 "Tervetuloa!"] "darth.kipsu.fi" "main"))
            (GET "/loves-me-not/" []
                 (redirect-response "/projects/loves-me-not/"))
            (GET "/GhostStory/" []
