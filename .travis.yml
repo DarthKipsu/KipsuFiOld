@@ -19,3 +19,6 @@ after_success:
   - lein uberjar
   - sshpass -p $DEPLOY_PASS scp target/kipsufi-0.1.0-SNAPSHOT-standalone.jar $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
   - sshpass -p $DEPLOY_PASS ssh $DEPLOY_USER@$DEPLOY_HOST $DEPLOY_COMMAND
+branches:
+  only:
+    - master
