@@ -3,7 +3,7 @@
 
 KipsuFi
 
-My personal website with Clojure.
+My personal website, with Clojure.
 
 ## REST API
 
