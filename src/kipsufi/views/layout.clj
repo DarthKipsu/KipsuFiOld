@@ -25,14 +25,14 @@
           [:span.icon-bar]]]
         [:div#main-navbar.collapse.navbar-collapse
         [:ul.nav.navbar-nav
-         [:li [:a {:href "#/"} "Home"]]
+         [:li [:a {:href "/"} "Home"]]
          [:li.divider.hidden-xs]
-         [:li [:a {:href "#/articles"} "Articles"]]
-         [:li [:a {:href "#/algorithms"} "Algorithms"]]
-         [:li [:a {:href "#/datastructures"} "Datastructures"]]]
+         [:li [:a {:href "/articles"} "Articles"]]
+         [:li [:a {:href "/algorithms"} "Algorithms"]]
+         [:li [:a {:href "/datastructures"} "Datastructures"]]]
         [:ul.nav.navbar-nav.navbar-right
-         [:li [:a {:href "#/projects"} "Projects"]]
-         [:li [:a {:href "#/about"} "About"]]
+         [:li [:a {:href "/projects"} "Projects"]]
+         [:li [:a {:href "/about"} "About"]]
          [:li.space]]]]]]
      [:section#content content]
      [:footer

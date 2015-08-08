@@ -2,7 +2,7 @@
 
 (def title "darth.kipsu.fi")
 
-(defn content [articles]
+(defn wrapper [articles]
   [:div
    [:section.img-bg
     [:img.face-big {:src "images/faces_big/main.png"}]]

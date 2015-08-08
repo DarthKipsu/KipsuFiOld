@@ -7,6 +7,11 @@
             [kipsufi.api_converter :as api->hiccup]
             [kipsufi.views.layout :as page]
             [kipsufi.views.main :as main]
+            [kipsufi.views.articles :as articles]
+            [kipsufi.views.algorithms :as algorithms]
+            [kipsufi.views.datastructures :as datastructures]
+            [kipsufi.views.projects :as projects]
+            [kipsufi.views.about :as about]
             [kipsufi.api :as api]
             [ring.middleware.session :as session]
             [ring.adapter.jetty :as jetty])
@@ -33,8 +38,24 @@
 
 (defroutes www-routes
            (GET "/" []
-                (page/common (main/content (api->hiccup/as-list (api/recent)))
+                (page/common (main/wrapper (api->hiccup/as-list (api/recent)))
                              main/title))
+           (GET "/articles" []
+                (page/common (articles/wrapper (api->hiccup/as-list (api/articles)))
+                             (str main/title " - " articles/title)))
+           (GET "/algorithms" []
+                (page/common (algorithms/wrapper (api->hiccup/as-list (api/algorithms)))
+                             (str main/title " - " algorithms/title)))
+           (GET "/datastructures" []
+                (page/common (datastructures/wrapper (api->hiccup/as-list (api/datastructures)))
+                             (str main/title " - " datastructures/title)))
+           (GET "/projects" []
+                (page/common (projects/wrapper (api->hiccup/as-list (api/projects)))
+                             (str main/title " - " projects/title)))
+           (GET "/about" []
+                (page/common (about/wrapper)
+                             (str main/title " - " about/title)))
+
            (GET "/loves-me-not/" []
                 (redirect-response "/projects/loves-me-not/"))
            (GET "/GhostStory/" []
