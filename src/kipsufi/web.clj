@@ -16,7 +16,7 @@
             [kipsufi.views.show :as show]
             [ring.adapter.jetty :as jetty]
             [ring.middleware.session :as session])
-  (:use [clojure.java.io :refer :all]
+  (:use [clojure.java.io :only [resource]]
         [ring.middleware.json :refer :all]
         [ring.middleware.keyword-params :only [wrap-keyword-params]]
         [ring.middleware.params :only [wrap-params]])
@@ -111,11 +111,8 @@
 
 (def config (delay (load-file (.getFile (resource "config.clj")))))
 
-(defn get-config []
-  @(force config))
-
 (defn db []
-  (if (= "dev" (:database (get-config)))
+  (if (= "dev" (:database @(force config)))
     'kipsufi.db-mock
     'kipsufi.database))
 
