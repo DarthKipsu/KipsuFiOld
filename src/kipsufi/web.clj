@@ -5,6 +5,7 @@
             [kipsufi.api :as api]
             [kipsufi.api_converter :as api->hiccup]
             [kipsufi.database :as database]
+            [kipsufi.db-mock :as db_mock]
             [kipsufi.views.about :as about]
             [kipsufi.views.algorithms :as algorithms]
             [kipsufi.views.articles :as articles]
@@ -15,7 +16,8 @@
             [kipsufi.views.show :as show]
             [ring.adapter.jetty :as jetty]
             [ring.middleware.session :as session])
-  (:use [ring.middleware.json :refer :all]
+  (:use [clojure.java.io :refer :all]
+        [ring.middleware.json :refer :all]
         [ring.middleware.keyword-params :only [wrap-keyword-params]]
         [ring.middleware.params :only [wrap-params]])
   (:gen-class))
@@ -107,11 +109,19 @@
     (route/resources "/")
     (route/not-found "Not Found")))
 
-(def db (atom 'kipsufi.database))
+(def config (delay (load-file (.getFile (resource "config.clj")))))
+
+(defn get-config []
+  @(force config))
+
+(defn db []
+  (if (= "dev" (:database (get-config)))
+    'kipsufi.db-mock
+    'kipsufi.database))
 
 (def app
-  (routes (www-routes @db) 
-          (-> (api-routes @db)
+  (routes (www-routes (db)) 
+          (-> (api-routes (db))
             wrap-json-response 
             wrap-json-params 
             wrap-json-body

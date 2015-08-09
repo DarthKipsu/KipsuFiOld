@@ -23,8 +23,10 @@
             [lein-npm "0.6.1"]
             [lein-ring "0.9.6"]]
   :profiles {:dev {:dependencies [[midje "1.7.0"]]
-                   :plugins [[lein-midje "3.1.3"]]}
-             :uberjar {:aot :all}}
+                   :plugins [[lein-midje "3.1.3"]]
+                   :resource-paths ["resource-dev"]}
+             :uberjar {:aot :all}
+             :prod {:resource-paths ["resource-prod"]}}
   :lesscss-paths ["src/less"]
   :cljsbuild {:builds []
               :test-commands nil}
