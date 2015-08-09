@@ -41,7 +41,7 @@ A single entry:
 
 ##Example
 
-My website [darth.kipsu.fi](http://darth.kipsu.fi) is running the newest version of the application.
+My website [darth.kipsu.fi](http://darth.kipsu.fi) is running the latest version of the application.
 
 ## License
 
