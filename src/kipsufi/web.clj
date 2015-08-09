@@ -4,7 +4,7 @@
             [compojure.route :as route]
             [kipsufi.api :as api]
             [kipsufi.api_converter :as api->hiccup]
-            [kipsufi.database :as db]
+            [kipsufi.database :as database]
             [kipsufi.views.about :as about]
             [kipsufi.views.algorithms :as algorithms]
             [kipsufi.views.articles :as articles]

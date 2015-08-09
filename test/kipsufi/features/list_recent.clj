@@ -1,6 +1,7 @@
 (ns kipsufi.features.list_recent
   (:use [kerodon.core]
         [kerodon.test]
+        [kipsufi.db-mock]
         [clojure.test])
   (:require [kipsufi.web :refer [app db]]))
 
@@ -25,7 +26,8 @@
                 (~'content-count-eql? ~n)))
 
 (deftest display-content
-  (swap! db 'kipsufi.db-mock)
+  (println "Running 3 assertions for list recent.")
+  (swap! db (fn [value] 'kipsufi.db-mock))
   (-> (session app)
     (visit "/")
     (has (status? 200)
