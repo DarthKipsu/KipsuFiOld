@@ -37,24 +37,24 @@
 (facts "database loaders for single items"
   (fact "a single algorithm is read from the database"
     (:name (single-item-from-db
-             db/read-algorithm "Algorithm 1")) => "Algorithm 1"
+             (db/read-algorithm "Algorithm 1"))) => "Algorithm 1"
     (:name (single-item-from-db
-             db/read-algorithm "Algorithm 2")) => "Algorithm 2")
+             (db/read-algorithm "Algorithm 2"))) => "Algorithm 2")
   (fact "a single datastructure is read from the database"
     (:name (single-item-from-db
-             db/read-datastructure "Datastructure 1")) => "Datastructure 1"
+             (db/read-datastructure "Datastructure 1"))) => "Datastructure 1"
     (:name (single-item-from-db
-             db/read-datastructure "Datastructure 2")) => "Datastructure 2")
+             (db/read-datastructure "Datastructure 2"))) => "Datastructure 2")
   (fact "a single article is read from the database"
     (:name (single-item-from-db
-             db/read-article "Article 1")) => "Article 1"
+             (db/read-article "Article 1"))) => "Article 1"
     (:name (single-item-from-db
-             db/read-article "Article 2")) => "Article 2")
+             (db/read-article "Article 2"))) => "Article 2")
   (fact "a single project is read from the database"
     (:name (single-item-from-db
-             db/read-project "Project 1")) => "Project 1"
+             (db/read-project "Project 1"))) => "Project 1"
     (:name (single-item-from-db
-             db/read-project "Project 2")) => "Project 2"))
+             (db/read-project "Project 2"))) => "Project 2"))
 
 (facts "database loaders for listed items"
   (fact "a list of algorithms is read from the database"
