@@ -1,24 +1,23 @@
 (ns kipsufi.web
-  (:require [compojure.core :refer :all]
+  (:require [clojure.data.json :as json]
+            [compojure.core :refer :all]
             [compojure.route :as route]
-            [ring.adapter.jetty :as ring]
-            [clojure.data.json :as json]
             [kipsufi.api :as api]
             [kipsufi.api_converter :as api->hiccup]
+            [kipsufi.database :as db]
+            [kipsufi.views.about :as about]
+            [kipsufi.views.algorithms :as algorithms]
+            [kipsufi.views.articles :as articles]
+            [kipsufi.views.datastructures :as datastructures]
             [kipsufi.views.layout :as page]
             [kipsufi.views.main :as main]
-            [kipsufi.views.articles :as articles]
-            [kipsufi.views.algorithms :as algorithms]
-            [kipsufi.views.datastructures :as datastructures]
             [kipsufi.views.projects :as projects]
-            [kipsufi.views.about :as about]
             [kipsufi.views.show :as show]
-            [kipsufi.api :as api]
-            [ring.middleware.session :as session]
-            [ring.adapter.jetty :as jetty])
-  (:use [ring.middleware.params :only [wrap-params]]
-        [ring.middleware.json :refer :all]
-        [ring.middleware.keyword-params :only [wrap-keyword-params]])
+            [ring.adapter.jetty :as jetty]
+            [ring.middleware.session :as session])
+  (:use [ring.middleware.json :refer :all]
+        [ring.middleware.keyword-params :only [wrap-keyword-params]]
+        [ring.middleware.params :only [wrap-params]])
   (:gen-class))
 
 (defn ^:private json-response [content]
@@ -39,31 +38,31 @@
 
 (defroutes www-routes
            (GET "/" []
-                (page/common (main/wrapper (api->hiccup/as-list (api/recent)))
+                (page/common (main/wrapper (api->hiccup/as-list (api/recent 'kipsufi.database)))
                              main/title))
            (GET "/articles" []
-                (page/common (articles/wrapper (api->hiccup/as-list (api/articles)))
+                (page/common (articles/wrapper (api->hiccup/as-list (api/articles 'kipsufi.database)))
                              (str main/title " - " articles/title)))
            (GET "/articles/:item" [item]
-                (page/common (show/article (api/article item))
+                (page/common (show/article (api/article 'kipsufi.database item))
                              (str main/title " - " item)))
            (GET "/algorithms" []
-                (page/common (algorithms/wrapper (api->hiccup/as-list (api/algorithms)))
+                (page/common (algorithms/wrapper (api->hiccup/as-list (api/algorithms 'kipsufi.database)))
                              (str main/title " - " algorithms/title)))
            (GET "/algorithms/:item" [item]
-                (page/common (show/algorithm-datastructure (api/algorithm item))
+                (page/common (show/algorithm-datastructure (api/algorithm 'kipsufi.database item))
                              (str main/title " - " item)))
            (GET "/datastructures" []
-                (page/common (datastructures/wrapper (api->hiccup/as-list (api/datastructures)))
+                (page/common (datastructures/wrapper (api->hiccup/as-list (api/datastructures 'kipsufi.database)))
                              (str main/title " - " datastructures/title)))
            (GET "/datastructures/:item" [item]
-                (page/common (show/algorithm-datastructure (api/datastructure item))
+                (page/common (show/algorithm-datastructure (api/datastructure 'kipsufi.database item))
                              (str main/title " - " item)))
            (GET "/work" []
-                (page/common (projects/wrapper (api->hiccup/as-list (api/projects)))
+                (page/common (projects/wrapper (api->hiccup/as-list (api/projects 'kipsufi.database)))
                              (str main/title " - " projects/title)))
            (GET "/work/:item" [item]
-                (page/common (show/project (api/project item))
+                (page/common (show/project (api/project 'kipsufi.database item))
                              (str main/title " - " item)))
            (GET "/about" []
                 (page/common (about/wrapper)
@@ -84,23 +83,23 @@
            (GET "/api" []
                 (json-response (api/index)))
            (GET "/api/recent" []
-                (json-response (api/recent)))
+                (json-response (api/recent 'kipsufi.database)))
            (GET "/api/algorithms" []
-                (json-response (api/algorithms)))
+                (json-response (api/algorithms 'kipsufi.database)))
            (GET "/api/datastructures" []
-                (json-response (api/datastructures)))
+                (json-response (api/datastructures 'kipsufi.database)))
            (GET "/api/projects" []
-                (json-response (api/projects)))
+                (json-response (api/projects 'kipsufi.database)))
            (GET "/api/articles" []
-                (json-response (api/articles)))
+                (json-response (api/articles 'kipsufi.database)))
            (GET "/api/algorithms/:algorithm-name" [algorithm-name]
-                (json-response (api/algorithm algorithm-name)))
+                (json-response (api/algorithm 'kipsufi.database algorithm-name)))
            (GET "/api/datastructures/:datastructure-name" [datastructure-name]
-                (json-response (api/datastructure datastructure-name)))
+                (json-response (api/datastructure 'kipsufi.database datastructure-name)))
            (GET "/api/projects/:project-name" [project-name]
-                (json-response (api/project project-name)))
+                (json-response (api/project 'kipsufi.database project-name)))
            (GET "/api/articles/:article-name" [article-name]
-                (json-response (api/article article-name)))
+                (json-response (api/article 'kipsufi.database article-name)))
            (route/resources "/")
            (route/not-found "Not Found"))
 

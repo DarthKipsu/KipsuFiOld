@@ -1,6 +1,5 @@
 (ns kipsufi.api
-    (:require [kipsufi.database :as db]
-              [clj-time.format :as f]
+    (:require [clj-time.format :as f]
               [clj-time.coerce :as c]))
 
 ; ---- PRIVATE ---- ;
@@ -43,8 +42,8 @@
 
 (defn single-item-from-db
   "Get a single item from db with formatted time"
-  [db-query item]
-  (format-time (first (db-query item))))
+  [db-query]
+  (format-time (first db-query)))
 
 ; ---- PUBLIC ---- ;
 
@@ -58,56 +57,56 @@
 
 (defn algorithms
   "Returns a formatted list of algorithms."
-  ([] (map features->advantage-groups
-           (list-from-db (db/list-algorithms) "algorithms")))
-  ([n] (map features->advantage-groups
-            (list-from-db (db/list-algorithms n) "algorithms"))))
+  ([db] (map features->advantage-groups
+           (list-from-db ((ns-resolve db 'list-algorithms)) "algorithms")))
+  ([db n] (map features->advantage-groups
+            (list-from-db ((ns-resolve db 'list-algorithms) n) "algorithms"))))
 
 (defn datastructures
   "Returns a formatted list of datastructures."
-  ([] (map features->advantage-groups
-           (list-from-db (db/list-datastructures) "datastructures")))
-  ([n] (map features->advantage-groups
-           (list-from-db (db/list-datastructures n) "datastructures"))))
+  ([db] (map features->advantage-groups
+           (list-from-db ((ns-resolve db 'list-datastructures)) "datastructures")))
+  ([db n] (map features->advantage-groups
+           (list-from-db ((ns-resolve db 'list-datastructures) n) "datastructures"))))
 
 (defn projects
   "Returns a formatted list of projects."
-  ([] (list-from-db (db/list-projects) "work"))
-  ([n] (list-from-db (db/list-projects n) "work")))
+  ([db] (list-from-db ((ns-resolve db 'list-projects)) "work"))
+  ([db n] (list-from-db ((ns-resolve db 'list-projects) n) "work")))
 
 (defn articles
   "Returns a formatted list of articles."
-  ([] (list-from-db (db/list-articles) "articles"))
-  ([n] (list-from-db (db/list-articles n) "articles")))
+  ([db] (list-from-db ((ns-resolve db 'list-articles)) "articles"))
+  ([db n] (list-from-db ((ns-resolve db 'list-articles) n) "articles")))
 
 (defn all
   "Returns a formatted list of all item types."
-  [n]
-  (concat (algorithms n) (datastructures n) (articles n) (projects n)))
+  [db n]
+  (concat (algorithms db n) (datastructures db n) (articles db n) (projects db n)))
 
 (defn recent
   "Returns a formatted list of all item types."
-  []
-  (take 10 (sort-by edited>DateTime #(compare %2 %1) (all 10))))
+  [db]
+  (take 10 (sort-by edited>DateTime #(compare %2 %1) (all db 10))))
 
 (defn algorithm
   "Returns the formatted entry of a single algorithm."
-  [algorithm]
+  [db algorithm]
   (features->advantage-groups
-    (single-item-from-db db/read-algorithm algorithm)))
+    (single-item-from-db ((ns-resolve db 'read-algorithm) algorithm))))
 
 (defn datastructure
   "Returns the formatted entry of a single datastructure."
-  [datastructure]
+  [db datastructure]
   (features->advantage-groups
-    (single-item-from-db db/read-datastructure datastructure)))
+    (single-item-from-db ((ns-resolve db 'read-datastructure) datastructure))))
 
 (defn project
   "Returns the formatted entry of a single project."
-  [project]
-  (single-item-from-db db/read-project project))
+  [db project]
+  (single-item-from-db ((ns-resolve db 'read-project) project)))
 
 (defn article
   "Returns the formatted entry of a single project."
-  [article]
-  (single-item-from-db db/read-article article))
+  [db article]
+  (single-item-from-db ((ns-resolve db 'read-article) article)))
