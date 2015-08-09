@@ -2,7 +2,7 @@
   (:use [kerodon.core]
         [kerodon.test]
         [clojure.test])
-  (:require [kipsufi.web :refer [app]]))
+  (:require [kipsufi.web :refer [app db]]))
 
 (defn path-to-articles [state#]
   (:content
@@ -25,6 +25,7 @@
                 (~'content-count-eql? ~n)))
 
 (deftest display-content
+  (swap! db 'kipsufi.db-mock)
   (-> (session app)
     (visit "/")
     (has (status? 200)
