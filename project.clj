@@ -3,7 +3,7 @@
   :url "http://darth.kipsu.fi"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[clj-time "0.9.0"]
+  :dependencies [[clj-time "0.10.0"]
                  [cljs-ajax "0.3.14"]
                  [com.jquery/jquery "1.9.1"]
                  [compojure "1.4.0"]
