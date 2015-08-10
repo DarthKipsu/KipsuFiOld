@@ -4,7 +4,7 @@
         [clojure.test])
   (:require [kipsufi.web :refer [app db api-routes]]))
 
-(println "Running 7 assertions for articles.")
+(println "Running 7 feature assertions for articles.")
 
 (deftest display-article-list
   (-> (session app)
@@ -18,7 +18,7 @@
     (within [:h3] (has (some-text? "Article 8")
          "article list page displays the last article"))))
 
-(deftest display-article-list
+(deftest display-single-article-page
   (-> (session app)
     (visit "/articles/Article%201")
     (has (status? 200)
