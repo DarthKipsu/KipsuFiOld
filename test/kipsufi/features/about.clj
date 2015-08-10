@@ -4,7 +4,7 @@
         [clojure.test])
   (:require [kipsufi.web :refer [app db api-routes]]))
 
-(println "Running 4 feature assertions for about page")
+(println "Running 5 feature assertions for about page")
 
 (deftest display-about-page
   (-> (session app)
