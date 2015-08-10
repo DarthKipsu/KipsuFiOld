@@ -26,12 +26,16 @@
                 (~'content-count-eql? ~n)))
 
 (deftest display-content
-  (println "Running 3 assertions for list recent.")
+  (println "Running 5 assertions for list recent.")
   (-> (session app)
     (visit "/")
     (has (status? 200)
          "page is found")
     (within [:h1] (has (text? "darth.kipsu.fi")
          "page title is darth.kipsu.fi"))
+    (within [:span.item-type] (has (some-text? "algorithms")
+         "has articles with type algorithms"))
+    (within [:span.item-type] (has (some-text? "datastructures")
+         "has articles with type datastructures"))
     (has (content-count-eql? 10)
          "page has exactly 10 most recent articles")))
