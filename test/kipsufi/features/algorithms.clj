@@ -4,7 +4,7 @@
         [clojure.test])
   (:require [kipsufi.web :refer [app db api-routes]]))
 
-(println "Running 7 feature assertions for algorithms.")
+(println "Running 8 feature assertions for algorithms.")
 
 (deftest display-algorithm-list
   (-> (session app)
@@ -23,6 +23,8 @@
     (visit "/algorithms/Algorithm%201")
     (has (status? 200)
          "single algorithm page is found")
+    (has (missing? [:h1])
+         "single algorithm page title should not be displayed")
     (within [:div.intro] (has (text? "Algo called Algorithm 1")
          "single algorithm page displays description of the algorithm"))
     (within [:div.col-md-12] (has (some-text? "Some super cool algorithm")

@@ -4,7 +4,7 @@
         [clojure.test])
   (:require [kipsufi.web :refer [app db api-routes]]))
 
-(println "Running 7 feature assertions for articles.")
+(println "Running 8 feature assertions for articles.")
 
 (deftest display-article-list
   (-> (session app)
@@ -23,6 +23,8 @@
     (visit "/articles/Article%201")
     (has (status? 200)
          "single article page is found")
+    (has (missing? [:h1])
+         "single article page title should not be displayed")
     (within [:div.intro] (has (text? "Article called Article 1")
          "single article page displays description of the article"))
     (within [:div.col-md-12] (has (some-text? "Some super cool article.")
