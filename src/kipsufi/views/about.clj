@@ -12,7 +12,7 @@
     [:div.col-md-6.small-font
      [:p]
      [:p [:strong "Name: "] "Verna Koskinen"]
-     [:p [:strong "Email: "] "dath.kipsu@gmail.com"]
+     [:p [:strong "Email: "] "darth.kipsu@gmail.com"]
      [:p [:strong "Phone: "] "+358451277921"]
      [:p [:strong "Address: "] "Kurkimäentie 19 D 36, 00940 Helsinki, Finland"]]
     [:div.col-md-6.small-font
