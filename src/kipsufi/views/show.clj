@@ -21,14 +21,15 @@
 (defn algorithm-datastructure [item]
   [:div
    [:div.img-bg [:img.face-big {:src (str "/images/faces_big/" (:name item) ".png")}]]
-   [:div.print (:description item)
+   [:div.print
+    [:div.intro (:description item)]
     [:div.col-md-12
      (if (:datastructures item)
        (list-all "Datastructures:" (:datastructures item) "/datastructures/"))
      (list-all "Advantages:" (:advantages item) nil)
      (list-all "Disadvantages:" (:disadvantages item) nil)]
     [:div.col-md-12.space]
-    (:content item)]
+    [:div.col-md-12 (:content item)]]
    [:div.col-md-12.space]])
 
 (defn project [item]
