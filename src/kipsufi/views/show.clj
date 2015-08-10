@@ -4,7 +4,7 @@
   [:div.col-md-4
    [:p [:strong title]]
    (map-indexed
-     (fn [index item] [:span {:key index}
+     (fn [index item] [:span
                        (if (pos? index) ", ")
                        (if link [:a {:href (str link item)} item]
                          item)])

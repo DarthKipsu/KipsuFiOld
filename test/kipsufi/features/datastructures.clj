@@ -4,9 +4,9 @@
         [clojure.test])
   (:require [kipsufi.web :refer [app db api-routes]]))
 
-(println "Running 8 feature assertions for datastructures.")
+(println "Running 10 feature assertions for datastructures.")
 
-(deftest display-algorithm-list
+(deftest display-datastructure-list
   (-> (session app)
     (visit "/datastructures")
     (has (status? 200)
@@ -18,13 +18,17 @@
     (within [:h3] (has (some-text? "Datastructure 8")
          "datastructure list page displays the last datastructure"))))
 
-(deftest display-single-algorithm-page
+(deftest display-single-datastructure-page
   (-> (session app)
     (visit "/datastructures/Datastructure%201")
     (has (status? 200)
          "single datastructure page is found")
     (has (missing? [:h1])
          "single datastructure page title should not be displayed")
+    (within [:span] (has (some-text? "pro")
+         "single datastructure page displays datastructure pros"))
+    (within [:span] (has (some-text? "con")
+         "single datastructure page displays datastructure cons"))
     (within [:div.intro] (has (text? "Datastructure called Datastructure 1")
          "single datastructure page displays description of the datastructure"))
     (within [:div.col-md-12] (has (some-text? "Some super cool datastructure")
