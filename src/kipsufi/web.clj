@@ -120,6 +120,9 @@
     'kipsufi.database))
 
 (def app
+  (do (println "Database: " (db))
+    (println "www-routes: " (www-routes (db)))
+    (println "api-routes: " (api-routes (db)))
   (routes (www-routes (db)) 
           (-> (api-routes (db))
             wrap-json-response 
@@ -127,7 +130,7 @@
             wrap-json-body
             wrap-keyword-params
             wrap-params
-            session/wrap-session)))
+            session/wrap-session))))
 
 (defn -main
   [& [port]]
