@@ -112,6 +112,7 @@
 (def config (delay (load-file (.getFile (resource "config.clj")))))
 
 (defn db []
+  (println "Using database " (:database @(force config)))
   (if (= "dev" (:database @(force config)))
     'kipsufi.db-mock
     'kipsufi.database))
