@@ -39,6 +39,7 @@
      :session (assoc session :user "Verna")}))
 
 (defn www-routes [db]
+  (println "Setting up www routes")
   (defroutes www-routes
     (GET "/" []
          (page/common (main/wrapper (api->hiccup/as-list (api/recent db)))
@@ -83,6 +84,7 @@
          (redirect-response "/projects/EclipseCalculator/"))))
 
 (defn api-routes [db]
+  (println "Setting up api routes")
   (defroutes api-routes
     (GET "/admin" {session :session}
          (check-session session))
