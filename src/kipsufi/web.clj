@@ -121,8 +121,6 @@
 
 (def app
   (do (println "Database: " (db))
-    (println "www-routes: " (www-routes (db)))
-    (println "api-routes: " (api-routes (db)))
   (routes (www-routes (db)) 
           (-> (api-routes (db))
             wrap-json-response 
