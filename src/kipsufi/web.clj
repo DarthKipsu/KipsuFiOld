@@ -20,6 +20,7 @@
         [ring.middleware.json :refer :all]
         [ring.middleware.keyword-params :only [wrap-keyword-params]]
         [ring.middleware.params :only [wrap-params]])
+  (:refer-clojure :exclude [update]) 
   (:gen-class))
 
 (defn ^:private json-response [content]
@@ -39,7 +40,6 @@
      :session (assoc session :user "Verna")}))
 
 (defn www-routes [db]
-  (println "Setting up www routes")
   (defroutes www-routes
     (GET "/" []
          (page/common (main/wrapper (api->hiccup/as-list (api/recent db)))
@@ -84,7 +84,6 @@
          (redirect-response "/projects/EclipseCalculator/"))))
 
 (defn api-routes [db]
-  (println "Setting up api routes")
   (defroutes api-routes
     (GET "/admin" {session :session}
          (check-session session))
@@ -111,24 +110,15 @@
     (route/resources "/")
     (route/not-found "Not Found")))
 
-(def config (delay (load-file (.getFile (resource "config.clj")))))
-
-(defn db []
-  (println "Using database " (:database @(force config)))
-  (if (= "dev" (:database @(force config)))
-    'kipsufi.db-mock
-    'kipsufi.database))
-
 (def app
-  (do (println "Database: " (db))
-  (routes (www-routes (db)) 
-          (-> (api-routes (db))
+  (routes (www-routes 'kipsufi.database) 
+          (-> (api-routes 'kipsufi.database)
             wrap-json-response 
             wrap-json-params 
             wrap-json-body
             wrap-keyword-params
             wrap-params
-            session/wrap-session))))
+            session/wrap-session)))
 
 (defn -main
   [& [port]]

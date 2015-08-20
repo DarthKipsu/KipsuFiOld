@@ -1,5 +1,6 @@
 (ns kipsufi.database
   (:use [java-jdbc.sql])
+  (:refer-clojure :exclude [update]) 
   (:require [kipsufi.jdbc.json]
             [clojure.java.jdbc :as sql]))
 
