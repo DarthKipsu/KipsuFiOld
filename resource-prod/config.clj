@@ -1,3 +1,3 @@
 (ns kipsufi.config)
 
-(def config {:database "prod"})
+(defn config [] {:database "prod"})
