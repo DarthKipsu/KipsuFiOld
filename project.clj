@@ -24,9 +24,9 @@
             [lein-ring "0.9.6"]]
   :profiles {:dev {:dependencies [[midje "1.7.0"]]
                    :plugins [[lein-midje "3.1.3"]]
-                   :resource-paths ["resource-dev"]}
+                   :resource-paths ["dev"]}
              :uberjar {:aot :all}
-             :prod {:resource-paths ["resource-prod"]}}
+             :prod {:resource-paths ["prod"]}}
   :lesscss-paths ["src/less"]
   :cljsbuild {:builds []
               :test-commands nil}

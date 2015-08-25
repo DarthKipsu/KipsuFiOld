@@ -39,7 +39,8 @@
     {:body "Setting session"
      :session (assoc session :user "Verna")}))
 
-(defn config [] ((load-file (.getFile (resource "config.clj")))))
+(defn config [] (try (load-file (.getFile (resource "config.clj")))
+                  (catch Exception e {:database "prod"})))
 
 (def mem-config (memoize config))
 
