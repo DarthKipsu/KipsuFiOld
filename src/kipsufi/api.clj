@@ -64,6 +64,18 @@
   (let [directory (io/file path)]
     (map (fn [file] (str "/" (.getName file))) (child-dirs-for directory))))
 
+(defn without-newline [string]
+  (if (.endsWith string "\n")
+    (.substring string 0 (dec (count string)))
+    string))
+
+(defn read-file
+  "Reads the contents of a file with the given name and category from
+  photography folders."
+  [category file content]
+  (without-newline
+    (slurp (str "images/photography/" category "/" (.getName file) "/" content))))
+
 
 ; ---- PUBLIC ---- ;
 
@@ -133,4 +145,11 @@
 (defn photography
   "Returns a list of folders or subfolders under photography."
   ([] (list-directories "images/photography"))
-  ([category] (list-directories (str "images/photography/" category))))
+  ([category]
+   (let [directory (io/file (str "images/photography/" category))]
+     (map (fn [file]
+            {"name" (.getName file)
+             "description" (read-file category file "info")
+             "group" category
+             "date" (read-file category file "date")})
+       (child-dirs-for directory)))))
