@@ -74,7 +74,14 @@
   photography folders."
   [category file content]
   (without-newline
-    (slurp (str "images/photography/" category "/" (.getName file) "/" content))))
+    (slurp (str "images/photography/" category "/" file "/" content))))
+
+(defn read-photos
+  "Reads a list of photos in a given directory"
+  [directory]
+  (sort (filter (fn [file] (or (.endsWith (.getName file) ".jpg")
+                         (.endsWith (.getName file) ".png")))
+          (.listFiles directory))))
 
 
 ; ---- PUBLIC ---- ;
@@ -149,7 +156,20 @@
    (let [directory (io/file (str "images/photography/" category))]
      (map (fn [file]
             {"name" (.getName file)
-             "description" (read-file category file "info")
+             "description" (read-file category (.getName file) "info")
              "group" category
-             "date" (read-file category file "date")})
+             "date" (read-file category (.getName file) "date")})
        (child-dirs-for directory)))))
+
+(defn gallery
+  "Returns a list of photographs in his gallery and their decriptions."
+  [category gallery-name]
+  (let [directory (str "images/photography/" category "/" gallery-name)
+        photos (read-photos (io/file directory))]
+    (map-indexed (fn [i photo] 
+           {"url" (str directory "/" (.getName photo))
+            "gallery" gallery-name
+            "description" (read-file category
+                                     gallery-name
+                                     (str "description" (inc i)))})
+         photos)))

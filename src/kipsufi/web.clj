@@ -122,6 +122,8 @@
          (json-response (api/photography)))
     (GET "/api/photography/:category" [category]
          (json-response (api/photography category)))
+    (GET "/api/photography/:category/:gallery" [category gallery]
+         (json-response (api/gallery category gallery)))
 
     (route/resources "/")
     (route/not-found "Not Found"))
