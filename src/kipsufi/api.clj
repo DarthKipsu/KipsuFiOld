@@ -79,9 +79,9 @@
 (defn read-photos
   "Reads a list of photos in a given directory"
   [directory]
-  (sort (filter (fn [file] (or (.endsWith (.getName file) ".jpg")
+  (filter (fn [file] (or (.endsWith (.getName file) ".jpg")
                          (.endsWith (.getName file) ".png")))
-          (.listFiles directory))))
+          (.listFiles directory)))
 
 
 ; ---- PUBLIC ---- ;
@@ -155,10 +155,10 @@
   ([category]
    (let [directory (io/file (str "images/photography/" category))]
      (map (fn [file]
-            {"name" (.getName file)
-             "description" (read-file category (.getName file) "info")
-             "group" category
-             "date" (read-file category (.getName file) "date")})
+            {:name (.getName file)
+             :description (read-file category (.getName file) "info")
+             :group category
+             :date (read-file category (.getName file) "date")})
        (child-dirs-for directory)))))
 
 (defn gallery
@@ -166,10 +166,13 @@
   [category gallery-name]
   (let [directory (str "images/photography/" category "/" gallery-name)
         photos (read-photos (io/file directory))]
-    (map-indexed (fn [i photo] 
-           {"url" (str directory "/" (.getName photo))
-            "gallery" gallery-name
-            "description" (read-file category
+    (sort-by :id (map (fn [photo]
+           (let [photo-name (.getName photo)
+                 id (.substring photo-name 5 (- (count photo-name) 4))]
+           {:url (str directory "/" photo-name)
+            :gallery gallery-name
+            :id (Integer/parseInt id)
+            :description (read-file category
                                      gallery-name
-                                     (str "description" (inc i)))})
-         photos)))
+                                     (str "description" id))}))
+                 photos))))
