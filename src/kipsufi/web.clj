@@ -96,6 +96,7 @@
 (defroutes api-routes
     (GET "/admin" {session :session}
          (check-session session))
+
     (GET "/api" []
          (json-response (api/index)))
     (GET "/api/recent" []
@@ -116,6 +117,12 @@
          (json-response (api/project (db) project-name)))
     (GET "/api/articles/:article-name" [article-name]
          (json-response (api/article (db) article-name)))
+
+    (GET "/api/photography" []
+         (json-response (api/photography)))
+    (GET "/api/photography/:category" [category]
+         (json-response (api/photography category)))
+
     (route/resources "/")
     (route/not-found "Not Found"))
 

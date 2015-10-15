@@ -1,6 +1,8 @@
 (ns kipsufi.api
-    (:require [clj-time.format :as f]
-              [clj-time.coerce :as c]))
+  (:require [clj-time.format :as f]
+            [clj-time.coerce :as c]
+            [clojure.java.io :as io])
+  (:import java.io.File))
 
 ; ---- PRIVATE ---- ;
 
@@ -20,9 +22,13 @@
 (defn format-time
   "Format sgl timestamp into better display format for web."
   [obj]
-  (assoc obj :created (f/unparse (f/formatter "d MMMM yyyy") (c/from-sql-time (:created obj)))
-             :edited (f/unparse (f/formatter "d MMMM yyyy") (c/from-sql-time (:edited obj)))
-             :launched (if (:launched obj) (f/unparse (f/formatter "d MMMM yyyy") (c/from-sql-time (:launched obj))) nil)))
+  (assoc obj :created (f/unparse (f/formatter "d MMMM yyyy")
+                                 (c/from-sql-time (:created obj)))
+             :edited (f/unparse (f/formatter "d MMMM yyyy")
+                                (c/from-sql-time (:edited obj)))
+             :launched (if (:launched obj)
+                         (f/unparse (f/formatter "d MMMM yyyy")
+                                    (c/from-sql-time (:launched obj))) nil)))
 
 (defn edited>DateTime
   "Return edited date in DateTime format"
@@ -45,15 +51,26 @@
   [db-query]
   (format-time (first db-query)))
 
+(defn child-dirs-for
+  "Reads a directory and returns a list of child directories for that directory."
+  [directory]
+  (let [children (fn [file] (and (not= (.getName file) (.getName directory))
+                                 (.isDirectory file)))]
+    (filter children (.listFiles directory))))
+
+(defn list-directories
+  "Returns a list of immediate child directories for a given path."
+  [path]
+  (let [directory (io/file (io/resource path))]
+    (map (fn [file] (str "/" (.getName file))) (child-dirs-for directory))))
+
+
 ; ---- PUBLIC ---- ;
 
 (defn index
   "Returns a list of API subdirectories."
   []
-  {"algorithms list" "/algorithms"
-   "datastructures list" "/datastructures"
-   "projects list" "/projects"
-   "recent items" "/recent"})
+  '("/algorithms" "/datastructures" "/projects" "/recent" "/photography"))
 
 (defn algorithms
   "Returns a formatted list of algorithms."
@@ -64,10 +81,12 @@
 
 (defn datastructures
   "Returns a formatted list of datastructures."
-  ([db] (map features->advantage-groups
-           (list-from-db ((ns-resolve db 'list-datastructures)) "datastructures")))
-  ([db n] (map features->advantage-groups
-           (list-from-db ((ns-resolve db 'list-datastructures) n) "datastructures"))))
+  ([db]
+   (map features->advantage-groups
+        (list-from-db ((ns-resolve db 'list-datastructures)) "datastructures")))
+  ([db n]
+   (map features->advantage-groups
+        (list-from-db ((ns-resolve db 'list-datastructures) n) "datastructures"))))
 
 (defn projects
   "Returns a formatted list of projects."
@@ -110,3 +129,8 @@
   "Returns the formatted entry of a single project."
   [db article]
   (single-item-from-db ((ns-resolve db 'read-article) article)))
+
+(defn photography
+  "Returns a list of folders or subfolders under photography."
+  ([] (list-directories "public/images/photography"))
+  ([category] (list-directories (str "public/images/photography/" category))))
