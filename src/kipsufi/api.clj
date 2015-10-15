@@ -132,5 +132,5 @@
 
 (defn photography
   "Returns a list of folders or subfolders under photography."
-  ([] (list-directories "public/images/photography"))
-  ([category] (list-directories (str "public/images/photography/" category))))
+  ([] (list-directories "images/photography"))
+  ([category] (list-directories (str "images/photography/" category))))
