@@ -61,7 +61,7 @@
 (defn list-directories
   "Returns a list of immediate child directories for a given path."
   [path]
-  (let [directory (io/file (io/resource path))]
+  (let [directory (io/file path)]
     (map (fn [file] (str "/" (.getName file))) (child-dirs-for directory))))
 
 
