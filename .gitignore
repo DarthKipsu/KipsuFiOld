@@ -1,20 +1,9 @@
-KipsuFiFSharpOld/packages/
-*.userprefs
-*/bin/
-*/obj/
-*/DesignTimeURIs/ 
-*/WorldBankSchema/ 
-
 *.swp
 *.swo
 *~
 
 /saved-articles
 /target
-/classes
-/checkouts
-pom.xml
-pom.xml.asc
 *.jar
 *.class
 /.lein-*
