@@ -52,7 +52,7 @@
   []
   {"algorithms list" "/algorithms"
    "datastructures list" "/datastructures"
-   "projects list" "/projectsrojects"
+   "projects list" "/projects"
    "recent items" "/recent"})
 
 (defn algorithms
