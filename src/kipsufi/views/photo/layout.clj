@@ -18,7 +18,8 @@
          [:a {:href "/photography/camping"} "C"] " "
          [:a {:href "/photography/travel"} "T"] " "
          [:a {:href "/photography/moments"} "M"]]]
-      [:section.photography content]
+      content
       [:footer.photography "Verna Koskinen - darth.kipsu@gmail.com"]]
      (h/include-js "//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
-     (h/include-js "//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js")]))
+     (h/include-js "//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js")
+     (h/include-js "/js/script.js")]))

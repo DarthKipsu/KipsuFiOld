@@ -265,17 +265,34 @@ div.file-data > table {
     width: 100%;
 }
 
-#photo-container {
-  max-width: 1400px;
-}
-
 .photography {
   text-align: center;
-  width: 100%;
+  width: 1000px;
+  margin: auto;
+}
+
+div.gallery-selector > a > header {
+  text-align: left;
+  div {
+    display: inline-block;
+    color: @photography-color;
+  }
+  div:nth-child(1) {
+    width: 800px;
+  }
+  div:nth-child(2) {
+    text-align: right;
+    width: 200px;
+  }
+}
+
+div.thumbnails {
+  margin: 5px;
 }
 
 nav.photography {
-  margin-top: 70px;
+  margin-top: 30px;
+  margin-bottom: 20px;
   color: @photography-color;
   a {
     color: @photography-color;
@@ -284,12 +301,21 @@ nav.photography {
     color: @highlight-color;
   }
   div {
-    width: 50%;
     display: inline-block;
+  }
+  div:nth-child(1) {
+    text-align: left;
+    width: 850px;
+  }
+  div:nth-child(2) {
+    text-align: right;
+    width: 150px;
   }
 }
 
 footer.photography {
+  margin: 50px auto;
+  height: 70px;
   background-color: white;
   color: @photography-color;
 }
