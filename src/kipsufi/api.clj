@@ -164,8 +164,8 @@
 (defn gallery
   "Returns a list of photographs in his gallery and their decriptions."
   [category gallery-name]
-  (let [directory (str "clj/images/photography/" category "/" gallery-name)
-        photos (read-photos (io/file directory))]
+  (let [directory (str "images/photography/" category "/" gallery-name)
+        photos (read-photos (io/file (str "clj/" directory)))]
     (sort-by :id (map (fn [photo]
            (let [photo-name (.getName photo)
                  id (.substring photo-name 5 (- (count photo-name) 4))]
