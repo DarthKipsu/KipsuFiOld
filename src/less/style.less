@@ -1,5 +1,6 @@
 @dark-color: #444;
 @medium-color: #666;
+@photography-color: #D1D1D1;
 @header-background-color: #F8F8F8;
 @border-color: #E7E7E7;
 @highlight-color: #E69F17;
@@ -262,4 +263,33 @@ p.align-middle {
 
 div.file-data > table {
     width: 100%;
+}
+
+#photo-container {
+  max-width: 1400px;
+}
+
+.photography {
+  text-align: center;
+  width: 100%;
+}
+
+nav.photography {
+  margin-top: 70px;
+  color: @photography-color;
+  a {
+    color: @photography-color;
+  }
+  a:hover {
+    color: @highlight-color;
+  }
+  div {
+    width: 50%;
+    display: inline-block;
+  }
+}
+
+footer.photography {
+  background-color: white;
+  color: @photography-color;
 }
