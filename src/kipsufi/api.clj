@@ -74,7 +74,7 @@
   photography folders."
   [category file content]
   (without-newline
-    (slurp (str "images/photography/" category "/" file "/" content))))
+    (slurp (str "clj/images/photography/" category "/" file "/" content))))
 
 (defn read-photos
   "Reads a list of photos in a given directory"
@@ -151,7 +151,7 @@
 
 (defn photography
   "Returns a list of folders or subfolders under photography."
-  ([] (list-directories "images/photography"))
+  ([] (list-directories "clj/images/photography"))
   ([category]
    (let [directory (io/file (str "clj/images/photography/" category))]
      (map (fn [file]
