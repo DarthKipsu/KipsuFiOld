@@ -153,7 +153,7 @@
   "Returns a list of folders or subfolders under photography."
   ([] (list-directories "images/photography"))
   ([category]
-   (let [directory (io/file (str "images/photography/" category))]
+   (let [directory (io/file (str "clj/images/photography/" category))]
      (map (fn [file]
             {:name (.getName file)
              :description (read-file category (.getName file) "info")
@@ -164,7 +164,7 @@
 (defn gallery
   "Returns a list of photographs in his gallery and their decriptions."
   [category gallery-name]
-  (let [directory (str "images/photography/" category "/" gallery-name)
+  (let [directory (str "clj/images/photography/" category "/" gallery-name)
         photos (read-photos (io/file directory))]
     (sort-by :id (map (fn [photo]
            (let [photo-name (.getName photo)
