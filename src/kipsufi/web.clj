@@ -12,8 +12,9 @@
             [kipsufi.views.datastructures :as datastructures]
             [kipsufi.views.layout :as page]
             [kipsufi.views.main :as main]
-            [kipsufi.views.photo.layout :as photo]
             [kipsufi.views.photo.categories :as categories]
+            [kipsufi.views.photo.galleries :as galleries]
+            [kipsufi.views.photo.layout :as photo]
             [kipsufi.views.projects :as projects]
             [kipsufi.views.show :as show]
             [ring.adapter.jetty :as jetty]
@@ -87,8 +88,14 @@
                       (str main/title " - " about/title)))
 
     (GET "/photography" []
-         (photo/common (categories/wrapper)
+         (photo/common (categories/index)
                        (str main/title " - " categories/title)))
+    (GET "/photography/:category" [category]
+         (photo/common (categories/wrapper (api/photography category))
+                       (str main/title " - " categories/title ": " category)))
+    (GET "/photography/:category/:gallery" [category gallery]
+         (photo/common (galleries/wrapper (api/gallery category gallery))
+                       (str main/title " - " categories/title ": " gallery)))
 
     (GET "/loves-me-not/" []
          (redirect-response "/projects/loves-me-not/"))
