@@ -272,6 +272,8 @@ div.file-data > table {
 }
 
 div.gallery-selector {
+  position: relative;
+
   a {
     header {
       text-align: left;
@@ -293,9 +295,28 @@ div.gallery-selector {
       max-height: 600px;
     }
   }
+
   img {
     max-width: 100%;
     max-height: 600px;
+  }
+  
+  div.next, div.previous {
+    position: absolute;
+    background-color: @photography-color;
+    border: 1px solid @dark-color;
+    padding: 15px 20px;
+    top: 45%;
+    cursor: pointer;
+    opacity: 0.7;
+  }
+
+  div.next {
+    left: 96%;
+  }
+
+  div.previous {
+    left: -2%;
   }
 }
 

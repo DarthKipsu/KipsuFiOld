@@ -5,7 +5,9 @@
 (defn single-item [image]
   [:div.gallery-selector
    [:img {:src (:url image)}]
-   [:p (:description image)]])
+   [:p (:description image)]
+   [:div.next ">"]
+   [:div.previous "<"]])
 
 (defn single-thumb [n image]
   [:img.thumb {:src (:thumb image) :data-order (inc n)}])
