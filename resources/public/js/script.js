@@ -24,6 +24,13 @@ $( document ).ready(function() {
         adjustThumbWidth(displaying, galleryCount);
     });
 
+    $("a#c").mouseenter(function() {$("a#c").text("Camping")});
+    $("a#c").mouseleave(function() {$("a#c").text("C")});
+    $("a#t").mouseenter(function() {$("a#t").text("Travel")});
+    $("a#t").mouseleave(function() {$("a#t").text("T")});
+    $("a#m").mouseenter(function() {$("a#m").text("Moments")});
+    $("a#m").mouseleave(function() {$("a#m").text("M")});
+
     adjustThumbWidth(displaying, galleryCount);
     $("img.thumb").mouseenter(function() {
         adjustThumbWidth(imgNumber(this), galleryCount);

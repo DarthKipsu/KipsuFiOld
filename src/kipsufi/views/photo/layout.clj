@@ -14,10 +14,10 @@
      [:div#photo-container
       [:nav.photography
         [:div [:a {:href "//darth.kipsu.fi"} "darth.kipsu.fi"]]
-        [:div
-         [:a {:href "/photography/camping"} "C"] " "
-         [:a {:href "/photography/travel"} "T"] " "
-         [:a {:href "/photography/moments"} "M"]]]
+        [:div#ctm
+         [:a#c {:href "/photography/camping"} "C"] " "
+         [:a#t {:href "/photography/travel"} "T"] " "
+         [:a#m {:href "/photography/moments"} "M"]]]
       content
       [:footer.photography "Verna Koskinen - darth.kipsu@gmail.com"]]
      (h/include-js "//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
