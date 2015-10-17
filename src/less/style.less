@@ -267,22 +267,35 @@ div.file-data > table {
 
 .photography {
   text-align: center;
-  width: 1000px;
+  max-width: 1000px;
   margin: auto;
 }
 
-div.gallery-selector > a > header {
-  text-align: left;
-  div {
-    display: inline-block;
-    color: @photography-color;
+div.gallery-selector {
+  a {
+    header {
+      text-align: left;
+      div {
+        display: inline-block;
+        color: @photography-color;
+      }
+      div:nth-child(1) {
+        width: 78%;
+      }
+      div:nth-child(2) {
+        text-align: right;
+        width: 22%;
+      }
+    }
+
+    img {
+      max-width: 100%;
+      max-height: 600px;
+    }
   }
-  div:nth-child(1) {
-    width: 800px;
-  }
-  div:nth-child(2) {
-    text-align: right;
-    width: 200px;
+  img {
+    max-width: 100%;
+    max-height: 600px;
   }
 }
 
@@ -305,16 +318,16 @@ nav.photography {
   }
   div:nth-child(1) {
     text-align: left;
-    width: 850px;
+    width: 85%;
   }
   div:nth-child(2) {
     text-align: right;
-    width: 150px;
+    width: 15%;
   }
 }
 
 footer.photography {
-  margin: 50px auto;
+  margin: 30px auto 10px;
   height: 70px;
   background-color: white;
   color: @photography-color;

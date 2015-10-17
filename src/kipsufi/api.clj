@@ -170,6 +170,7 @@
            (let [photo-name (.getName photo)
                  id (.substring photo-name 5 (- (count photo-name) 4))]
            {:url (str "/" directory "/" photo-name)
+            :thumb (str "/" directory "/thumbs/" photo-name)
             :gallery gallery-name
             :id (Integer/parseInt id)
             :description (read-file category

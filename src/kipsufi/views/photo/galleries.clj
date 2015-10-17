@@ -3,16 +3,23 @@
 ; PRIVATE
 
 (defn single-item [image]
-  [:div
+  [:div.gallery-selector
    [:img {:src (:url image)}]
    [:p (:description image)]])
+
+(defn single-thumb [n image]
+  [:img.thumb {:src (:thumb image) :data-order (inc n)}])
 
 (defn as-list [content]
   (map single-item content))
 
+(defn thumbnails [content]
+  (map-indexed single-thumb content))
+
 ; PUBLIC
 
 (defn wrapper [content]
-  [:div
-   [:p (:gallery (first content))]
-   (as-list content)])
+  [:section.photography
+   [:div (:gallery (first content))]
+   [:div.thumbnails (thumbnails content)]
+   [:div.faces (as-list content)]])
