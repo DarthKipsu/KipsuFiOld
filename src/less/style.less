@@ -274,8 +274,7 @@ div.file-data > table {
 div.gallery-selector {
   position: relative;
 
-  a {
-    header {
+  header {
       text-align: left;
       div {
         display: inline-block;
@@ -288,12 +287,6 @@ div.gallery-selector {
         text-align: right;
         width: 22%;
       }
-    }
-
-    img {
-      max-width: 100%;
-      max-height: 600px;
-    }
   }
 
   img {
@@ -326,6 +319,15 @@ div.gallery-selector {
 
 div.thumbnails {
   margin: 5px;
+
+  img {
+    height: 100px;
+    opacity: 0.6;
+  }
+
+  img:hover {
+    opacity: 1;
+  }
 }
 
 nav.photography {

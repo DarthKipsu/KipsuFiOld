@@ -9,9 +9,8 @@
    [:img {:src (str "/images/galleries/" (:name gallery) ".png")}]]])
 
 (defn single-thumb [n gallery]
-  [:a {:href (str "/photography/" (:group gallery) "/" (:name gallery))}
-   [:img.thumb {:src (str "/images/galleries/" (:name gallery) "-small.png")
-                :data-order (inc n)}]])
+  [:img.thumb {:src (str "/images/galleries/" (:name gallery) "-small.png")
+               :data-order (inc n)}])
 
 (defn as-list [content]
   (map single-item content))
