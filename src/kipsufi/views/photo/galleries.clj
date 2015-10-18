@@ -23,5 +23,5 @@
 (defn wrapper [content]
   [:section.photography
    [:div (:gallery (first content))]
-   [:div.thumbnails (thumbnails content)]
-   [:div.faces (as-list content)]])
+   [:div.faces (as-list content)]
+   [:div.thumbnails (thumbnails content)]])
