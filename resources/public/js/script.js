@@ -9,19 +9,11 @@ $( document ).ready(function() {
     });
 
     $("div.next").click(function() {
-        $(".gallery-selector:nth-child(" + displaying + ")").hide();
-        displaying++;
-        if (displaying > galleryCount) displaying = 1;
-        $(".gallery-selector:nth-child(" + displaying + ")").show();
-        adjustThumbWidth(displaying, galleryCount);
+        displaying = moveToNextImage(displaying, galleryCount);
     });
 
     $("div.previous").click(function() {
-        $(".gallery-selector:nth-child(" + displaying + ")").hide();
-        displaying--;
-        if (displaying === 0) displaying = galleryCount;
-        $(".gallery-selector:nth-child(" + displaying + ")").show();
-        adjustThumbWidth(displaying, galleryCount);
+        displaying = moveToPreviousImage(displaying, galleryCount);
     });
 
     $("a#c").mouseenter(function() {$("a#c").text("Camping")});
@@ -37,6 +29,10 @@ $( document ).ready(function() {
     });
     $("img.thumb").mouseleave(function() {
         adjustThumbWidth(displaying, galleryCount);
+    });
+
+    $(document).keydown(function(e) {
+        displaying = addKeyBindings(e, displaying, galleryCount);
     });
 });
 
@@ -72,4 +68,39 @@ function adjustThumbWidth(displaying, galleryCount) {
             $("img.thumb:nth-child(" + (displaying - 3) + ")").width(compressedWidth * 2);
         }
     }
+}
+
+function addKeyBindings(e, displaying, galleryCount) {
+    switch (e.which) {
+        case 37:
+        case 65:
+            return moveToPreviousImage(displaying, galleryCount);
+        break;
+
+        case 39:
+        case 68:
+            return moveToNextImage(displaying, galleryCount);
+        break;
+
+        default: return displaying;
+    }
+    e.preventDefault();
+}
+
+function moveToNextImage(displaying, galleryCount) {
+    $(".gallery-selector:nth-child(" + displaying + ")").hide();
+    displaying++;
+    if (displaying > galleryCount) displaying = 1;
+    $(".gallery-selector:nth-child(" + displaying + ")").show();
+    adjustThumbWidth(displaying, galleryCount);
+    return displaying;
+}
+
+function moveToPreviousImage(displaying, galleryCount) {
+    $(".gallery-selector:nth-child(" + displaying + ")").hide();
+    displaying--;
+    if (displaying === 0) displaying = galleryCount;
+    $(".gallery-selector:nth-child(" + displaying + ")").show();
+    adjustThumbWidth(displaying, galleryCount);
+    return displaying;
 }
