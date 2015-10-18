@@ -273,6 +273,12 @@ div.file-data > table {
 
 div.gallery-selector {
   position: relative;
+  width: 1%;
+  margin: 20px auto;
+  display: table;
+  border: 1px solid @photography-color;
+  padding: 10px;
+  box-shadow: 1px 1px 5px @photography-color;
 
   header {
       text-align: left;
@@ -290,7 +296,10 @@ div.gallery-selector {
   }
 
   img {
-    max-width: 100%;
+    height: auto;
+    width: auto;
+    overflow: hidden;
+    max-width: 980px;
     max-height: 600px;
   }
   
@@ -305,15 +314,20 @@ div.gallery-selector {
   }
 
   div.next {
-    left: 96%;
+    right: -25px;
   }
 
   div.previous {
-    left: -2%;
+    left: -25px;
   }
 
   div.next:hover, div.previous:hover {
     opacity: 1;
+  }
+
+  p {
+    font-size: 15px;
+    margin: 5px;
   }
 }
 
