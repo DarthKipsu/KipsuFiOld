@@ -175,5 +175,5 @@
             :id (Integer/parseInt id)
             :description (read-file category
                                      gallery-name
-                                     (str "description" id))}))
+                                     (str "photo" id))}))
                  photos))))
