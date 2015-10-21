@@ -29,14 +29,14 @@
          [:li.divider.hidden-xs]
          [:li [:a {:href "/articles"} "Articles"]]
          [:li [:a {:href "/algorithms"} "Algorithms"]]
-         [:li [:a {:href "/datastructures"} "Datastructures"]]]
+         [:li [:a {:href "/datastructures"} "Datastructures"]]
+         [:li [:a {:href "/work"} "Projects"]]]
         [:ul.nav.navbar-nav.navbar-right
-         [:li [:a {:href "/work"} "Projects"]]
+         [:li [:a {:href "/photography"} "Photography"]]
          [:li [:a {:href "/about"} "About"]]
          [:li.space]]]]]]
      [:section#content content]
      [:footer
       [:div.col-md-12 "Verna Koskinen - darth.kipsu@gmail.com"]]
      (h/include-js "//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
-     (h/include-js "//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js")
-     ]));(h/include-js "js/script.js")]))
+     (h/include-js "//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js")]))
