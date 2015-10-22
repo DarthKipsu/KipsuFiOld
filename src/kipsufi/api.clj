@@ -99,7 +99,7 @@
    :date (read-file category (.getName file) "date")})
 
 (defn photo-object
-  [category photo]
+  [directory category gallery-name photo]
   (let [photo-name (.getName photo)
         id (.substring photo-name 5 (- (count photo-name) 4))]
     {:url (str "/" directory "/" photo-name)
@@ -190,4 +190,5 @@
   [category gallery-name]
   (let [directory (str "images/photography/" category "/" gallery-name)
         photos (read-photos (io/file (str "clj/" directory)))]
-    (sort-by :id (map (partial photo-object category) photos))))
+    (sort-by :id (map (partial photo-object directory category gallery-name)
+                      photos))))
