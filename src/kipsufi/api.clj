@@ -73,8 +73,11 @@
   "Reads the contents of a file with the given name and category from
   photography folders."
   [category file content]
-  (without-newline
-    (slurp (str "clj/images/photography/" category "/" file "/" content))))
+  (try
+    (without-newline
+      (slurp (str "clj/images/photography/" category "/" file "/" content)))
+    (catch Exception e "")))
+
 
 (defn read-photos
   "Reads a list of photos in a given directory"
