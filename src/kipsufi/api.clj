@@ -1,7 +1,8 @@
 (ns kipsufi.api
   (:require [clj-time.format :as f]
             [clj-time.coerce :as c]
-            [clojure.java.io :as io])
+            [clojure.java.io :as io]
+            [clojure.string :refer [trim]])
   (:import java.io.File))
 
 ; ---- PRIVATE ---- ;
@@ -33,6 +34,11 @@
 (defn edited>DateTime
   "Return edited date in DateTime format"
   [x] (f/parse (f/formatter "d MMMM yyyy") (:edited x)))
+
+(defn date>DateTime
+  "Returns an item date formatted to DateTime"
+  [item]
+  (f/parse (f/formatter "d MMMM yyyy") (trim (:date item))))
 
 (defn with-group
   "Add :group to map."
@@ -78,13 +84,31 @@
       (slurp (str "clj/images/photography/" category "/" file "/" content)))
     (catch Exception e "")))
 
-
 (defn read-photos
   "Reads a list of photos in a given directory"
   [directory]
   (filter (fn [file] (or (.endsWith (.getName file) ".jpg")
                          (.endsWith (.getName file) ".png")))
           (.listFiles directory)))
+
+(defn gallery-object
+  [category file]
+  {:name (.getName file)
+   :description (read-file category (.getName file) "info")
+   :group category
+   :date (read-file category (.getName file) "date")})
+
+(defn photo-object
+  [category photo]
+  (let [photo-name (.getName photo)
+        id (.substring photo-name 5 (- (count photo-name) 4))]
+    {:url (str "/" directory "/" photo-name)
+     :thumb (str "/" directory "/thumbs/" photo-name)
+     :gallery gallery-name
+     :id (Integer/parseInt id)
+     :description (read-file category
+                             gallery-name
+                             (str "photo" id))}))
 
 
 ; ---- PUBLIC ---- ;
@@ -157,26 +181,13 @@
   ([] (list-directories "clj/images/photography"))
   ([category]
    (let [directory (io/file (str "clj/images/photography/" category))]
-     (map (fn [file]
-            {:name (.getName file)
-             :description (read-file category (.getName file) "info")
-             :group category
-             :date (read-file category (.getName file) "date")})
-       (child-dirs-for directory)))))
+     (reverse (sort-by date>DateTime
+                       (map (partial gallery-object category)
+                            (child-dirs-for directory)))))))
 
 (defn gallery
   "Returns a list of photographs in his gallery and their decriptions."
   [category gallery-name]
   (let [directory (str "images/photography/" category "/" gallery-name)
         photos (read-photos (io/file (str "clj/" directory)))]
-    (sort-by :id (map (fn [photo]
-           (let [photo-name (.getName photo)
-                 id (.substring photo-name 5 (- (count photo-name) 4))]
-           {:url (str "/" directory "/" photo-name)
-            :thumb (str "/" directory "/thumbs/" photo-name)
-            :gallery gallery-name
-            :id (Integer/parseInt id)
-            :description (read-file category
-                                     gallery-name
-                                     (str "photo" id))}))
-                 photos))))
+    (sort-by :id (map (partial photo-object category) photos))))
