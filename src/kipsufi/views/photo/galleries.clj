@@ -2,9 +2,9 @@
 
 ; PRIVATE
 
-(defn single-item [image]
+(defn single-item [n image]
   [:div.gallery-selector
-   [:img {:src (:url image)}]
+   [:img {:src (:url image) :data-order (inc n)}]
    [:p (:description image)]
    [:div.next ">"]
    [:div.previous "<"]])
@@ -13,7 +13,7 @@
   [:img.thumb {:src (:thumb image) :data-order (inc n)}])
 
 (defn as-list [content]
-  (map single-item content))
+  (map-indexed single-item content))
 
 (defn thumbnails [content]
   (map-indexed single-thumb content))

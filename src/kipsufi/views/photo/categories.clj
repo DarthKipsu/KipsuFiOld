@@ -2,18 +2,19 @@
 
 ; PRIVATE
 
-(defn single-item [gallery]
+(defn single-item [n gallery]
   [:div.gallery-selector
    [:a {:href (str "/photography/" (:group gallery) "/" (:name gallery))}
    [:header [:div (:name gallery)] [:div (:date gallery)]]
-   [:img {:src (str "/images/galleries/" (:name gallery) ".png")}]]])
+   [:img {:src (str "/images/galleries/" (:name gallery) ".png")
+          :data-order (inc n)}]]])
 
 (defn single-thumb [n gallery]
   [:img.thumb {:src (str "/images/galleries/" (:name gallery) "-small.png")
                :data-order (inc n)}])
 
 (defn as-list [content]
-  (map single-item content))
+  (map-indexed single-item content))
 
 (defn thumbnails [content]
   (map-indexed single-thumb content))

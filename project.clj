@@ -7,11 +7,13 @@
                  [cljs-ajax "0.3.14"]
                  [com.jquery/jquery "1.9.1"]
                  [compojure "1.4.0"]
+                 [domina "1.0.3"]
                  [hiccup "1.0.5"]
                  [hickory "0.5.4"]
                  [java-jdbc/dsl "0.1.3"]
                  [kerodon "0.6.1"]
                  [org.clojure/clojure "1.7.0"]
+                 [org.clojure/clojurescript "0.0-3211"]
                  [org.clojure/data.json "0.2.6"]
                  [org.clojure/java.jdbc "0.4.1"]
                  [postgresql/postgresql "9.3-1102.jdbc41"]
@@ -19,16 +21,21 @@
                  [ring/ring-json "0.4.0"]]
   :main kipsufi.web
   :plugins [[com.cemerick/clojurescript.test "0.3.3"]
+            [lein-cljsbuild "1.0.6"]
             [lein-lesscss "1.2"]
             [lein-npm "0.6.1"]
             [lein-ring "0.9.6"]]
+  :hooks [leiningen.cljsbuild]
   :profiles {:dev {:dependencies [[midje "1.7.0"]]
                    :plugins [[lein-midje "3.1.3"]]
                    :resource-paths ["dev"]}
              :uberjar {:aot :all}
              :prod {:resource-paths ["prod"]}}
+  :cljsbuild {:builds [{:source-paths ["src/cljs"]
+                        :jar true
+                        :compiler {:output-to "resources/public/js/script.js"
+                                   :optimizations :whitespace
+                                   :pretty-print true}}]}
   :lesscss-paths ["src/less"]
-  :cljsbuild {:builds []
-              :test-commands nil}
   :lesscss-output-path "resources/public/css"
   :ring {:handler kipsufi.web/app})
