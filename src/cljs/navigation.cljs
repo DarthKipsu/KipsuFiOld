@@ -7,10 +7,21 @@
 (def displaying (atom 1))
 
 (defn thumb-nth-child
+  "Returns css selector for img.thmub:nth-child for the given n"
   [n]
   (css/sel (str "img.thumb:nth-child(" n ")")))
 
+(defn change-width!
+  "Changes the width of img.thumb element or if given n, the nth child of the
+  element, with the given width"
+  ([width]
+   (dom/set-style! (css/sel "img.thumb") :width (str width "px")))
+  ([n width]
+   (dom/set-style! (thumb-nth-child n) :width (str width "px"))))
+
 (defn calculated-compr-width
+  "Returns the width for the smallest compressed image for the thumbnail
+  navigation bar based on the container width"
   [cont-width displ]
   (cond (or (= displ 1) (= displ gallery-count))
           (/ (- cont-width 210) (inc gallery-count))
@@ -22,14 +33,19 @@
           (/ (- cont-width 310) (+ gallery-count 3))))
 
 (defn remove-class!
+  "Removes the given class from the given element"
   [c selector]
   (dom/remove-class! (css/sel selector) c))
 
 (defn add-class!
+  "Adds the given class to the given element"
   [c selector]
   (dom/add-class! (css/sel selector) c))
 
 (defn adj-thumb-width!
+  "Changes the width of all thumbnails in the thumbnail navigation bar, so that
+  the displayed thumbnail has maximum width and the thumbnails around it have
+  correctly decreasing width to fit the bar in one line"
   [displ]
   (remove-class! "displaying" ".thumb")
   (add-class! "displaying" (str ".thumb:nth-child(" displ ")"))
@@ -37,52 +53,50 @@
     (if (> gallery-count (/ cont-width 100))
       (let [compr-width (calculated-compr-width cont-width displ)]
         (if (> compr-width 33.33)
-          (do (dom/set-style! (css/sel "img.thumb")
-                              :width (str (/ (- cont-width 110)
-                                             (dec gallery-count)) "px"))
-              (dom/set-style! (thumb-nth-child displ)
-                              :width "100px"))
-          (do (dom/set-style! (css/sel "img.thumb")
-                              :width (str compr-width "px"))
-              (dom/set-style! (thumb-nth-child displ)
-                              :width "100px")
-              (dom/set-style! (thumb-nth-child (inc displ))
-                              :width "100px")
-              (dom/set-style! (thumb-nth-child (dec displ))
-                              :width "100px")
-              (dom/set-style! (thumb-nth-child (+ displ 2))
-                              :width (str (* 3 compr-width) "px"))
-              (dom/set-style! (thumb-nth-child (- displ 2))
-                              :width (str (* 3 compr-width) "px"))
-              (dom/set-style! (thumb-nth-child (+ displ 3))
-                              :width (str (* 2 compr-width) "px"))
-              (dom/set-style! (thumb-nth-child (- displ 3))
-                              :width (str (* 2 compr-width) "px"))))))))
+          (do (change-width! (str (/ (- cont-width 110) (dec gallery-count))))
+              (change-width! displ 100))
+          (do (change-width! compr-width)
+              (change-width! displ 100)
+              (change-width! (inc displ) 100)
+              (change-width! (dec displ) 100)
+              (change-width! (+ displ 2)  (* 3 compr-width))
+              (change-width! (- displ 2) (* 3 compr-width))
+              (change-width! (+ displ 3) (* 2 compr-width))
+              (change-width! (- displ 3) (* 2 compr-width))))))))
 
-(defn reset-display-photo [id]
-  (dom/set-style! (css/sel (str ".gallery-selector:nth-child(" @displaying ")"))
-                  :display "none")
-  ;(.log js/console @displaying)
+(defn displ-photo!
+  "Either display or hide a gallery-selector element with the given n"
+  [n display]
+  (dom/set-style! (css/sel (str ".gallery-selector:nth-child(" n ")"))
+                  :display display))
+
+(defn reset-display-photo
+  "Hide the currently visible gallery-selector element and display the one with
+  the given id"
+  [id]
+  (displ-photo! @displaying "none")
   (reset! displaying id)
-  ;(.log js/console @displaying)
-  (dom/set-style! (css/sel (str ".gallery-selector:nth-child(" id ")"))
-                  :display "table"))
+  (displ-photo! id "table"))
 
 (defn data-order
-  "Get event data-order attribute value"
+  "Get event data-order attribute value from the domina event, as integer"
   [event]
   (js/parseInt (.getAttribute (:target event) "data-order")))
 
 (defn mouseenter-effects!
+  "Adjust width for thumbnail bar thumbnails so that the element where the mouse
+  is moved is fully displayed"
   [evt]
   (adj-thumb-width! (data-order evt)))
 
 (defn mouseleave-effects!
+  "Restore full display of thumbnail navigation to the corresponding thumbnail
+  of the currently displayed gallery-selector"
   [evt]
   (adj-thumb-width! @displaying))
 
 (defn switch-photo!
-  "Hides all other photos / galeries and displays the one with the given id."
+  "Hides all other photos / galleries and displays the one with the given id."
   [id]
   (cond
     (> id gallery-count) (switch-photo! 1)
@@ -114,6 +128,8 @@
   "adds the given function to click event in the given selector"
   [div fun event]
   (events/listen! (css/sel div) event fun))
+
+; INITIALIZE EVERYTHING ;
 
 (adj-thumb-width! @displaying)
 (dom/set-style! (css/sel ".gallery-selector:not(:nth-child(1))")
