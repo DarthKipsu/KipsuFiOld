@@ -101,6 +101,15 @@
   [evt]
   (switch-photo! (data-order evt)))
 
+(defn keybindings!
+  "Adds keybindings for left, right arrow keys and A, D to move between images"
+  [evt]
+  (let [key-code (.-keyCode (events/raw-event evt))]
+  (cond (or (= key-code 37) (= key-code 65))
+        ((move-one-photo! dec) evt)
+        (or (= key-code 39) (= key-code 68))
+        ((move-one-photo! inc) evt))))
+
 (defn add-listener!
   "adds the given function to click event in the given selector"
   [div fun event]
@@ -115,3 +124,4 @@
 (add-listener! ".thumb" move-attr-photo! :click)
 (add-listener! ".thumb" mouseenter-effects! :mouseenter)
 (add-listener! ".thumb" mouseleave-effects! :mouseleave)
+(add-listener! js/document keybindings! :keydown)
