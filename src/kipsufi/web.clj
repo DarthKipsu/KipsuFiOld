@@ -93,8 +93,11 @@
     (GET "/photography/:category" [category]
          (photo/common (categories/wrapper (api/photography category))
                        (str main/title " - " categories/title ": " category)))
+    (GET "/photography/:category/:gallery/:photo" [category gallery photo]
+         (photo/common (galleries/wrapper (api/gallery category gallery) photo)
+                       (str main/title " - " categories/title ": " gallery)))
     (GET "/photography/:category/:gallery" [category gallery]
-         (photo/common (galleries/wrapper (api/gallery category gallery))
+         (photo/common (galleries/wrapper (api/gallery category gallery) 1)
                        (str main/title " - " categories/title ": " gallery)))
 
     (GET "/loves-me-not/" []

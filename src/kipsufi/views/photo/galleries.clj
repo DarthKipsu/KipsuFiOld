@@ -20,7 +20,7 @@
 
 ; PUBLIC
 
-(defn wrapper [content]
+(defn wrapper [content photo-id]
   [:section.photography
    [:div (:gallery (first content))]
    [:div.faces (as-list content)]

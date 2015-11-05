@@ -1,10 +1,18 @@
 (ns cljs.navigation
-  (:require [domina :as dom]
+  (:require [clojure.string :as str]
+            [domina :as dom]
             [domina.css :as css]
             [domina.events :as events]))
 
 (def gallery-count (count (dom/by-class "gallery-selector")))
-(def displaying (atom 1))
+
+(defn displaying-id []
+  (let [id (get (str/split js/window.location.pathname "/") 4)]
+    (if id (let [id (js/parseInt id)]
+             (if (> id gallery-count) 1 id))
+        1)))
+
+(def displaying (atom (displaying-id)))
 
 (defn thumb-nth-child
   "Returns css selector for img.thmub:nth-child for the given n"
@@ -76,6 +84,8 @@
   [id]
   (displ-photo! @displaying "none")
   (reset! displaying id)
+  (if (not (.querySelector js/document ".date"))
+    (.replaceState js/window.history {} "" id))
   (displ-photo! id "table"))
 
 (defn data-order
@@ -133,8 +143,9 @@
 
 (if (.querySelector js/document ".thumbnails")
     (do (adj-thumb-width! @displaying)
-        (dom/set-style! (css/sel ".gallery-selector:not(:nth-child(1))")
-                        :display "none")
+        (dom/set-style!
+          (css/sel (str ".gallery-selector:not(:nth-child(" @displaying "))"))
+                   :display "none")
 
         (add-listener! ".next" (move-one-photo! inc) :click)
         (add-listener! ".previous" (move-one-photo! dec) :click)

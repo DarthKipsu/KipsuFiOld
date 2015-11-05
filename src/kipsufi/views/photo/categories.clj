@@ -5,7 +5,7 @@
 (defn single-item [n gallery]
   [:div.gallery-selector
    [:a {:href (str "/photography/" (:group gallery) "/" (:name gallery))}
-   [:header [:div (:name gallery)] [:div (:date gallery)]]
+   [:header [:div (:name gallery)] [:div.date (:date gallery)]]
    [:img {:src (str "/images/galleries/" (:name gallery) ".png")
           :data-order (inc n)}]]])
 
