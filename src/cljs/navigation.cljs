@@ -9,7 +9,7 @@
 (defn displaying-id []
   (let [id (get (str/split js/window.location.pathname "/") 4)]
     (if id (let [id (js/parseInt id)]
-             (if (> id gallery-count) 1 id))
+             (if (or (> id gallery-count) (< id 1)) 1 id))
         1)))
 
 (def displaying (atom (displaying-id)))
