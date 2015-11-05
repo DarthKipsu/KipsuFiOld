@@ -118,11 +118,11 @@
 (defn keybindings!
   "Adds keybindings for left, right arrow keys and A, D to move between images"
   [evt]
-  (let [key-code (.-keyCode (events/raw-event evt))]
-  (cond (or (= key-code 37) (= key-code 65))
-        ((move-one-photo! dec) evt)
-        (or (= key-code 39) (= key-code 68))
-        ((move-one-photo! inc) evt))))
+  (let [key-code (.-keyCode (events/raw-event evt))
+        a-or-left-arrow (or (= key-code 37) (= key-code 65))
+        d-or-right-arrow (or (= key-code 39) (= key-code 68))]
+    (cond a-or-left-arrow ((move-one-photo! dec) evt)
+          d-or-right-arrow ((move-one-photo! inc) evt))))
 
 (defn add-listener!
   "adds the given function to click event in the given selector"
@@ -131,13 +131,14 @@
 
 ; INITIALIZE EVERYTHING ;
 
-(adj-thumb-width! @displaying)
-(dom/set-style! (css/sel ".gallery-selector:not(:nth-child(1))")
-                :display "none")
+(if (.querySelector js/document ".thumbnails")
+    (do (adj-thumb-width! @displaying)
+        (dom/set-style! (css/sel ".gallery-selector:not(:nth-child(1))")
+                        :display "none")
 
-(add-listener! ".next" (move-one-photo! inc) :click)
-(add-listener! ".previous" (move-one-photo! dec) :click)
-(add-listener! ".thumb" move-attr-photo! :click)
-(add-listener! ".thumb" mouseenter-effects! :mouseenter)
-(add-listener! ".thumb" mouseleave-effects! :mouseleave)
-(add-listener! js/document keybindings! :keydown)
+        (add-listener! ".next" (move-one-photo! inc) :click)
+        (add-listener! ".previous" (move-one-photo! dec) :click)
+        (add-listener! ".thumb" move-attr-photo! :click)
+        (add-listener! ".thumb" mouseenter-effects! :mouseenter)
+        (add-listener! ".thumb" mouseleave-effects! :mouseleave)
+        (add-listener! js/document keybindings! :keydown)))
