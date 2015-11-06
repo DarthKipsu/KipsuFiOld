@@ -4,9 +4,13 @@
             [domina.css :as css]
             [domina.events :as events]))
 
+; INITIALIZE VARIABLES ;
+
 (def gallery-count (count (dom/by-class "gallery-selector")))
 
-(defn displaying-id []
+(defn displaying-id
+  "Parses information from page URL about which photo we should display"
+  []
   (let [id (get (str/split js/window.location.pathname "/") 4)]
     (if id (let [id (js/parseInt id)]
              (if (or (> id gallery-count) (< id 1)) 1 id))
@@ -17,6 +21,8 @@
 (def has-thumbnails (.querySelector js/document ".thumbnails"))
 (def is-category-page (and has-thumbnails (.querySelector js/document ".date")))
 (def is-gallery-page (and has-thumbnails (not is-category-page)))
+
+; THUMBNAIL BAR ;
 
 (defn thumb-nth-child
   "Returns css selector for img.thmub:nth-child for the given n"
@@ -76,6 +82,8 @@
               (change-width! (+ displ 3) (* 2 compr-width))
               (change-width! (- displ 3) (* 2 compr-width))))))))
 
+; EFFECTS ;
+
 (defn displ-photo!
   "Either display or hide a gallery-selector element with the given n"
   [n display]
@@ -128,7 +136,16 @@
   [evt]
   (switch-photo! (data-order evt)))
 
-(defn enter-gallery []
+(defn add-listener!
+  "adds the given function to click event in the given selector"
+  [div fun event]
+  (events/listen! (css/sel div) event fun))
+
+; KEYBINDINGS ;
+
+(defn enter-gallery
+  "Enters the gallery we are looking at in the category page"
+  []
   (if is-category-page
     (let [url (.-src (.querySelector js/document ".displaying"))
           gallery-img (get (str/split url "/") 5)
@@ -136,23 +153,29 @@
       (aset js/window.location "href"
             (str js/window.location "/" gallery "/1")))))
 
+(defn exit-gallery
+  "Exits the current gallery"
+  []
+  (if is-gallery-page
+    (let [path (str/split js/window.location.pathname "/")
+          url (str js/window.location.origin "/" (get path 1) "/" (get path 2))]
+      (aset js/window.location "href" url))))
+
 (defn keybindings!
   "Adds keybindings for left, right arrow keys and A, D to move between images"
   [evt]
   (let [key-code (.-keyCode (events/raw-event evt))
         a-or-left-arrow (or (= key-code 37) (= key-code 65))
         d-or-right-arrow (or (= key-code 39) (= key-code 68))
-        s-or-enter (or (= key-code 13) (= key-code 83))]
+        s-or-enter (or (= key-code 13) (= key-code 83))
+        w-or-back (or (= key-code 8) (= key-code 87))]
+    ;(.log js/console key-code)
     (cond a-or-left-arrow ((move-one-photo! dec) evt)
           d-or-right-arrow ((move-one-photo! inc) evt)
-          s-or-enter (enter-gallery))))
+          s-or-enter (enter-gallery)
+          w-or-back (exit-gallery))))
 
-(defn add-listener!
-  "adds the given function to click event in the given selector"
-  [div fun event]
-  (events/listen! (css/sel div) event fun))
-
-; INITIALIZE EVERYTHING ;
+; INITIALIZE FUNCTIONALITY ;
 
 (if has-thumbnails
     (do (adj-thumb-width! @displaying)
