@@ -14,6 +14,10 @@
 
 (def displaying (atom (displaying-id)))
 
+(def has-thumbnails (.querySelector js/document ".thumbnails"))
+(def is-category-page (and has-thumbnails (.querySelector js/document ".date")))
+(def is-gallery-page (and has-thumbnails (not is-category-page)))
+
 (defn thumb-nth-child
   "Returns css selector for img.thmub:nth-child for the given n"
   [n]
@@ -84,8 +88,7 @@
   [id]
   (displ-photo! @displaying "none")
   (reset! displaying id)
-  (if (not (.querySelector js/document ".date"))
-    (.replaceState js/window.history {} "" id))
+  (if is-gallery-page (.replaceState js/window.history {} "" id))
   (displ-photo! id "table"))
 
 (defn data-order
@@ -125,14 +128,24 @@
   [evt]
   (switch-photo! (data-order evt)))
 
+(defn enter-gallery []
+  (if is-category-page
+    (let [url (.-src (.querySelector js/document ".displaying"))
+          gallery-img (get (str/split url "/") 5)
+          gallery (.substring gallery-img 0 (- (count gallery-img) 10))]
+      (aset js/window.location "href"
+            (str js/window.location "/" gallery "/1")))))
+
 (defn keybindings!
   "Adds keybindings for left, right arrow keys and A, D to move between images"
   [evt]
   (let [key-code (.-keyCode (events/raw-event evt))
         a-or-left-arrow (or (= key-code 37) (= key-code 65))
-        d-or-right-arrow (or (= key-code 39) (= key-code 68))]
+        d-or-right-arrow (or (= key-code 39) (= key-code 68))
+        s-or-enter (or (= key-code 13) (= key-code 83))]
     (cond a-or-left-arrow ((move-one-photo! dec) evt)
-          d-or-right-arrow ((move-one-photo! inc) evt))))
+          d-or-right-arrow ((move-one-photo! inc) evt)
+          s-or-enter (enter-gallery))))
 
 (defn add-listener!
   "adds the given function to click event in the given selector"
@@ -141,7 +154,7 @@
 
 ; INITIALIZE EVERYTHING ;
 
-(if (.querySelector js/document ".thumbnails")
+(if has-thumbnails
     (do (adj-thumb-width! @displaying)
         (dom/set-style!
           (css/sel (str ".gallery-selector:not(:nth-child(" @displaying "))"))
