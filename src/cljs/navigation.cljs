@@ -153,12 +153,23 @@
       (aset js/window.location "href"
             (str js/window.location "/" gallery "/1")))))
 
+(defn enter-category
+  "Enters a category based on key code"
+  [key-code]
+  (let [base js/window.location.origin]
+    (cond (= key-code 67)
+          (aset js/window.location "href" (str base "/photography/camping"))
+          (= key-code 84)
+          (aset js/window.location "href" (str base "/photography/travel"))
+          (= key-code 77)
+          (aset js/window.location "href" (str base "/photography/moments")))))
+
 (defn exit-gallery
   "Exits the current gallery"
   []
   (cond is-gallery-page
     (let [path (str/split js/window.location.pathname "/")
-          url (str js/window.location.origin "/" (get path 1) "/" (get path 2))]
+          url (str js/window.location.origin "/photography/" (get path 2))]
       (aset js/window.location "href" url))
     is-category-page
     (let [url (str js/window.location.origin "/photography")]
@@ -170,13 +181,15 @@
   (let [key-code (.-keyCode (events/raw-event evt))
         a-or-left-arrow (or (= key-code 37) (= key-code 65))
         d-or-right-arrow (or (= key-code 39) (= key-code 68))
+        c-t-or-m (or (= key-code 67) (= key-code 84) (= key-code 77))
         s-or-enter (or (= key-code 13) (= key-code 83))
         w-or-back (or (= key-code 8) (= key-code 87))]
     ;(.log js/console key-code)
-    (cond a-or-left-arrow ((move-one-photo! dec) evt)
-          d-or-right-arrow ((move-one-photo! inc) evt)
+    (cond (and a-or-left-arrow has-thumbnails) ((move-one-photo! dec) evt)
+          (and d-or-right-arrow has-thumbnails) ((move-one-photo! inc) evt)
           s-or-enter (enter-gallery)
-          w-or-back (exit-gallery))))
+          w-or-back (exit-gallery)
+          c-t-or-m (enter-category key-code))))
 
 ; INITIALIZE FUNCTIONALITY ;
 
@@ -190,5 +203,6 @@
         (add-listener! ".previous" (move-one-photo! dec) :click)
         (add-listener! ".thumb" move-attr-photo! :click)
         (add-listener! ".thumb" mouseenter-effects! :mouseenter)
-        (add-listener! ".thumb" mouseleave-effects! :mouseleave)
-        (add-listener! js/document keybindings! :keydown)))
+        (add-listener! ".thumb" mouseleave-effects! :mouseleave)))
+
+(add-listener! js/document keybindings! :keydown)
