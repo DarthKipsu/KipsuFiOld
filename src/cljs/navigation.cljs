@@ -156,9 +156,12 @@
 (defn exit-gallery
   "Exits the current gallery"
   []
-  (if is-gallery-page
+  (cond is-gallery-page
     (let [path (str/split js/window.location.pathname "/")
           url (str js/window.location.origin "/" (get path 1) "/" (get path 2))]
+      (aset js/window.location "href" url))
+    is-category-page
+    (let [url (str js/window.location.origin "/photography")]
       (aset js/window.location "href" url))))
 
 (defn keybindings!
