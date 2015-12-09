@@ -48,7 +48,7 @@
 (def mem-config (memoize config))
 
 (defn db []
-  (println "Using database " (:database (mem-config)))
+  ;(println "Using database " (:database (mem-config)))
   (if (= "dev" (:database (mem-config)))
     'kipsufi.db-mock
     'kipsufi.database))
