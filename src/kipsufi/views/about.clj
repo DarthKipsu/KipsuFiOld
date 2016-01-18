@@ -14,7 +14,7 @@
      [:p [:strong "Name: "] "Verna Koskinen"]
      [:p [:strong "Email: "] "darth.kipsu@gmail.com"]
      [:p [:strong "Phone: "] "+358451277921"]
-     [:p [:strong "Address: "] "Kurkimäentie 19 D 36, 00940 Helsinki, Finland"]]
+     [:p [:strong "Address: "] "Susitie 3 a 4, 00800 Helsinki, Finland"]]
     [:div.col-md-6.small-font
      [:p [:strong "Website: "] [:a {:href "//darth.kipsu.fi"} "darth.kipsu.fi"]]
      [:p [:strong "GitHub: "] [:a {:href "//github.com/DarthKipsu"} "Darth Kipsu"]]
