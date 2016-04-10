@@ -39,10 +39,6 @@ A single entry:
 //[server]/api/datastructures/[datastructure name]
 ```
 
-##Example
-
-My website [darth.kipsu.fi](http://darth.kipsu.fi) is running the latest version of the application.
-
 ## License
 
 Distributed under the GNU General Public License v2.0
